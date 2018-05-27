@@ -8,6 +8,7 @@
 
 import Cocoa
 
+
 class displayWindow: NSWindow {
     
     override var canBecomeKey: Bool {

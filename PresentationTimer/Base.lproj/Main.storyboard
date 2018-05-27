@@ -732,12 +732,17 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aNB-xZ-BJV" userLabel="timerDisplayText">
                                 <rect key="frame" x="18" y="106" width="464" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="sqJ-Lk-8sv" userLabel="timerDisplayTextCell">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="sqJ-Lk-8sv" userLabel="timerDisplayTextCell">
                                     <font key="font" metaFont="system" size="150"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
-                                        <binding destination="EfJ-oa-6SN" name="value" keyPath="countdownTimer.displayTime.totalTimeAsString" id="sme-Qz-Qsh"/>
+                                        <binding destination="EfJ-oa-6SN" name="value" keyPath="countdownTimerController.timer.currentTime.totalTimeAsString" id="oZ6-Kj-UGy">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                <bool key="NSValidatesImmediately" value="YES"/>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </textFieldCell>
                             </textField>
@@ -770,7 +775,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmH-Uc-knu">
-                                <rect key="frame" x="193" y="28" width="115" height="32"/>
+                                <rect key="frame" x="14" y="28" width="115" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Count Down" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MhM-NZ-Keh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

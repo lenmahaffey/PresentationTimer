@@ -11,18 +11,36 @@ import Cocoa
 class displayViewController: NSViewController {
     
     @IBOutlet weak var timerDisplayText: NSTextField!
-    @objc dynamic var countdownTimer = presentationTimer(secondsToCount: 34352)
+    @objc dynamic var countdownTimerController = presentationTimerController(timeLimit: 360, warningTime: 359)
+    
+    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     func countDown() {
-        countdownTimer.countDown()
+        countdownTimerController.countDownWithoutWarning()
+        self.showBorder()
     }
     
     func countUp() {
-        countdownTimer.countUp()
+        countdownTimerController.countUpWithWarning()
+    }
+    
+    func showBorder() {
+        let warningBorder = warningView(frame: self.view.frame)
+        self.view.addSubview(warningBorder)
+        self.view.setNeedsDisplay(self.view.frame)
+    }
+    
+    func hideBorder() {
+        
     }
 }

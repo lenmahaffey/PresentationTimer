@@ -9,6 +9,7 @@
 import Cocoa
 
 class displayWindowController: NSWindowController, NSWindowDelegate {
+    var nc = NotificationCenter.default
     
     required init?(coder: NSCoder){
         super.init(coder: coder)
@@ -44,5 +45,17 @@ class displayWindowController: NSWindowController, NSWindowDelegate {
     func countDown() {
         let viewController = contentViewController as! displayViewController
         viewController.countDown()
+    }
+    
+    func showBorder() {
+        
+    }
+    
+    func hideBorder() {
+        
+    }
+    
+    func timerComplete() {
+        
     }
 }
