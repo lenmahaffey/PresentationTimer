@@ -92,9 +92,9 @@
 				7F8C610A20746D6A0074A6BE /* controlView.swift */,
 				7F8C610620746D6A0074A6BE /* controlViewController.swift */,
 				7F8C610720746D6A0074A6BE /* displayViewController.swift */,
+				7F8C610C20746D6A0074A6BE /* displayWindowController.swift */,
 				7F8C610B20746D6A0074A6BE /* displayWindow.swift */,
 				7F11D29120B76E9600F910F3 /* warningView.swift */,
-				7F8C610C20746D6A0074A6BE /* displayWindowController.swift */,
 			);
 			path = UIObjects;
 			sourceTree = "<group>";

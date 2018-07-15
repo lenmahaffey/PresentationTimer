@@ -8,27 +8,22 @@
 
 import Cocoa
 
+extension Notification.Name {
+    static let warn = Notification.Name("warn")
+}
+
 class presentationTimerController: NSObject {
     @objc dynamic var timer: presentationTimer
-    private var nc = NotificationCenter.default
     
     init (timeLimit: Int, warningTime: Int){
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)
     }
     
-    func countDownWithWarning () {
+    func countDown() {
         self.timer.countDown()
     }
-    
-    func countDownWithoutWarning () {
-        self.timer.countDown()
-    }
-    
-    func countUpWithoutWarning () {
-        self.timer.countUp()
-    }
-    
-    func countUpWithWarning () {
+
+    func countUp() {
         self.timer.countUp()
     }
     
@@ -39,14 +34,34 @@ class presentationTimerController: NSObject {
     func warn () {
         
     }
+    
+    func stopTheClock() {
+    
+    }
 }
 
 class presentationTimer: NSObject {
     @objc dynamic var totalTime: time
     @objc dynamic var currentTime: time
     @objc dynamic var warningTime: time
+    /*@objc dynamic var currentDateTime: String {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let requestedComponents: Set<Calendar.Component> = [
+            .year,
+            .month,
+            .day,
+            .hour,
+            .minute,
+            .second
+        ]
+        let currentComponents =  calendar.dateComponents(requestedComponents, from: currentDate)
+        let formatter = DateFormatter()
+        //return formatter.string(from: currentComponents)
+    }*/
+    var isRunning: Bool
+    var nc = NotificationCenter.default
     private var timer = Timer()
-    private var isRunning: Bool
     
     init(secondsToCount: Int, warningTime: Int) {
         self.totalTime = time(timeToCountInSeconds: secondsToCount)
@@ -83,15 +98,23 @@ class presentationTimer: NSObject {
             currentTime.timeInSeconds -= 1
             print(currentTime.totalTimeAsString)
         } else {
-            timer.invalidate()
+            stopTheClock()
         }
         if currentTime == warningTime {
-            
+            nc.post(name: Notification.Name.warn, object: self)
         }
     }
     
     @objc func addOneSecond() {
-        currentTime.timeInSeconds += 1
+        if currentTime.timeInSeconds < totalTime.timeInSeconds {
+            currentTime.timeInSeconds += 1
+            print(currentTime.totalTimeAsString)
+        } else {
+            stopTheClock()
+        }
+        if currentTime == warningTime {
+            nc.post(name: Notification.Name.warn, object: self)
+        }
     }
     
     func stopTheClock() {

@@ -4,7 +4,7 @@
 //
 //  Created by Len Mahaffey on 5/24/18.
 //  Copyright © 2018 TLA Designs. All rights reserved.
-//
+//  Sets up a view with a yellow border framing the window
 
 import Cocoa
 
