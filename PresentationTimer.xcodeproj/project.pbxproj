@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F11D29220B76E9600F910F3 /* warningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F11D29120B76E9600F910F3 /* warningView.swift */; };
+		7F7DC46D20FBEB9100A5EB6D /* controlViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */; };
 		7F8C60F520746D280074A6BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C60F420746D280074A6BE /* AppDelegate.swift */; };
 		7F8C60F920746D290074A6BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F8C60F820746D290074A6BE /* Assets.xcassets */; };
 		7F8C60FC20746D290074A6BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8C60FA20746D290074A6BE /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		7F11D29120B76E9600F910F3 /* warningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = warningView.swift; sourceTree = "<group>"; };
 		7F2513EA20B71F6700CB8837 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controlViewTextField.swift; sourceTree = "<group>"; };
 		7F8C60F120746D280074A6BE /* PresentationTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PresentationTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8C60F420746D280074A6BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F8C60F820746D290074A6BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				7F8C610C20746D6A0074A6BE /* displayWindowController.swift */,
 				7F8C610B20746D6A0074A6BE /* displayWindow.swift */,
 				7F11D29120B76E9600F910F3 /* warningView.swift */,
+				7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */,
 			);
 			path = UIObjects;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F8C611220746D6A0074A6BE /* controlView.swift in Sources */,
+				7F7DC46D20FBEB9100A5EB6D /* controlViewTextField.swift in Sources */,
 				7F8C610E20746D6A0074A6BE /* controlViewController.swift in Sources */,
 				7F8C611320746D6A0074A6BE /* displayWindow.swift in Sources */,
 				7F8C611420746D6A0074A6BE /* displayWindowController.swift in Sources */,
@@ -320,6 +324,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TLA.PresentationTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -339,6 +344,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TLA.PresentationTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

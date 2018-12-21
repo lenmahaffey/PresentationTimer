@@ -19,6 +19,12 @@ class presentationTimerController: NSObject {
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)
     }
     
+    func setTime(timeLimit: time) {
+        self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
+        self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
+        //self.timer.warningTime = time(timeToCountInSeconds: warningTime)
+    }
+    
     func countDown() {
         self.timer.countDown()
     }
@@ -36,7 +42,11 @@ class presentationTimerController: NSObject {
     }
     
     func stopTheClock() {
+        timer.stopTheClock()
+    }
     
+    func resetTheClock() {
+        timer.resetTheClock()
     }
 }
 
@@ -44,39 +54,24 @@ class presentationTimer: NSObject {
     @objc dynamic var totalTime: time
     @objc dynamic var currentTime: time
     @objc dynamic var warningTime: time
-    /*@objc dynamic var currentDateTime: String {
-        let currentDate = Date()
-        let calendar = Calendar.current
-        let requestedComponents: Set<Calendar.Component> = [
-            .year,
-            .month,
-            .day,
-            .hour,
-            .minute,
-            .second
-        ]
-        let currentComponents =  calendar.dateComponents(requestedComponents, from: currentDate)
-        let formatter = DateFormatter()
-        //return formatter.string(from: currentComponents)
-    }*/
     var isRunning: Bool
     var nc = NotificationCenter.default
     private var timer = Timer()
     
     init(secondsToCount: Int, warningTime: Int) {
         self.totalTime = time(timeToCountInSeconds: secondsToCount)
-        self.currentTime = totalTime
+        self.currentTime = time(timeToCountInSeconds: secondsToCount)
         self.warningTime = time(timeToCountInSeconds: warningTime)
         isRunning = false
     }
-    
+
     init(hoursToCount: Int, minutesToCount: Int, secondsToCount: Int, warningTime: time) {
-        self.totalTime = time(hours: hoursToCount, minutes: minutesToCount, seconds: secondsToCount)
+        self.totalTime = time(hours: Int(hoursToCount), minutes: Int(minutesToCount), seconds: Int(secondsToCount))
         self.currentTime = totalTime
         self.warningTime = warningTime
         self.isRunning = false
     }
-    
+
     func countDown() {
         if isRunning == false {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(reduceTimeByOneSecond), userInfo: nil, repeats: true)
@@ -96,7 +91,7 @@ class presentationTimer: NSObject {
     @objc func reduceTimeByOneSecond() {
         if currentTime.timeInSeconds > 0 {
             currentTime.timeInSeconds -= 1
-            print(currentTime.totalTimeAsString)
+            print(currentTime.totalTimeAsString, "/", totalTime.totalTimeAsString)
         } else {
             stopTheClock()
         }
@@ -108,7 +103,7 @@ class presentationTimer: NSObject {
     @objc func addOneSecond() {
         if currentTime.timeInSeconds < totalTime.timeInSeconds {
             currentTime.timeInSeconds += 1
-            print(currentTime.totalTimeAsString)
+            print(currentTime.totalTimeAsString, "/", totalTime.totalTimeAsString)
         } else {
             stopTheClock()
         }
@@ -120,6 +115,16 @@ class presentationTimer: NSObject {
     func stopTheClock() {
         timer.invalidate()
         isRunning = false
+    }
+    
+    func resetTheClock() {
+        if isRunning == true {
+            timer.invalidate()
+            currentTime.timeInSeconds = totalTime.timeInSeconds
+            isRunning = false
+            return
+        }
+        currentTime.timeInSeconds = totalTime.timeInSeconds
     }
 }
 
@@ -153,13 +158,20 @@ class time: NSObject, NSCopying {
     
     @objc dynamic var minutes: Int {
         get {
-            return (timeInSeconds - (self.hours * 3600)) / 60
+            let totalMinutes = timeInSeconds / 60
+            if totalMinutes > 59 {
+                return totalMinutes % 60
+            }
+            return totalMinutes
         }
     }
     
     @objc dynamic var seconds: Int {
         get {
-            return (timeInSeconds - (self.hours * 3600 ) - (self.minutes * 60))
+            if timeInSeconds > 59 {
+                return timeInSeconds % 60
+            }
+            return timeInSeconds
         }
     }
     
@@ -174,7 +186,6 @@ class time: NSObject, NSCopying {
     }
     
     init(hours: Int, minutes: Int, seconds: Int) {
-        self.timeInSeconds = (hours * 3600) + (minutes * 60) + (seconds * 60)
+        self.timeInSeconds = (Int(hours) * 3600) + (Int(minutes) * 60) + (Int(seconds))
     }
-
 }

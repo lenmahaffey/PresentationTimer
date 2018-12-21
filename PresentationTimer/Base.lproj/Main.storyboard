@@ -784,8 +784,11 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="stopButtonPress:" target="XfG-lQ-9wD" id="HgJ-oC-kvt"/>
+                                </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaV-2u-pEc">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaV-2u-pEc" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
                                 <rect key="frame" x="117" y="135" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="ZJT-wd-BAO">
@@ -794,7 +797,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XEN-h3-Lvl">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XEN-h3-Lvl" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
                                 <rect key="frame" x="154" y="135" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="6dn-HI-90w">
@@ -803,7 +806,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xn-rK-WVy">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xn-rK-WVy" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
                                 <rect key="frame" x="191" y="135" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="sAj-rs-Fjk">
@@ -812,7 +815,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nb-UD-Y3g">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nb-UD-Y3g" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
                                 <rect key="frame" x="272" y="135" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="dOI-F9-Kzh">
@@ -821,7 +824,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XW9-c0-AWm">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XW9-c0-AWm" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
                                 <rect key="frame" x="309" y="135" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="1SD-wu-emj">
@@ -830,7 +833,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-C6-lCV">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-C6-lCV" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
                                 <rect key="frame" x="346" y="135" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="YtG-mh-YkA">
@@ -849,7 +852,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5a7-i0-8fh">
-                                <rect key="frame" x="125" y="220" width="250" height="60"/>
+                                <rect key="frame" x="0.0" y="220" width="500" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="0h 0s 0m" drawsBackground="YES" id="4C6-XF-O8r">
                                     <font key="font" metaFont="system" size="50"/>
@@ -894,6 +897,7 @@
                         <outlet property="wrapUpTimeSecondsEntryField" destination="Zc8-C6-lCV" id="JAA-Xf-8Ob"/>
                     </connections>
                 </viewController>
+                <userDefaultsController id="JCv-Qm-gd1"/>
             </objects>
             <point key="canvasLocation" x="75" y="785"/>
         </scene>

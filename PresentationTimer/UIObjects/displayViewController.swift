@@ -11,8 +11,7 @@ import Cocoa
 class displayViewController: NSViewController {
     
     @IBOutlet weak var timerDisplayText: NSTextField!
-    
-    @objc dynamic var countdownTimerController = presentationTimerController(timeLimit: 360, warningTime: 359)
+    @objc dynamic var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
     lazy var warningBorder = { () -> warningView in
         var warning = warningView(frame: self.view.frame)
         warning.isHidden = true
@@ -42,6 +41,16 @@ class displayViewController: NSViewController {
         countdownTimerController.countUp()
     }
     
+    func stopTheClock() {
+        if countdownTimerController.timer.isRunning == true {
+            countdownTimerController.stopTheClock()
+        }
+    }
+    
+    func resetTheClock() {
+        countdownTimerController.resetTheClock()
+    }
+    
     @objc func showBorder() {
         if self.warningBorder.isHidden == true {
             self.warningBorder.isHidden = false
@@ -53,12 +62,6 @@ class displayViewController: NSViewController {
         if self.warningBorder.isHidden == false {
             self.warningBorder.isHidden = true
             self.view.setNeedsDisplay(self.view.frame)
-        }
-    }
-    
-    func stopTheClock() {
-        if countdownTimerController.timer.isRunning == true {
-            countdownTimerController.timer.stopTheClock()
         }
     }
 }
