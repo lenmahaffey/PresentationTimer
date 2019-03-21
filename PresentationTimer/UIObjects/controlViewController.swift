@@ -36,11 +36,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             selector: #selector(setUpTime),
             name: NSText.didEndEditingNotification,
             object: nil)
-        //Instantiate display controllers directly
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let displayWindowControllerSceneID = NSStoryboard.SceneIdentifier(rawValue: "displayWindowController")
-        let displayViewControllerSceneID = NSStoryboard.SceneIdentifier(rawValue: "displayViewController")
-        displayViewControl = (storyboard.instantiateController(withIdentifier: displayViewControllerSceneID) as! displayViewController)
+        //Instantiate external window controller directly
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let displayWindowControllerSceneID = "displayWindowController"
         displayWindowControl = (storyboard.instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
     }
     
@@ -50,41 +48,18 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //If only one screen then close the displayWindow
-        if NSScreen.screens.count == 1 {
-            displayWindowControl?.window?.close()
-        }
-        //If more than one screen is detected then show the displayWindow
-        if NSScreen.screens.count > 1 {
-            displayWindowControl?.showWindowOnExtendedDesktop()
-        }
-    }
-    
-    //Function called when a change to screens is observed by notification
-    //closes displayWindow if only one screen, shows displayWindow if more than one
-    @objc func monitorDidChange(notification: NSNotification) {
-        if NSScreen.screens.count == 1 {
-            displayWindowControl?.window?.close()
-        }
-        if NSScreen.screens.count > 1 {
-            displayWindowControl?.showWindowOnExtendedDesktop()
-        }
-    }
-    
-    override func controlTextDidEndEditing(_ obj: Notification) {
-        print ("done editing")
     }
     
     @IBAction func startButtonPress(_ sender: Any) {
-        displayViewControl?.countDown()
+        timerController.countDown()
     }
     
     @IBAction func stopButtonPress(_ sender: Any) {
-        displayViewControl?.stopTheClock()
+        timerController.stopTheClock()
     }
     
     @IBAction func repeatButtonPress(_ sender: Any) {
-        displayViewControl?.resetTheClock()
+        timerController.resetTheClock()
     }
     
     @objc func setUpTime(notification: Notification) {

@@ -12,12 +12,21 @@ class displayWindowController: NSWindowController, NSWindowDelegate {
     
     required init?(coder: NSCoder){
         super.init(coder: coder)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(monitorDidChange),
+            name:  NSApplication.didChangeScreenParametersNotification,
+            object: nil)
     }
     
-    override init(window: NSWindow?) {
-        super.init(window: window)
+    @objc func monitorDidChange(notification: NSNotification) {
+        if NSScreen.screens.count == 1 {
+            self.window?.close()
+        }
+        if NSScreen.screens.count > 1 {
+            self.showWindowOnExtendedDesktop()
+        }
     }
-    
     override func windowWillLoad() {
         super.windowWillLoad()
     }

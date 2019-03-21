@@ -25,24 +25,6 @@ class displayViewController: NSViewController {
         nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.warn, object:nil)
     }
     
-    func countDown() {
-        countdownTimerController.countDown()
-    }
-    
-    func countUp() {
-        countdownTimerController.countUp()
-    }
-    
-    func stopTheClock() {
-        if countdownTimerController.timer.isRunning == true {
-            countdownTimerController.stopTheClock()
-        }
-    }
-    
-    func resetTheClock() {
-        countdownTimerController.resetTheClock()
-    }
-    
     @objc func showBorder() {
         if self.warningBorder.isHidden == true {
             self.warningBorder.isHidden = false
