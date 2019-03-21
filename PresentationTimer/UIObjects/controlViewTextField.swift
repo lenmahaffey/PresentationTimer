@@ -14,10 +14,6 @@ class controlViewTextField: NSTextField {
         super.init(coder: coder)
         formatter = controlViewTextFieldFormatter()
     }
-    
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-    }
 }
 
 class controlViewTextFieldFormatter: Formatter {

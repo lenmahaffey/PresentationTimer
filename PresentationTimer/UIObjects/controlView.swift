@@ -14,15 +14,6 @@ class controlView: NSView {
         return true
     }
     
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-        // Drawing code here.
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-        
-    }
-    
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 53 {
             if (self.window?.styleMask.contains(NSWindow.StyleMask.fullScreen))!  {

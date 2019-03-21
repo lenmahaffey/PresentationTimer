@@ -18,15 +18,6 @@ class displayViewController: NSViewController {
         self.view.addSubview(warning)
         return warning
     }()
-    let nc = NotificationCenter.default
-    
-    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
