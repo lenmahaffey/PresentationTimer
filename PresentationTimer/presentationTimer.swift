@@ -11,7 +11,9 @@ import Cocoa
 var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
 
 extension Notification.Name {
+    static let clockStarted = Notification.Name("clockStarted")
     static let warn = Notification.Name("warn")
+    static let outOfTime = Notification.Name("outOfTime")
 }
 
 class presentationTimerController: NSObject {
@@ -21,10 +23,10 @@ class presentationTimerController: NSObject {
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)
     }
     
-    func setTime(timeLimit: time) {
+    func setTime(timeLimit: time, warningTime: time) {
         self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
-        //self.timer.warningTime = time(timeToCountInSeconds: warningTime)
+        self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
     }
     
     func countDown() {
@@ -37,10 +39,6 @@ class presentationTimerController: NSObject {
     
     func countDownComplete () {
     
-    }
-    
-    func warn () {
-        
     }
     
     func stopTheClock() {
@@ -78,6 +76,7 @@ class presentationTimer: NSObject {
         if isRunning == false {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(reduceTimeByOneSecond), userInfo: nil, repeats: true)
             timer.fire()
+            nc.post(name: Notification.Name.clockStarted, object: self)
             isRunning = true
         }
     }
@@ -86,6 +85,7 @@ class presentationTimer: NSObject {
         if isRunning == false {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(addOneSecond), userInfo: nil, repeats: true)
             timer.fire()
+            nc.post(name: Notification.Name.clockStarted, object: self)
             isRunning = true
         }
     }
@@ -93,11 +93,11 @@ class presentationTimer: NSObject {
     @objc func reduceTimeByOneSecond() {
         if currentTime.timeInSeconds > 0 {
             currentTime.timeInSeconds -= 1
-            print(currentTime.totalTimeAsString, "/", totalTime.totalTimeAsString)
         } else {
             stopTheClock()
+            nc.post(name: Notification.Name.outOfTime, object: self)
         }
-        if currentTime == warningTime {
+        if currentTime.timeInSeconds <= warningTime.timeInSeconds {
             nc.post(name: Notification.Name.warn, object: self)
         }
     }
@@ -105,9 +105,9 @@ class presentationTimer: NSObject {
     @objc func addOneSecond() {
         if currentTime.timeInSeconds < totalTime.timeInSeconds {
             currentTime.timeInSeconds += 1
-            print(currentTime.totalTimeAsString, "/", totalTime.totalTimeAsString)
         } else {
             stopTheClock()
+            nc.post(name: Notification.Name.outOfTime, object: self)
         }
         if currentTime == warningTime {
             nc.post(name: Notification.Name.warn, object: self)

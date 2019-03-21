@@ -60,7 +60,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let totalHours = self.totalTimeHoursEntryField?.intValue ?? 0
         let totalMinutes = self.totalTimeMinutesEntryField?.intValue ?? 0
         let totalSeconds = self.totalTimeSecondsEntryField?.intValue ?? 0
-
+        self.totalTimeHoursEntryField?.placeholderString = ""
+        self.totalTimeMinutesEntryField?.placeholderString = ""
+        self.totalTimeSecondsEntryField?.placeholderString = ""
         if Int(totalSeconds) > 59 {
             let newSeconds = Int(totalSeconds) - 60
             let newMinutes = Int(totalMinutes) + 1
@@ -78,7 +80,16 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let timerTotal = time(hours: (Int(self.totalTimeHoursEntryField?.intValue ?? 0)),
                               minutes: (Int(self.totalTimeMinutesEntryField?.intValue ?? 0)),
                               seconds: (Int(self.totalTimeSecondsEntryField?.intValue ?? 0)))
-        displayViewControl?.countdownTimerController.setTime(timeLimit: timerTotal)
+        
+        let warningTotal = time(hours: (Int(self.wrapUpTimeHoursEntryField?.intValue ?? 0)),
+                                minutes: (Int(self.wrapUpTimeMinutesEntryField?.intValue ?? 0)),
+                                seconds: (Int(self.wrapUpTimeSecondsEntryField?.intValue ?? 0)))
+        if timerController.timer.isRunning == false {
+            timerController.setTime(timeLimit: timerTotal, warningTime: warningTotal)
+        }
+        if timerController.timer.isRunning == true {
+            timerController.timer.warningTime.timeInSeconds = warningTotal.timeInSeconds
+        }
     }
     
 }
