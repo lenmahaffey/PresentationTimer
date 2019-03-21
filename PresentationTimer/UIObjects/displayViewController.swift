@@ -10,8 +10,9 @@ import Cocoa
 
 class displayViewController: NSViewController {
     
+    let nc = NotificationCenter.default
+    @objc dynamic var timerController = countdownTimerController
     @IBOutlet weak var timerDisplayText: NSTextField!
-    @objc dynamic var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
     lazy var warningBorder = { () -> warningView in
         var warning = warningView(frame: self.view.frame)
         warning.isHidden = true

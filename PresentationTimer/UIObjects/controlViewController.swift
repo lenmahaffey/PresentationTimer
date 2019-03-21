@@ -21,6 +21,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var wrapUpTimeSecondsEntryField: controlViewTextField?
     @objc dynamic var displayWindowControl: displayWindowController? = nil
     @objc dynamic var displayViewControl: displayViewController? = nil
+    @objc dynamic var timerController = countdownTimerController
     
     required init?(coder: NSCoder){
         super.init(coder: coder)

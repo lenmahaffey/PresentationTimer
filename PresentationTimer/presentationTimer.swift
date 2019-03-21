@@ -8,6 +8,8 @@
 
 import Cocoa
 
+var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
+
 extension Notification.Name {
     static let warn = Notification.Name("warn")
 }
