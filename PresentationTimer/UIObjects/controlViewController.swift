@@ -25,12 +25,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     required init?(coder: NSCoder){
         super.init(coder: coder)
-        //Add notification observer to watch for screen changes.
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(monitorDidChange),
-            name:  NSApplication.didChangeScreenParametersNotification,
-            object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(setUpTime),

@@ -33,12 +33,22 @@ class displayWindowController: NSWindowController, NSWindowDelegate {
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        //If only one screen then close the displayWindow
+        if NSScreen.screens.count == 1 {
+            self.window?.close()
+        }
+        //If more than one screen is detected then show the displayWindow
+        if NSScreen.screens.count > 1 {
+            self.showWindowOnExtendedDesktop()
+        }
     }
     
     func windowDidExitFullScreen(_ notification: Notification) {
         self.window?.close()
     }
     
+    //Function called when a change to screens is observed by notification
+    //closes displayWindow if only one screen, shows displayWindow if more than one
     func showWindowOnExtendedDesktop() {
         if NSScreen.screens.count > 1 {
             self.window?.setFrame(NSScreen.screens[1].frame, display: true)
