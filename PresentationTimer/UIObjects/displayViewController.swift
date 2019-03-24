@@ -39,5 +39,6 @@ class displayViewController: NSViewController {
     
     @objc func hideBorder() {
         self.view.layer?.borderWidth = 0
+        self.view.layer?.borderColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
     }
 }
