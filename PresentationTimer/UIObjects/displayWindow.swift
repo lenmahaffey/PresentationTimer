@@ -19,7 +19,7 @@ class displayWindow: NSWindow {
         return false
     }
     
-    let background: NSColor = NSColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
+    let background = NSColor(red: 0, green: 0, blue: 0, alpha: 1)
     
     override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
         super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
