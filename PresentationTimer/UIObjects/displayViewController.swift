@@ -13,29 +13,31 @@ class displayViewController: NSViewController {
     let nc = NotificationCenter.default
     @objc dynamic var timerController = countdownTimerController
     @IBOutlet weak var timerDisplayText: NSTextField!
-    lazy var warningBorder = { () -> warningView in
-        var warning = warningView(frame: self.view.frame)
-        warning.isHidden = true
-        self.view.addSubview(warning)
-        return warning
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.warn, object:nil)
+        nc.addObserver(self, selector: #selector(showGreenBorder), name: Notification.Name.clockStarted, object:nil)
+        nc.addObserver(self, selector: #selector(showYellowBorder), name: Notification.Name.warn, object:nil)
+        nc.addObserver(self, selector: #selector(showRedBorder), name: Notification.Name.outOfTime, object:nil)
+        nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.clockReset, object:nil)
     }
     
-    @objc func showBorder() {
-        if self.warningBorder.isHidden == true {
-            self.warningBorder.isHidden = false
-            self.view.setNeedsDisplay(self.view.frame)
-        }
+    @objc func showGreenBorder() {
+        self.view.layer?.borderWidth = 50
+        self.view.layer?.borderColor = NSColor.green.cgColor
     }
     
-    func hideBorder() {
-        if self.warningBorder.isHidden == false {
-            self.warningBorder.isHidden = true
-            self.view.setNeedsDisplay(self.view.frame)
-        }
+    @objc func showYellowBorder() {
+        self.view.layer?.borderWidth = 50
+        self.view.layer?.borderColor = NSColor.yellow.cgColor
+    }
+    
+    @objc func showRedBorder() {
+        self.view.layer?.borderWidth = 50
+        self.view.layer?.borderColor = NSColor.red.cgColor
+    }
+    
+    @objc func hideBorder() {
+        self.view.layer?.borderWidth = 0
     }
 }
