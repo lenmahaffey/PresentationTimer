@@ -12,33 +12,49 @@ class displayViewController: NSViewController {
     
     let nc = NotificationCenter.default
     @objc dynamic var timerController = countdownTimerController
-    @IBOutlet weak var timerDisplayText: NSTextField!
-    
+    weak var timerDisplayText: NSTextField!
+    lazy var warningBorderView = { () -> NSView in
+        var warning = NSView(frame: self.view.frame)
+        warning.isHidden = false
+        return warning
+    }()
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         nc.addObserver(self, selector: #selector(showGreenBorder), name: Notification.Name.clockStarted, object:nil)
         nc.addObserver(self, selector: #selector(showYellowBorder), name: Notification.Name.warn, object:nil)
         nc.addObserver(self, selector: #selector(showRedBorder), name: Notification.Name.outOfTime, object:nil)
-        nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.clockReset, object:nil)
+        nc.addObserver(self, selector: #selector(hideBorderView), name: Notification.Name.clockReset, object:nil)
+        nc.addObserver(self, selector: #selector(showBorderView), name: Notification.Name.showBorder, object:nil)
+        nc.addObserver(self, selector: #selector(hideBorderView), name: Notification.Name.hideBorder, object:nil)
+    }
+    
+    override func viewWillAppear() {
+        if !warningBorderView.isDescendant(of: self.view) {
+            self.view.addSubview(warningBorderView)
+        }
     }
     
     @objc func showGreenBorder() {
-        self.view.layer?.borderWidth = 50
-        self.view.layer?.borderColor = NSColor.green.cgColor
+        self.warningBorderView.layer?.borderWidth = 50
+        self.warningBorderView.layer?.borderColor = NSColor.green.cgColor
     }
     
     @objc func showYellowBorder() {
-        self.view.layer?.borderWidth = 50
-        self.view.layer?.borderColor = NSColor.yellow.cgColor
+        self.warningBorderView.layer?.borderWidth = 50
+        self.warningBorderView.layer?.borderColor = NSColor.yellow.cgColor
     }
     
     @objc func showRedBorder() {
-        self.view.layer?.borderWidth = 50
-        self.view.layer?.borderColor = NSColor.red.cgColor
+        self.warningBorderView.layer?.borderWidth = 50
+        self.warningBorderView.layer?.borderColor = NSColor.red.cgColor
     }
     
-    @objc func hideBorder() {
-        self.view.layer?.borderWidth = 0
-        self.view.layer?.borderColor = NSColor(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+    @objc func hideBorderView() {
+        self.warningBorderView.isHidden = true
+    }
+    
+    @objc func showBorderView() {
+        self.warningBorderView.isHidden = false
     }
 }

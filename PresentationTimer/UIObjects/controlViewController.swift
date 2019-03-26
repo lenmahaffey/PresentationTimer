@@ -10,6 +10,7 @@ import Cocoa
 
 class controlViewController: NSViewController, NSTextViewDelegate {
     
+    let nc = NotificationCenter.default
     @IBOutlet weak var timerDisplay: NSTextField!
     @IBOutlet weak var startButton: NSButton!
     @IBOutlet weak var repeatButton: NSButton!
@@ -20,28 +21,28 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var wrapUpTimeMinutesEntryField: controlViewTextField?
     @IBOutlet weak var wrapUpTimeSecondsEntryField: controlViewTextField?
     @objc dynamic var displayWindowControl: displayWindowController? = nil
-    @objc dynamic var displayViewControl: displayViewController? = nil
     @objc dynamic var timerController = countdownTimerController
-    
-    required init?(coder: NSCoder){
-        super.init(coder: coder)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(setUpTime),
-            name: NSText.didEndEditingNotification,
-            object: nil)
-        //Instantiate external window controller directly
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let displayWindowControllerSceneID = "displayWindowController"
-        displayWindowControl = (storyboard.instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
-    }
-    
-    override func viewWillAppear() {
-        super .viewWillAppear()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
+    }
+    
+    override func viewDidAppear() {
+        loadDisplayWindow()
+    }
+    
+    func loadDisplayWindow() {
+        let displayWindowControllerSceneID = "displayWindowController"
+        self.displayWindowControl = (NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
+    }
+    
+    @IBAction func showBorder(_ sender: Any) {
+        if (sender as AnyObject).state == .on {
+            nc.post(name: Notification.Name.showBorder, object: self)
+        } else {
+            nc.post(name: Notification.Name.hideBorder, object: self)
+        }
     }
     
     @IBAction func startButtonPress(_ sender: Any) {

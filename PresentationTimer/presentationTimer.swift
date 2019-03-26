@@ -8,13 +8,15 @@
 
 import Cocoa
 
-var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
+var countdownTimerController = presentationTimerController(timeLimit: 5, warningTime: 3)
 
 extension Notification.Name {
     static let clockStarted = Notification.Name("clockStarted")
     static let warn = Notification.Name("warn")
     static let outOfTime = Notification.Name("outOfTime")
     static let clockReset = Notification.Name("clockReset")
+    static let showBorder = Notification.Name("showBorder")
+    static let hideBorder = Notification.Name("hideBorder")
 }
 
 class presentationTimerController: NSObject {

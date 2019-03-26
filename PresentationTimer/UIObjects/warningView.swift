@@ -20,12 +20,12 @@ class warningView: NSView {
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        let warningBorder = NSBezierPath(rect: NSRect(origin: CGPoint(x: CGFloat(0), y: CGFloat(0)),
+        /*let warningBorder = NSBezierPath(rect: NSRect(origin: CGPoint(x: CGFloat(0), y: CGFloat(0)),
                                                       size: CGSize(width: (self.window?.frame.width)!,
                                                                    height: (self.window?.frame.height)!)))
         warningBorder.lineWidth = 45
         NSColor.systemYellow.setStroke()
-        warningBorder.stroke()
+        warningBorder.stroke()*/
     }
 
 }
