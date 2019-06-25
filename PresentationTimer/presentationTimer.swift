@@ -8,7 +8,7 @@
 
 import Cocoa
 
-var countdownTimerController = presentationTimerController(timeLimit: 5, warningTime: 3)
+var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
 
 extension Notification.Name {
     static let clockStarted = Notification.Name("clockStarted")
@@ -30,6 +30,20 @@ class presentationTimerController: NSObject {
         self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
+    }
+    
+    func changeTotalTimeLimit(newTime: time) {
+        
+    }
+    
+    func changeWarningTimeLimit(newTime: time) {
+        
+    }
+    
+    func changeCurrentTime(newTime: time) {
+        let totalSecondsToChange = self.timer.totalTime.timeInSeconds - newTime.timeInSeconds
+        self.timer.currentTime.timeInSeconds += totalSecondsToChange
+        
     }
     
     func countDown() {
@@ -66,7 +80,7 @@ class presentationTimer: NSObject {
         self.warningTime = warningTime
         self.isRunning = false
     }
-
+    
     func countDown() {
         if isRunning == false {
             nc.post(name: Notification.Name.clockStarted, object: self)

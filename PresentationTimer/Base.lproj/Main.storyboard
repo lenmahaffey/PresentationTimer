@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -358,7 +358,7 @@
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="toggleSourceList:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
+                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -474,11 +474,11 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="XfG-lQ-9wD" customClass="controlViewController" customModule="PresentationTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="controlView" customModule="PresentationTimer" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="489" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="552" height="348"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmH-Uc-knu">
-                                <rect key="frame" x="138" y="38" width="70" height="32"/>
+                                <rect key="frame" x="161" y="42" width="70" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MhM-NZ-Keh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -489,7 +489,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lPH-Yu-eVO">
-                                <rect key="frame" x="138" y="9" width="69" height="32"/>
+                                <rect key="frame" x="161" y="13" width="69" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CvJ-Ct-s2v">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -500,7 +500,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uaV-2u-pEc" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                <rect key="frame" x="117" y="135" width="37" height="30"/>
+                                <rect key="frame" x="143" y="174" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="ZJT-wd-BAO">
                                     <font key="font" metaFont="system" size="25"/>
@@ -509,7 +509,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XEN-h3-Lvl" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                <rect key="frame" x="154" y="135" width="37" height="30"/>
+                                <rect key="frame" x="180" y="174" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="6dn-HI-90w">
                                     <font key="font" metaFont="system" size="25"/>
@@ -518,7 +518,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xn-rK-WVy" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                <rect key="frame" x="191" y="135" width="37" height="30"/>
+                                <rect key="frame" x="217" y="174" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="sAj-rs-Fjk">
                                     <font key="font" metaFont="system" size="25"/>
@@ -527,7 +527,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nb-UD-Y3g" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                <rect key="frame" x="272" y="135" width="37" height="30"/>
+                                <rect key="frame" x="298" y="174" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="dOI-F9-Kzh">
                                     <font key="font" metaFont="system" size="25"/>
@@ -536,7 +536,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XW9-c0-AWm" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                <rect key="frame" x="309" y="135" width="37" height="30"/>
+                                <rect key="frame" x="335" y="174" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="1SD-wu-emj">
                                     <font key="font" metaFont="system" size="25"/>
@@ -545,7 +545,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-C6-lCV" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                <rect key="frame" x="346" y="135" width="37" height="30"/>
+                                <rect key="frame" x="372" y="174" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" alignment="center" placeholderString="00" drawsBackground="YES" id="YtG-mh-YkA">
                                     <font key="font" metaFont="system" size="25"/>
@@ -554,7 +554,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6D-Ga-iz7">
-                                <rect key="frame" x="283" y="173" width="89" height="17"/>
+                                <rect key="frame" x="310" y="243" width="89" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Wrap up Time" id="vOs-AN-xAc">
                                     <font key="font" metaFont="system"/>
@@ -563,7 +563,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GH4-bt-wBY">
-                                <rect key="frame" x="139" y="173" width="67" height="17"/>
+                                <rect key="frame" x="166" y="243" width="67" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total Time" id="x54-lt-cBD">
                                     <font key="font" metaFont="system"/>
@@ -572,7 +572,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z4I-h8-bw5">
-                                <rect key="frame" x="286" y="38" width="83" height="32"/>
+                                <rect key="frame" x="309" y="42" width="83" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Repeat" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="beX-sH-h8c">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -583,7 +583,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5a7-i0-8fh">
-                                <rect key="frame" x="117" y="207" width="266" height="60"/>
+                                <rect key="frame" x="143" y="268" width="266" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" drawsBackground="YES" id="4C6-XF-O8r">
                                     <font key="font" metaFont="system" size="50"/>
@@ -594,8 +594,140 @@
                                     <binding destination="XfG-lQ-9wD" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="nsu-07-zH0"/>
                                 </connections>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CEb-Cl-mDZ">
+                                <rect key="frame" x="175" y="141" width="47" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="d88-7D-8He">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="totalTimeDecreaseMinutesButtonPress:" target="XfG-lQ-9wD" id="REn-n4-pbB"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APf-ix-tEo">
+                                <rect key="frame" x="212" y="141" width="47" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="G1V-O5-eSm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="totalTimeDecreaseSecondsButtonPress:" target="XfG-lQ-9wD" id="UjM-Qu-y2U"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6LM-7O-yOc">
+                                <rect key="frame" x="293" y="141" width="47" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ixj-3c-sxP">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="wrapUpTimeDecreaseHoursButtonPress:" target="XfG-lQ-9wD" id="LsM-9f-adY"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qj5-wj-nqR">
+                                <rect key="frame" x="330" y="141" width="47" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Me5-TA-RbV">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="wrapUpTimeDecreaseMinutesButtonPress:" target="XfG-lQ-9wD" id="GQu-t8-nTa"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PI9-jg-jJw">
+                                <rect key="frame" x="367" y="141" width="47" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9sD-Yp-4qU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="wrapUpTimeDecreaseSecondsButtonPress:" target="XfG-lQ-9wD" id="w4k-LL-pge"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWv-DJ-L6x">
+                                <rect key="frame" x="137" y="205" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tuf-7L-cLt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="totalTimeIncreaseHoursButtonPress:" target="XfG-lQ-9wD" id="u1A-HV-42n"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbH-xl-cow">
+                                <rect key="frame" x="174" y="205" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="StJ-Kw-UjL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="totalTimeIncreaseMinutesButtonPress:" target="XfG-lQ-9wD" id="2IA-6G-vSl"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zuf-qQ-B0k">
+                                <rect key="frame" x="211" y="205" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Ex-yR-wHp">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="totalTimeIncreaseSecondsButtonPress:" target="XfG-lQ-9wD" id="hqs-h8-Gbv"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tsr-JJ-sN0">
+                                <rect key="frame" x="292" y="205" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mtm-Dx-cLB">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="wrapUpTimeIncreaseHoursButtonPress:" target="XfG-lQ-9wD" id="sbE-MT-cCR"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t8x-Kw-Gt3">
+                                <rect key="frame" x="329" y="205" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tGZ-tI-idP">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="wrapUpTimeIncreaseMinutesButtonPress:" target="XfG-lQ-9wD" id="ELe-fb-ttL"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSx-CG-Bim">
+                                <rect key="frame" x="366" y="205" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iih-eo-p7h">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="wrapUpTimeIncreaseSecondsButtonPress:" target="XfG-lQ-9wD" id="6Yx-sq-Pvz"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNo-H8-lNO">
+                                <rect key="frame" x="143" y="116" width="111" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Count Up" bezelStyle="regularSquare" imagePosition="left" inset="2" id="y9Y-hJ-bGO">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showBorder:" target="XfG-lQ-9wD" id="NSu-EM-Ltj"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bfm-na-PJb">
-                                <rect key="frame" x="272" y="104" width="111" height="25"/>
+                                <rect key="frame" x="299" y="116" width="111" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Show Border" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6MG-rJ-wRs">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -605,22 +737,45 @@
                                     <action selector="showBorder:" target="XfG-lQ-9wD" id="idK-S3-kzK"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVB-v7-VCB">
+                                <rect key="frame" x="139" y="141" width="47" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f2Y-P4-8eP">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="totalTimeDecreaseHoursButtonPress:" target="XfG-lQ-9wD" id="vJG-E6-MY3"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="repeatButton" destination="Z4I-h8-bw5" id="y4b-Oq-ZJa"/>
                         <outlet property="startButton" destination="rmH-Uc-knu" id="cde-hf-YE3"/>
                         <outlet property="timerDisplay" destination="5a7-i0-8fh" id="hFG-lQ-ENg"/>
+                        <outlet property="totalTimeDecreaseHoursButton" destination="tVB-v7-VCB" id="wGh-JW-SEr"/>
+                        <outlet property="totalTimeDecreaseMinutesButton" destination="CEb-Cl-mDZ" id="bCS-dg-buv"/>
+                        <outlet property="totalTimeDecreaseSecondsButton" destination="APf-ix-tEo" id="KCx-1S-eyq"/>
                         <outlet property="totalTimeHoursEntryField" destination="uaV-2u-pEc" id="cZM-hq-8Dz"/>
+                        <outlet property="totalTimeIncreaseSecondsButton" destination="Zuf-qQ-B0k" id="oew-GB-gwx"/>
+                        <outlet property="totalTimeIncreseHoursButton" destination="xWv-DJ-L6x" id="A8M-jD-4ht"/>
+                        <outlet property="totalTimeIncreseMinutesButton" destination="VbH-xl-cow" id="Vqp-f7-C1y"/>
                         <outlet property="totalTimeMinutesEntryField" destination="XEN-h3-Lvl" id="oN2-6d-yRS"/>
                         <outlet property="totalTimeSecondsEntryField" destination="8xn-rK-WVy" id="EFj-FY-Dlt"/>
+                        <outlet property="warpUpTimeDecreaseHoursButton" destination="6LM-7O-yOc" id="7eA-aU-Uf0"/>
+                        <outlet property="wrapUpTimeDecreaseMinutesButton" destination="Qj5-wj-nqR" id="Imz-ux-Fdy"/>
+                        <outlet property="wrapUpTimeDecreaseSecondsButton" destination="PI9-jg-jJw" id="irz-XH-8tN"/>
                         <outlet property="wrapUpTimeHoursEntryField" destination="1nb-UD-Y3g" id="SbU-Ra-Mf0"/>
+                        <outlet property="wrapUpTimeIncreaseHoursButton" destination="Tsr-JJ-sN0" id="7y3-Rr-QSe"/>
+                        <outlet property="wrapUpTimeIncreaseMinutesButton" destination="t8x-Kw-Gt3" id="arS-Wb-swb"/>
+                        <outlet property="wrapUpTimeIncreaseSecondsButton" destination="kSx-CG-Bim" id="gmk-hn-Xmr"/>
                         <outlet property="wrapUpTimeMinutesEntryField" destination="XW9-c0-AWm" id="kV4-cY-hmV"/>
                         <outlet property="wrapUpTimeSecondsEntryField" destination="Zc8-C6-lCV" id="JAA-Xf-8Ob"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="69.5" y="785"/>
+            <point key="canvasLocation" x="101" y="809"/>
         </scene>
     </scenes>
 </document>
