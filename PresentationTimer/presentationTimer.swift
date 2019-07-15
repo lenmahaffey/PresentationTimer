@@ -17,6 +17,11 @@ extension Notification.Name {
     static let clockReset = Notification.Name("clockReset")
     static let showBorder = Notification.Name("showBorder")
     static let hideBorder = Notification.Name("hideBorder")
+    static let greenBorder = Notification.Name("greenReset")
+    static let yellowBorder = Notification.Name("yellowBorder")
+    static let redBorder = Notification.Name("redBorder")
+    
+    
 }
 
 class presentationTimerController: NSObject {
@@ -95,6 +100,9 @@ class presentationTimer: NSObject {
             currentTime.timeInSeconds -= 1
             if currentTime.timeInSeconds <= warningTime.timeInSeconds {
                 nc.post(name: Notification.Name.warn, object: self)
+            }
+            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.clockStarted, object: self)
             }
         }
         if currentTime.timeInSeconds == 0 {

@@ -21,9 +21,9 @@ class displayViewController: NSViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        nc.addObserver(self, selector: #selector(showGreenBorder), name: Notification.Name.clockStarted, object:nil)
-        nc.addObserver(self, selector: #selector(showYellowBorder), name: Notification.Name.warn, object:nil)
-        nc.addObserver(self, selector: #selector(showRedBorder), name: Notification.Name.outOfTime, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warn, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
         nc.addObserver(self, selector: #selector(hideBorderView), name: Notification.Name.clockReset, object:nil)
         nc.addObserver(self, selector: #selector(showBorderView), name: Notification.Name.showBorder, object:nil)
         nc.addObserver(self, selector: #selector(hideBorderView), name: Notification.Name.hideBorder, object:nil)
@@ -35,17 +35,17 @@ class displayViewController: NSViewController {
         }
     }
     
-    @objc func showGreenBorder() {
+    @objc func setBorderGreen() {
         self.warningBorderView.layer?.borderWidth = 50
         self.warningBorderView.layer?.borderColor = NSColor.green.cgColor
     }
     
-    @objc func showYellowBorder() {
+    @objc func setBorderYellow() {
         self.warningBorderView.layer?.borderWidth = 50
         self.warningBorderView.layer?.borderColor = NSColor.yellow.cgColor
     }
     
-    @objc func showRedBorder() {
+    @objc func setBorderRed() {
         self.warningBorderView.layer?.borderWidth = 50
         self.warningBorderView.layer?.borderColor = NSColor.red.cgColor
     }
