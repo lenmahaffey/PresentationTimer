@@ -61,21 +61,23 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let newTime = time.init(hours: 1, minutes: 0, seconds: 0)
         timerController.timer.totalTime.timeInSeconds += newTime.timeInSeconds
         timerController.timer.currentTime.timeInSeconds += newTime.timeInSeconds
-        self.totalTimeHoursEntryField?.intValue = Int32(timerController.timer.totalTime.hours)
+        self.totalTimeHoursEntryField?.stringValue = String(timerController.timer.totalTime.hours)
     }
     
     @IBAction func totalTimeIncreaseMinutesButtonPress(_ sender: Any) {
         let newTime = time.init(hours: 0, minutes: 1, seconds: 0)
         timerController.timer.totalTime.timeInSeconds += newTime.timeInSeconds
         timerController.timer.currentTime.timeInSeconds += newTime.timeInSeconds
-        self.totalTimeMinutesEntryField?.intValue = Int32(timerController.timer.totalTime.minutes)
+        self.totalTimeHoursEntryField?.stringValue = String(timerController.timer.totalTime.hours)
+        self.totalTimeMinutesEntryField?.stringValue = String(timerController.timer.totalTime.minutes)
     }
     
     @IBAction func totalTimeIncreaseSecondsButtonPress(_ sender: Any) {
         let newTime = time.init(hours: 0, minutes: 0, seconds: 1)
         timerController.timer.totalTime.timeInSeconds += newTime.timeInSeconds
         timerController.timer.currentTime.timeInSeconds += newTime.timeInSeconds
-        self.totalTimeSecondsEntryField?.intValue = Int32(timerController.timer.totalTime.seconds)
+        self.totalTimeMinutesEntryField?.stringValue = String(timerController.timer.totalTime.minutes)
+        self.totalTimeSecondsEntryField?.stringValue = String(timerController.timer.totalTime.seconds)
     }
     
     @IBAction func totalTimeDecreaseHoursButtonPress(_ sender: Any) {
@@ -205,13 +207,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             self.totalTimeHoursEntryField?.stringValue = String(describing: newHours)
             setUpTime(notification: notification)
         }
-        if Int(wrapUpSeconds) > 59 {
-            let newSeconds = Int(wrapUpSeconds) - 60
-            let newMinutes = Int(wrapUpMinutes) + 1
-            self.wrapUpTimeSecondsEntryField?.stringValue = String(describing: newSeconds)
-            self.wrapUpTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            setUpTime(notification: notification)
-        }
+        
         if Int(wrapUpMinutes) > 59 {
             let newMinutes = Int(wrapUpMinutes) - 60
             let newHours = Int(wrapUpHours) + 1
@@ -219,20 +215,25 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             self.wrapUpTimeHoursEntryField?.stringValue = String(describing: newHours)
             setUpTime(notification: notification)
         }
-        let timerTotal = time(hours: (Int(self.totalTimeHoursEntryField?.intValue ?? 0)),
-                              minutes: (Int(self.totalTimeMinutesEntryField?.intValue ?? 0)),
-                              seconds: (Int(self.totalTimeSecondsEntryField?.intValue ?? 0)))
         
-        let warningTotal = time(hours: (Int(self.wrapUpTimeHoursEntryField?.intValue ?? 0)),
-                                minutes: (Int(self.wrapUpTimeMinutesEntryField?.intValue ?? 0)),
-                                seconds: (Int(self.wrapUpTimeSecondsEntryField?.intValue ?? 0)))
-        if timerController.timer.isRunning == false {
-            timerController.setTime(timeLimit: timerTotal, warningTime: warningTotal)
+        if Int(wrapUpSeconds) > 59 {
+            let newSeconds = Int(wrapUpSeconds) - 60
+            let newMinutes = Int(wrapUpMinutes) + 1
+            self.wrapUpTimeSecondsEntryField?.stringValue = String(describing: newSeconds)
+            self.wrapUpTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
+            setUpTime(notification: notification)
         }
-        if timerController.timer.isRunning == true {
-            //timerController.timer.changeTime(newTime: timerTotal)
-            //timerController.timer.warningTime.timeInSeconds = warningTotal.timeInSeconds
-        }
+        
+        let totalTime = time(hours: Int(self.totalTimeHoursEntryField?.intValue ?? 0),
+                             minutes: Int(self.totalTimeMinutesEntryField?.intValue ?? 0),
+                             seconds: Int(self.totalTimeSecondsEntryField?.intValue ?? 0))
+        
+        let warningTime = time(hours: Int(self.wrapUpTimeHoursEntryField?.intValue ?? 0),
+                               minutes: Int(self.wrapUpTimeMinutesEntryField?.intValue ?? 0),
+                               seconds: Int(self.wrapUpTimeSecondsEntryField?.intValue ?? 0))
+        
+        timerController.setTime(timeLimit: totalTime, warningTime: warningTime)
+        
     }
     
 }
