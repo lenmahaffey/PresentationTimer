@@ -14,7 +14,12 @@ class controlViewTextField: NSTextField {
         super.init(coder: coder)
         formatter = controlViewTextFieldFormatter()
     }
-}
+    
+    override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
+        self.selectText(NSEvent.self)
+        }
+    }
 
 class controlViewTextFieldFormatter: Formatter {
     
@@ -41,5 +46,4 @@ class controlViewTextFieldFormatter: Formatter {
         obj?.pointee = Int(string) as AnyObject
         return true
     }
-    
 }
