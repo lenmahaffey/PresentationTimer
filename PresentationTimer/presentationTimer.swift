@@ -17,11 +17,9 @@ extension Notification.Name {
     static let clockReset = Notification.Name("clockReset")
     static let showBorder = Notification.Name("showBorder")
     static let hideBorder = Notification.Name("hideBorder")
-    static let greenBorder = Notification.Name("greenReset")
-    static let yellowBorder = Notification.Name("yellowBorder")
-    static let redBorder = Notification.Name("redBorder")
-    
-    
+    static let setGreenBorder = Notification.Name("setGreenBorder")
+    static let setYellowBorder = Notification.Name("setYellowBorder")
+    static let setRedBorder = Notification.Name("setRedBorder")
 }
 
 class presentationTimerController: NSObject {
@@ -36,13 +34,13 @@ class presentationTimerController: NSObject {
         self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
     }
-    
-    func changeTotalTimeLimit(newTime: time) {
-        
+    func setTotalTime(timeLimit: time) {
+        self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
+        self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
     }
     
-    func changeWarningTimeLimit(newTime: time) {
-        
+    func setWarningTime(warningTime: time) {
+        self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
     }
     
     func changeCurrentTime(newTime: time) {

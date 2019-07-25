@@ -37,11 +37,34 @@ class controlViewController: NSViewController, NSTextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
+        nc.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warn, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
+        nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.showBorder, object:nil)
+        nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
+        self.timerDisplay.isBordered = false
+        self.timerDisplay.wantsLayer = true
+        self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
+        self.timerDisplay.layer?.borderWidth = 10
+        self.timerDisplay.layer?.cornerRadius = 10.0
     }
     
     override func viewDidAppear() {
         loadDisplayWindow()
+        view.window?.zoom(self)
+    }
+    
+    @objc func setBorderGreen(notification: Notification) {
+        self.timerDisplay.layer?.borderColor = NSColor.green.cgColor
+    }
+    
+    @objc func setBorderYellow(notification: Notification) {
+        self.timerDisplay.layer?.borderColor = NSColor.yellow.cgColor
+    }
+    
+    @objc func setBorderRed(notification: Notification) {
+        self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
     }
     
     func loadDisplayWindow() {
@@ -49,12 +72,21 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.displayWindowControl = (NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
     }
     
-    @IBAction func showBorder(_ sender: Any) {
+    @IBAction func showBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.showBorder, object: self)
-        } else {
+        }
+        if (sender as AnyObject).state == .off {
             nc.post(name: Notification.Name.hideBorder, object: self)
         }
+    }
+ 
+    @objc func showBorder() {
+        self.timerDisplay.layer?.borderWidth = 10
+    }
+    
+    @objc func hideBorder() {
+        self.timerDisplay.layer?.borderWidth = 0
     }
     
     @IBAction func totalTimeIncreaseHoursButtonPress(_ sender: Any) {
@@ -232,8 +264,14 @@ class controlViewController: NSViewController, NSTextViewDelegate {
                                minutes: Int(self.wrapUpTimeMinutesEntryField?.intValue ?? 0),
                                seconds: Int(self.wrapUpTimeSecondsEntryField?.intValue ?? 0))
         
-        timerController.setTime(timeLimit: totalTime, warningTime: warningTime)
+        if timerController.timer.isRunning == true {
+            timerController.setWarningTime(warningTime: warningTime)
+        }
         
+        if timerController.timer.isRunning == false {
+            timerController.setTotalTime(timeLimit: totalTime)
+            timerController.setWarningTime(warningTime: warningTime)
+        }
     }
     
 }
