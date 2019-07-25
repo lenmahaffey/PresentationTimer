@@ -8,7 +8,7 @@
 
 import Cocoa
 
-var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
+var countdownTimerController = presentationTimerController(timeLimit: 3600, warningTime: 0)
 
 extension Notification.Name {
     static let clockStarted = Notification.Name("clockStarted")
