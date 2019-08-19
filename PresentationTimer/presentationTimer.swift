@@ -49,8 +49,20 @@ class presentationTimerController: NSObject {
         
     }
     
-    func countDown() {
-        self.timer.countDown()
+    func countDownAndContinue() {
+        self.timer.countDownAndContinue()
+    }
+    
+    func countDownAndStop() {
+        self.timer.countDownAndStop()
+    }
+    
+    func countUpAndContinue() {
+        self.timer.countUpAndContinue()
+    }
+    
+    func countUpAndStop() {
+        self.timer.countUpAndStop()
     }
     
     func stopTheClock() {
@@ -84,18 +96,85 @@ class presentationTimer: NSObject {
         self.isRunning = false
     }
     
-    func countDown() {
+    func countDownAndContinue() {
         if isRunning == false {
             nc.post(name: Notification.Name.clockStarted, object: self)
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(reduceTimeByOneSecond), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecondAndContinue), userInfo: nil, repeats: true)
             timer.fire()
             isRunning = true
         }
     }
 
-    @objc func reduceTimeByOneSecond() {
+    func countDownAndStop() {
+        if isRunning == false {
+            nc.post(name: Notification.Name.clockStarted, object: self)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecondAndStop), userInfo: nil, repeats: true)
+            timer.fire()
+            isRunning = true
+        }
+    }
+    
+    func countUpAndContinue() {
+        if isRunning == false {
+            nc.post(name: Notification.Name.clockStarted, object: self)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecondAndContinue), userInfo: nil, repeats: true)
+            timer.fire()
+            isRunning = true
+        }
+    }
+    
+    func countUpAndStop() {
+        if isRunning == false {
+            nc.post(name: Notification.Name.clockStarted, object: self)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecondAndStop), userInfo: nil, repeats: true)
+            timer.fire()
+            isRunning = true
+        }
+    }
+    
+    @objc func decreaseTimeByOneSecondAndContinue() {
         if currentTime.timeInSeconds > 0 {
             currentTime.timeInSeconds -= 1
+            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.warn, object: self)
+            }
+            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.clockStarted, object: self)
+            }
+        }
+    }
+    
+    @objc func decreaseTimeByOneSecondAndStop() {
+        if currentTime.timeInSeconds > 0 {
+            currentTime.timeInSeconds -= 1
+            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.warn, object: self)
+            }
+            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.clockStarted, object: self)
+            }
+        }
+        if currentTime.timeInSeconds == 0 {
+            stopTheClock()
+            nc.post(name: Notification.Name.outOfTime, object: self)
+        }
+    }
+    
+    @objc func increaseTimeByOneSecondAndContinue() {
+        if currentTime.timeInSeconds > 0 {
+            currentTime.timeInSeconds += 1
+            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.warn, object: self)
+            }
+            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.clockStarted, object: self)
+            }
+        }
+    }
+    
+    @objc func increaseTimeByOneSecondAndStop() {
+        if currentTime.timeInSeconds > 0 {
+            currentTime.timeInSeconds += 1
             if currentTime.timeInSeconds <= warningTime.timeInSeconds {
                 nc.post(name: Notification.Name.warn, object: self)
             }
