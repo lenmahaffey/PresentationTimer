@@ -395,7 +395,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-81" y="-62"/>
+            <point key="canvasLocation" x="-257" y="-30"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -415,7 +415,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-257" y="202"/>
+            <point key="canvasLocation" x="-257" y="250"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="oXu-rF-Zvx">
@@ -505,19 +505,6 @@
                                             <action selector="repeatButtonPress:" target="XfG-lQ-9wD" id="r37-FG-wnF"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lPH-Yu-eVO">
-                                        <rect key="frame" x="15" y="46" width="69" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="57" id="O1f-tE-GfK"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CvJ-Ct-s2v">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="stopButtonPress:" target="XfG-lQ-9wD" id="HgJ-oC-kvt"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rmH-Uc-knu">
                                         <rect key="frame" x="14" y="2" width="70" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -542,10 +529,8 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="lPH-Yu-eVO" firstAttribute="leading" secondItem="caM-20-p8K" secondAttribute="leading" constant="21" id="4kt-LG-bb4"/>
                                     <constraint firstAttribute="width" constant="283" id="NYh-kZ-0T2"/>
                                     <constraint firstAttribute="height" constant="85" id="Ufe-md-BuT"/>
-                                    <constraint firstItem="lPH-Yu-eVO" firstAttribute="top" secondItem="caM-20-p8K" secondAttribute="top" constant="11" id="Y2O-j8-Bom"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Mb7-0n-Mc2">
@@ -785,10 +770,77 @@
                                     <constraint firstAttribute="bottom" secondItem="8fa-zA-xNF" secondAttribute="bottom" constant="37" id="yKa-EC-UND"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="gth-us-QDe">
+                                <rect key="frame" x="469" y="157" width="342" height="118"/>
+                                <subviews>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMe-eM-1Cf">
+                                        <rect key="frame" x="208" y="20" width="114" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-k4-33A">
+                                                <rect key="frame" x="19" y="41" width="51" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="radio" title="Stop" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="7ba-Bz-Ext">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="continueOrStopCountingSelector:" target="XfG-lQ-9wD" id="pmT-45-Cbp"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMi-p2-9Yv">
+                                                <rect key="frame" x="19" y="19" width="77" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="radio" title="Continue" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="d30-YZ-4mX">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="continueOrStopCountingSelector:" target="XfG-lQ-9wD" id="O0a-Z0-4Hj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y0G-cU-Zkd">
+                                        <rect key="frame" x="20" y="20" width="134" height="78"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCF-1u-0Y4">
+                                                <rect key="frame" x="19" y="19" width="97" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="radio" title="Count Down" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ATP-pY-bS2">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="countUpOrDownSelector:" target="XfG-lQ-9wD" id="oL8-DP-KwI"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n1i-8E-FO4">
+                                                <rect key="frame" x="19" y="41" width="97" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="radio" title="Count Up" bezelStyle="regularSquare" imagePosition="left" inset="2" id="n8T-LS-onq">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="countUpOrDownSelector:" target="XfG-lQ-9wD" id="5xf-XK-FaP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="118" id="UTD-hP-ks9"/>
+                                    <constraint firstAttribute="width" constant="342" id="XUT-Jn-Lbc"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="gth-us-QDe" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="13n-xG-DIG"/>
                             <constraint firstItem="5a7-i0-8fh" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="8m5-dA-Jgr" userLabel="Timer Display Left Edge"/>
                             <constraint firstAttribute="trailing" secondItem="5a7-i0-8fh" secondAttribute="trailing" constant="20" symbolic="YES" id="B7d-yi-VHV" userLabel="Timer Display Right Edge"/>
+                            <constraint firstItem="caM-20-p8K" firstAttribute="top" secondItem="gth-us-QDe" secondAttribute="bottom" constant="13" id="H36-SM-cfj"/>
                             <constraint firstItem="caM-20-p8K" firstAttribute="top" secondItem="Mb7-0n-Mc2" secondAttribute="bottom" constant="139" id="JbE-Q7-beZ"/>
                             <constraint firstItem="caM-20-p8K" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="hb5-Qe-nfM"/>
                             <constraint firstItem="5a7-i0-8fh" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="27" id="nXS-Ul-Y2J" userLabel="Timer Display Top"/>
@@ -797,8 +849,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="continueCountingRadioButton" destination="bMi-p2-9Yv" id="CmD-3T-FgI"/>
+                        <outlet property="countDownRadioButton" destination="MCF-1u-0Y4" id="SnB-Kg-d0t"/>
+                        <outlet property="countUpRadioButton" destination="n1i-8E-FO4" id="Kp7-6H-3Y2"/>
                         <outlet property="repeatButton" destination="Z4I-h8-bw5" id="y4b-Oq-ZJa"/>
                         <outlet property="startButton" destination="rmH-Uc-knu" id="cde-hf-YE3"/>
+                        <outlet property="stopCountingRadioButton" destination="WtX-k4-33A" id="pCj-FA-QmU"/>
                         <outlet property="timerDisplay" destination="5a7-i0-8fh" id="hFG-lQ-ENg"/>
                         <outlet property="totalTimeDecreaseHoursButton" destination="tVB-v7-VCB" id="wGh-JW-SEr"/>
                         <outlet property="totalTimeDecreaseMinutesButton" destination="CEb-Cl-mDZ" id="bCS-dg-buv"/>
@@ -821,7 +877,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-257" y="784.5"/>
+            <point key="canvasLocation" x="-257" y="1017.5"/>
         </scene>
     </scenes>
 </document>

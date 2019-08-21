@@ -34,12 +34,17 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var wrapUpTimeSecondsEntryField: controlViewTextField?
     @objc dynamic var displayWindowControl: displayWindowController? = nil
     @objc dynamic var timerController = countdownTimerController
-
+    @IBOutlet weak var countUpRadioButton: NSButton!
+    @IBOutlet weak var countDownRadioButton: NSButton!
+    @IBOutlet weak var stopCountingRadioButton: NSButton!
+    @IBOutlet weak var continueCountingRadioButton: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nc.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warn, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
         nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
         nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.showBorder, object:nil)
         nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
@@ -48,6 +53,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
         self.timerDisplay.layer?.borderWidth = 10
         self.timerDisplay.layer?.cornerRadius = 10.0
+        self.countDownRadioButton.state = .on
+        self.stopCountingRadioButton.state = .on
+        
     }
     
     override func viewDidAppear() {
@@ -199,22 +207,46 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    @IBAction func startButtonPress(_ sender: Any) {
-        timerController.countDown()
-        //self.totalTimeHoursEntryField?.isEditable = false
-        //self.totalTimeMinutesEntryField?.isEditable = false
-        //self.totalTimeSecondsEntryField?.isEditable = false
+    @IBAction func countUpOrDownSelector(_ sender: AnyObject) {
+        if countUpRadioButton.state == .on {
+            nc.post(name: Notification.Name.countUp, object: self)
+        }
+        if countDownRadioButton.state == .on {
+            nc.post(name: Notification.Name.countDown, object: self)
+        }
     }
     
-    @IBAction func stopButtonPress(_ sender: Any) {
+    @IBAction func continueOrStopCountingSelector(_ sender: AnyObject) {
+        if stopCountingRadioButton.state == .on {
+            nc.post(name: Notification.Name.stopCounting, object: self)
+        }
+        if continueCountingRadioButton.state == .on {
+            nc.post(name: Notification.Name.continueCounting, object: self)
+        }
+    }
+    
+    
+    @IBAction func startButtonPress(_ sender: Any) {
+        guard timerController.timer.isRunning == true else {
+            guard self.countDownRadioButton.state == .on else {
+                timerController.countUp()
+                self.startButton.title = "Stop"
+                return
+            }
+            timerController.countDown()
+            self.startButton.title = "Stop"
+            return
+        }
         timerController.stopTheClock()
-        //self.totalTimeHoursEntryField?.isEditable = true
-        //self.totalTimeMinutesEntryField?.isEditable = true
-        //self.totalTimeSecondsEntryField?.isEditable = true
+        self.startButton.title = "Start"
     }
     
     @IBAction func repeatButtonPress(_ sender: Any) {
-        timerController.resetTheClock()
+        guard self.countUpRadioButton.state == .on else {
+             timerController.resetTheClock()
+             return
+        }
+        timerController.setCountUp()
     }
     
     @objc func setUpTime(notification: Notification) {
@@ -266,9 +298,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         
         if timerController.timer.isRunning == true {
             timerController.setWarningTime(warningTime: warningTime)
-        }
-        
-        if timerController.timer.isRunning == false {
+        } else if timerController.timer.isRunning == false {
             timerController.setTotalTime(timeLimit: totalTime)
             timerController.setWarningTime(warningTime: warningTime)
         }

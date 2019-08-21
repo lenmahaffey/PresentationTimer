@@ -12,7 +12,8 @@ var countdownTimerController = presentationTimerController(timeLimit: 3600, warn
 
 extension Notification.Name {
     static let clockStarted = Notification.Name("clockStarted")
-    static let warn = Notification.Name("warn")
+    static let warningOn = Notification.Name("warningOn")
+    static let warningOff = Notification.Name("warningOff")
     static let outOfTime = Notification.Name("outOfTime")
     static let clockReset = Notification.Name("clockReset")
     static let showBorder = Notification.Name("showBorder")
@@ -20,20 +21,47 @@ extension Notification.Name {
     static let setGreenBorder = Notification.Name("setGreenBorder")
     static let setYellowBorder = Notification.Name("setYellowBorder")
     static let setRedBorder = Notification.Name("setRedBorder")
+    static let countUp = Notification.Name("countUp")
+    static let countDown = Notification.Name("countDown")
+    static let stopCounting = Notification.Name("stopCounting")
+    static let continueCounting = Notification.Name("continueCounting")
 }
 
 class presentationTimerController: NSObject {
     @objc dynamic var timer: presentationTimer
+    let nc = NotificationCenter.default
     
     init (timeLimit: Int, warningTime: Int){
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)
+        super.init()
+        nc.addObserver(self, selector: #selector(setContinueCounting), name: Notification.Name.continueCounting, object:nil)
+        nc.addObserver(self, selector: #selector(setStopCounting), name: Notification.Name.stopCounting, object:nil)
+        nc.addObserver(self, selector: #selector(setCountUp), name: Notification.Name.countUp, object:nil)
+        nc.addObserver(self, selector: #selector(setCountDown), name: Notification.Name.countDown, object:nil)
     }
     
+    @objc func setContinueCounting() {
+        self.timer.continueCounting = true
+    }
+    
+    @objc func setStopCounting() {
+        self.timer.continueCounting = false
+    }
+    
+    @objc func setCountDown() {
+        self.timer.currentTime = self.timer.totalTime
+    }
+    
+    @objc func setCountUp() {
+        self.timer.currentTime.timeInSeconds = 0
+    }
+
     func setTime(timeLimit: time, warningTime: time) {
         self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
     }
+    
     func setTotalTime(timeLimit: time) {
         self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
@@ -49,20 +77,12 @@ class presentationTimerController: NSObject {
         
     }
     
-    func countDownAndContinue() {
-        self.timer.countDownAndContinue()
+    func countDown() {
+        self.timer.countDown()
     }
     
-    func countDownAndStop() {
-        self.timer.countDownAndStop()
-    }
-    
-    func countUpAndContinue() {
-        self.timer.countUpAndContinue()
-    }
-    
-    func countUpAndStop() {
-        self.timer.countUpAndStop()
+    func countUp() {
+        self.timer.countUp()
     }
     
     func stopTheClock() {
@@ -79,6 +99,7 @@ class presentationTimer: NSObject {
     @objc dynamic var currentTime: time
     @objc dynamic var warningTime: time
     var isRunning: Bool
+    var continueCounting: Bool
     var nc = NotificationCenter.default
     private var timer = Timer()
     
@@ -86,7 +107,8 @@ class presentationTimer: NSObject {
         self.totalTime = time(timeToCountInSeconds: secondsToCount)
         self.currentTime = time(timeToCountInSeconds: secondsToCount)
         self.warningTime = time(timeToCountInSeconds: warningTime)
-        isRunning = false
+        self.isRunning = false
+        self.continueCounting = false
     }
 
     init(hoursToCount: Int, minutesToCount: Int, secondsToCount: Int, warningTime: time) {
@@ -94,97 +116,69 @@ class presentationTimer: NSObject {
         self.currentTime = totalTime
         self.warningTime = warningTime
         self.isRunning = false
+        self.continueCounting = false
     }
     
-    func countDownAndContinue() {
+    func countDown() {
         if isRunning == false {
             nc.post(name: Notification.Name.clockStarted, object: self)
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecondAndContinue), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecond), userInfo: nil, repeats: true)
             timer.fire()
             isRunning = true
+        }
+    }
+    
+    func countUp() {
+        if isRunning == false {
+            nc.post(name: Notification.Name.clockStarted, object: self)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecond), userInfo: nil, repeats: true)
+            timer.fire()
+            isRunning = true
+        }
+    }
+    
+    @objc func decreaseTimeByOneSecond() {
+        if self.continueCounting == false {
+            if currentTime.timeInSeconds > 0 {
+                currentTime.timeInSeconds -= 1
+                warn()
+            }
+            if currentTime.timeInSeconds <= 0 {
+                stopTheClock()
+                nc.post(name: Notification.Name.outOfTime, object: self)
+            }
+        } else if self.continueCounting == true {
+            currentTime.timeInSeconds -= 1
+            warn()
         }
     }
 
-    func countDownAndStop() {
-        if isRunning == false {
-            nc.post(name: Notification.Name.clockStarted, object: self)
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecondAndStop), userInfo: nil, repeats: true)
-            timer.fire()
-            isRunning = true
-        }
-    }
-    
-    func countUpAndContinue() {
-        if isRunning == false {
-            nc.post(name: Notification.Name.clockStarted, object: self)
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecondAndContinue), userInfo: nil, repeats: true)
-            timer.fire()
-            isRunning = true
-        }
-    }
-    
-    func countUpAndStop() {
-        if isRunning == false {
-            nc.post(name: Notification.Name.clockStarted, object: self)
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecondAndStop), userInfo: nil, repeats: true)
-            timer.fire()
-            isRunning = true
-        }
-    }
-    
-    @objc func decreaseTimeByOneSecondAndContinue() {
-        if currentTime.timeInSeconds > 0 {
-            currentTime.timeInSeconds -= 1
-            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.warn, object: self)
+    @objc func increaseTimeByOneSecond() {
+        if self.continueCounting == false {
+            if currentTime.timeInSeconds > self.totalTime.timeInSeconds {
+                currentTime.timeInSeconds += 1
+                warn()
             }
-            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.clockStarted, object: self)
+            if currentTime.timeInSeconds == self.totalTime.timeInSeconds {
+                stopTheClock()
+                nc.post(name:Notification.Name.outOfTime, object: self)
             }
-        }
-    }
-    
-    @objc func decreaseTimeByOneSecondAndStop() {
-        if currentTime.timeInSeconds > 0 {
-            currentTime.timeInSeconds -= 1
-            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.warn, object: self)
-            }
-            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.clockStarted, object: self)
-            }
-        }
-        if currentTime.timeInSeconds == 0 {
-            stopTheClock()
-            nc.post(name: Notification.Name.outOfTime, object: self)
-        }
-    }
-    
-    @objc func increaseTimeByOneSecondAndContinue() {
-        if currentTime.timeInSeconds > 0 {
+        } else if self.continueCounting == true {
             currentTime.timeInSeconds += 1
-            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.warn, object: self)
-            }
-            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.clockStarted, object: self)
-            }
+            warn()
         }
+        
     }
     
-    @objc func increaseTimeByOneSecondAndStop() {
-        if currentTime.timeInSeconds > 0 {
-            currentTime.timeInSeconds += 1
-            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.warn, object: self)
-            }
-            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
-                nc.post(name: Notification.Name.clockStarted, object: self)
-            }
+    func warn() {
+        if currentTime.timeInSeconds <= warningTime.timeInSeconds {
+            nc.post(name: Notification.Name.warningOn, object: self)
         }
-        if currentTime.timeInSeconds == 0 {
-            stopTheClock()
-            nc.post(name: Notification.Name.outOfTime, object: self)
+        if currentTime.timeInSeconds >= warningTime.timeInSeconds {
+            nc.post(name:Notification.Name.warningOff, object: self)
+        }
+        if currentTime.timeInSeconds < 0 {
+            nc.post(name:Notification.Name.outOfTime, object: self)
         }
     }
     
@@ -227,7 +221,7 @@ class time: NSObject, NSCopying {
     }
     @objc dynamic var hours: Int {
         get {
-            return timeInSeconds / 3600
+            return abs(timeInSeconds / 3600)
         }
     }
     
@@ -237,7 +231,7 @@ class time: NSObject, NSCopying {
             if totalMinutes > 59 {
                 return totalMinutes % 60
             }
-            return totalMinutes
+            return abs(totalMinutes)
         }
     }
     
@@ -246,7 +240,7 @@ class time: NSObject, NSCopying {
             if timeInSeconds > 59 {
                 return timeInSeconds % 60
             }
-            return timeInSeconds
+            return abs(timeInSeconds)
         }
     }
     
