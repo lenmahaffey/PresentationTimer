@@ -138,23 +138,22 @@ class presentationTimer: NSObject {
     }
     
     @objc func decreaseTimeByOneSecond() {
-        if self.continueCounting == false {
-            if currentTime.timeInSeconds > 0 {
-                currentTime.timeInSeconds -= 1
-                warn()
-            }
-            if currentTime.timeInSeconds <= 0 {
+        guard self.continueCounting == true else {
+            guard currentTime.timeInSeconds > 0 else {
                 stopTheClock()
                 nc.post(name: Notification.Name.outOfTime, object: self)
+                return
             }
-        } else if self.continueCounting == true {
             currentTime.timeInSeconds -= 1
             warn()
+            return
         }
+        currentTime.timeInSeconds -= 1
+        warn()
     }
 
     @objc func increaseTimeByOneSecond() {
-        if self.continueCounting == false {
+        guard self.continueCounting == true else {
             if currentTime.timeInSeconds > self.totalTime.timeInSeconds {
                 currentTime.timeInSeconds += 1
                 warn()
@@ -163,11 +162,10 @@ class presentationTimer: NSObject {
                 stopTheClock()
                 nc.post(name:Notification.Name.outOfTime, object: self)
             }
-        } else if self.continueCounting == true {
-            currentTime.timeInSeconds += 1
-            warn()
+            return
         }
-        
+        currentTime.timeInSeconds += 1
+        warn()
     }
     
     func warn() {
