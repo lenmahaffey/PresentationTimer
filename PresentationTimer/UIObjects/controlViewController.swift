@@ -36,8 +36,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var wrapUpTimeSecondsEntryField: controlViewTextField?
     @IBOutlet weak var countUpRadioButton: NSButton!
     @IBOutlet weak var countDownRadioButton: NSButton!
-    @IBOutlet weak var stopCountingRadioButton: NSButton!
-    @IBOutlet weak var continueCountingRadioButton: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +54,11 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.timerDisplay.layer?.borderWidth = 10
         self.timerDisplay.layer?.cornerRadius = 10.0
         self.countDownRadioButton.state = .on
-        self.stopCountingRadioButton.state = .on
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        self.view.window?.minSize = NSSize(width: 1000, height: 545)
     }
     
     override func viewDidAppear() {
@@ -218,15 +220,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
         if countDownRadioButton.state == .on {
             nc.post(name: Notification.Name.countDown, object: self)
-        }
-    }
-    
-    @IBAction func continueOrStopCountingSelector(_ sender: AnyObject) {
-        if stopCountingRadioButton.state == .on {
-            nc.post(name: Notification.Name.stopCounting, object: self)
-        }
-        if continueCountingRadioButton.state == .on {
-            nc.post(name: Notification.Name.continueCounting, object: self)
         }
     }
     
