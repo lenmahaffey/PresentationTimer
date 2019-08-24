@@ -16,17 +16,15 @@ class displayViewController: NSViewController {
  
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
-        nc.addObserver(self, selector: #selector(hideBorderView), name: Notification.Name.clockReset, object:nil)
-        nc.addObserver(self, selector: #selector(showBorderView), name: Notification.Name.showBorder, object:nil)
-        nc.addObserver(self, selector: #selector(hideBorderView), name: Notification.Name.hideBorder, object:nil)
+        commonInit()
     }
     
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    func commonInit() {
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
         nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
