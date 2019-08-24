@@ -36,6 +36,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var wrapUpTimeSecondsEntryField: controlViewTextField?
     @IBOutlet weak var countUpRadioButton: NSButton!
     @IBOutlet weak var countDownRadioButton: NSButton!
+    @IBOutlet weak var showDateRadioButton: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +93,35 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
  
+    @IBAction func blinkBorderControl(_ sender: Any) {
+        if (sender as AnyObject).state == .on {
+            nc.post(name: Notification.Name.blinkBorder, object: self)
+        }
+        if (sender as AnyObject).state == .off {
+            nc.post(name: Notification.Name.staticBorder, object: self)
+        }
+    }
+    
+    
+    @IBAction func blinkClockControl(_ sender: Any) {
+        if (sender as AnyObject).state == .on {
+            nc.post(name: Notification.Name.blinkClock, object: self)
+        }
+        if (sender as AnyObject).state == .off {
+            nc.post(name: Notification.Name.staticClock, object: self)
+        }
+    }
+    
+    
+    @IBAction func keepCountingControl(_ sender: Any) {
+        if (sender as AnyObject).state == .on {
+            nc.post(name: Notification.Name.continueCounting, object: self)
+        }
+        if (sender as AnyObject).state == .off {
+            nc.post(name: Notification.Name.stopCounting, object: self)
+        }
+    }
+    
     @objc func showBorder() {
         self.timerDisplay.layer?.borderWidth = 10
     }
@@ -214,12 +244,15 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    @IBAction func countUpOrDownSelector(_ sender: AnyObject) {
+    @IBAction func timerFunctionSelector(_ sender: AnyObject) {
         if countUpRadioButton.state == .on {
             nc.post(name: Notification.Name.countUp, object: self)
         }
         if countDownRadioButton.state == .on {
             nc.post(name: Notification.Name.countDown, object: self)
+        }
+        if showDateRadioButton.state == .on {
+            nc.post(name: Notification.Name.showDate, object: self)
         }
     }
     

@@ -324,6 +324,9 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="blinkBorderControl:" target="XfG-lQ-9wD" id="MiP-b4-wYd"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q0a-N6-vee">
                                                 <rect key="frame" x="17" y="0.0" width="112" height="20"/>
@@ -331,6 +334,9 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="keepCountingControl:" target="XfG-lQ-9wD" id="Hlo-vd-oA2"/>
+                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cOw-a9-6Pk">
                                                 <rect key="frame" x="17" y="18" width="90" height="20"/>
@@ -340,6 +346,9 @@
                                                 <buttonCell key="cell" type="check" title="Blink Clock" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ujI-go-2ti">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
+                                                    <connections>
+                                                        <action selector="blinkClockControl:" target="XfG-lQ-9wD" id="c87-XZ-PMS"/>
+                                                    </connections>
                                                 </buttonCell>
                                             </button>
                                         </subviews>
@@ -374,7 +383,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="countUpOrDownSelector:" target="XfG-lQ-9wD" id="oL8-DP-KwI"/>
+                                                    <action selector="timerFunctionSelector:" target="XfG-lQ-9wD" id="GLX-1L-tOi"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n1i-8E-FO4">
@@ -387,15 +396,18 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="countUpOrDownSelector:" target="XfG-lQ-9wD" id="5xf-XK-FaP"/>
+                                                    <action selector="timerFunctionSelector:" target="XfG-lQ-9wD" id="X4Q-N4-m6v"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pld-tM-w6a">
-                                                <rect key="frame" x="18" y="12" width="122" height="18"/>
-                                                <buttonCell key="cell" type="radio" title="Show Date/Time" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="grZ-0J-D3q">
+                                                <rect key="frame" x="18" y="12" width="88" height="18"/>
+                                                <buttonCell key="cell" type="radio" title="Show Date" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="grZ-0J-D3q">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="timerFunctionSelector:" target="XfG-lQ-9wD" id="Ms1-fo-b3W"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -403,7 +415,7 @@
                                             <constraint firstItem="n1i-8E-FO4" firstAttribute="top" secondItem="y0G-cU-Zkd" secondAttribute="top" constant="6" id="Fnp-OT-7ho"/>
                                             <constraint firstItem="MCF-1u-0Y4" firstAttribute="top" secondItem="n1i-8E-FO4" secondAttribute="bottom" constant="4" id="OBD-06-31t"/>
                                             <constraint firstItem="pld-tM-w6a" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MCF-1u-0Y4" secondAttribute="leading" id="OBv-5U-Bu3"/>
-                                            <constraint firstAttribute="trailing" secondItem="pld-tM-w6a" secondAttribute="trailing" constant="12" id="Q4Y-cF-j9u"/>
+                                            <constraint firstAttribute="trailing" secondItem="pld-tM-w6a" secondAttribute="trailing" constant="46" id="Q4Y-cF-j9u"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MCF-1u-0Y4" secondAttribute="trailing" constant="20" symbolic="YES" id="Z7Q-gq-833"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="n1i-8E-FO4" secondAttribute="trailing" constant="20" symbolic="YES" id="ZAw-Hj-nsR"/>
                                             <constraint firstItem="n1i-8E-FO4" firstAttribute="leading" secondItem="y0G-cU-Zkd" secondAttribute="leading" constant="19" id="c1O-Xx-IDD"/>
@@ -821,6 +833,7 @@
                         <outlet property="countDownRadioButton" destination="MCF-1u-0Y4" id="SnB-Kg-d0t"/>
                         <outlet property="countUpRadioButton" destination="n1i-8E-FO4" id="Kp7-6H-3Y2"/>
                         <outlet property="repeatButton" destination="Z4I-h8-bw5" id="y4b-Oq-ZJa"/>
+                        <outlet property="showDateRadioButton" destination="pld-tM-w6a" id="Whw-LW-x85"/>
                         <outlet property="startButton" destination="rmH-Uc-knu" id="cde-hf-YE3"/>
                         <outlet property="timerDisplay" destination="5a7-i0-8fh" id="hFG-lQ-ENg"/>
                         <outlet property="totalTimeDecreaseHoursButton" destination="tVB-v7-VCB" id="wGh-JW-SEr"/>

@@ -26,6 +26,11 @@ extension Notification.Name {
     static let countDown = Notification.Name("countDown")
     static let stopCounting = Notification.Name("stopCounting")
     static let continueCounting = Notification.Name("continueCounting")
+    static let showDate = Notification.Name("showDate")
+    static let blinkBorder = Notification.Name("blinkBorder")
+    static let staticBorder = Notification.Name("staticBorder")
+    static let blinkClock = Notification.Name("blinkClock")
+    static let staticClock = Notification.Name("staticClock")
 }
 
 class presentationTimerController: NSObject {
