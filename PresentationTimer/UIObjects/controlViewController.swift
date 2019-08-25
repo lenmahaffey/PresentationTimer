@@ -42,7 +42,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         super.viewDidLoad()
         nc.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.clockReset, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockReset, object:nil)
         nc.addObserver(self, selector: #selector(clockStopped), name: Notification.Name.clockStopped, object: nil)
         nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
