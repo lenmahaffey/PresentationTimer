@@ -67,6 +67,11 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         view.window?.zoom(self)
     }
     
+    func loadDisplayWindow() {
+        let displayWindowControllerSceneID = "displayWindowController"
+        self.displayWindowControl = (NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
+    }
+    
     @objc func setBorderGreen(notification: Notification) {
         self.timerDisplay.layer?.borderColor = NSColor.green.cgColor
     }
@@ -79,9 +84,32 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
     }
     
-    func loadDisplayWindow() {
-        let displayWindowControllerSceneID = "displayWindowController"
-        self.displayWindowControl = (NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
+    @objc func showBorder() {
+        self.timerDisplay.layer?.borderWidth = 10
+    }
+    
+    @objc func hideBorder() {
+        self.timerDisplay.layer?.borderWidth = 0
+    }
+    
+    @objc func clockStopped() {
+        self.startButton.title = "Start"
+    }
+    
+    @objc func blinkBorder() {
+
+    }
+    
+    @objc func staticBorder() {
+
+    }
+    
+    @objc func blinkClock() {
+    
+    }
+    
+    @objc func staticClock() {
+    
     }
     
     @IBAction func showBorderControl(_ sender: Any) {
@@ -120,16 +148,49 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    @objc func showBorder() {
-        self.timerDisplay.layer?.borderWidth = 10
+    @IBAction func timerFunctionSelector(_ sender: AnyObject) {
+        if countUpRadioButton.state == .on {
+            print("Count up selected")
+            nc.post(name: Notification.Name.showTimer, object: self)
+            nc.post(name: Notification.Name.countUp, object: self)
+        }
+        if countDownRadioButton.state == .on {
+            print("Count down selected")
+            nc.post(name: Notification.Name.showTimer, object: self)
+            nc.post(name: Notification.Name.countDown, object: self)
+        }
+        if showDateRadioButton.state == .on {
+            nc.post(name: Notification.Name.showDate, object: self)
+        }
     }
     
-    @objc func hideBorder() {
-        self.timerDisplay.layer?.borderWidth = 0
+    
+    @IBAction func startButtonPress(_ sender: Any) {
+        if timerController.timer.isRunning == true {
+            timerController.stopTheClock()
+            self.startButton.title = "Start"
+        } else if timerController.timer.isRunning == false {
+            if self.countUpRadioButton.state == .on {
+                timerController.countUp()
+                self.startButton.title = "Stop"
+            } else if self.countDownRadioButton.state == .on {
+                timerController.countDown()
+                self.startButton.title = "Stop"
+            }
+        }
     }
     
-    @objc func clockStopped() {
-        self.startButton.title = "Start"
+    @IBAction func repeatButtonPress(_ sender: Any) {
+        if timerController.timer.isRunning == true {
+            timerController.stopTheClock()
+            self.startButton.title = "Start"
+        }
+        if self.countUpRadioButton.state == .on {
+            timerController.setCountUp()
+        } else if self.countDownRadioButton.state == .on {
+             timerController.resetTheClock()
+             return
+        }
     }
     
     @IBAction func totalTimeIncreaseHoursButtonPress(_ sender: Any) {
@@ -240,44 +301,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
                 wrapUpTimeSecondsEntryField?.intValue -= 1
             }
         }
-    }
-    
-    @IBAction func timerFunctionSelector(_ sender: AnyObject) {
-        if countUpRadioButton.state == .on {
-            nc.post(name: Notification.Name.countUp, object: self)
-        }
-        if countDownRadioButton.state == .on {
-            nc.post(name: Notification.Name.countDown, object: self)
-        }
-        if showDateRadioButton.state == .on {
-            nc.post(name: Notification.Name.showDate, object: self)
-        }
-    }
-    
-    
-    @IBAction func startButtonPress(_ sender: Any) {
-        guard timerController.timer.isRunning == true else {
-            if self.countUpRadioButton.state == .on {
-                timerController.countUp()
-                self.startButton.title = "Stop"
-            } else {
-                timerController.countDown()
-                self.startButton.title = "Stop"
-            }            
-            return
-        }
-        timerController.stopTheClock()
-        self.startButton.title = "Start"
-    }
-    
-    @IBAction func repeatButtonPress(_ sender: Any) {
-        guard self.countUpRadioButton.state == .on else {
-             timerController.resetTheClock()
-            self.startButton.title = "Start"
-             return
-        }
-        timerController.setCountUp()
-        self.startButton.title = "Start"
     }
     
     @objc func setUpTime(notification: Notification) {
