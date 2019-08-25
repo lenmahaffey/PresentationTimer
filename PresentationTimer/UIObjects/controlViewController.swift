@@ -102,7 +102,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    
     @IBAction func blinkClockControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.blinkClock, object: self)
@@ -111,7 +110,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             nc.post(name: Notification.Name.staticClock, object: self)
         }
     }
-    
     
     @IBAction func keepCountingControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
@@ -225,7 +223,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func wrapUpTimeDecreaseMinutesButtonPress(_ sender: Any) {
-       let newTime =  time.init(hours: 0, minutes: 1, seconds: 0)
+        let newTime =  time.init(hours: 0, minutes: 1, seconds: 0)
         if timerController.timer.warningTime.timeInSeconds > newTime.timeInSeconds {
             timerController.timer.warningTime.timeInSeconds -= newTime.timeInSeconds
             if wrapUpTimeMinutesEntryField?.intValue != 0 {
