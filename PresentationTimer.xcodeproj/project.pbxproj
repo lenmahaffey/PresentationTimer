@@ -18,7 +18,6 @@
 		7F8C611420746D6A0074A6BE /* displayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C610C20746D6A0074A6BE /* displayWindowController.swift */; };
 		7F9BB3A9207C14FA00351035 /* presentationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BB3A8207C14FA00351035 /* presentationTimer.swift */; };
 		7FB2511C230FACCC00157224 /* preferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2511B230FACCC00157224 /* preferencesViewController.swift */; };
-		7FB2511E230FADA800157224 /* preferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2511D230FADA800157224 /* preferencesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +36,6 @@
 		7F8C610C20746D6A0074A6BE /* displayWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = displayWindowController.swift; sourceTree = "<group>"; };
 		7F9BB3A8207C14FA00351035 /* presentationTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = presentationTimer.swift; path = PresentationTimer/presentationTimer.swift; sourceTree = SOURCE_ROOT; };
 		7FB2511B230FACCC00157224 /* preferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = preferencesViewController.swift; sourceTree = "<group>"; };
-		7FB2511D230FADA800157224 /* preferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = preferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +97,6 @@
 				7F8C610C20746D6A0074A6BE /* displayWindowController.swift */,
 				7F8C610B20746D6A0074A6BE /* displayWindow.swift */,
 				7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */,
-				7FB2511D230FADA800157224 /* preferencesView.swift */,
 				7FB2511B230FACCC00157224 /* preferencesViewController.swift */,
 			);
 			path = UIObjects;
@@ -183,7 +180,6 @@
 				7F8C611420746D6A0074A6BE /* displayWindowController.swift in Sources */,
 				7F8C60F520746D280074A6BE /* AppDelegate.swift in Sources */,
 				7F9BB3A9207C14FA00351035 /* presentationTimer.swift in Sources */,
-				7FB2511E230FADA800157224 /* preferencesView.swift in Sources */,
 				7F8C610F20746D6A0074A6BE /* displayViewController.swift in Sources */,
 				7FB2511C230FACCC00157224 /* preferencesViewController.swift in Sources */,
 			);
