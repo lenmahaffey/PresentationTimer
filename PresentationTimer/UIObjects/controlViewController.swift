@@ -49,6 +49,10 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
         nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.showBorder, object:nil)
         nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
+        nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
+        nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
+        nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkClock, object:nil)
+        nc.addObserver(self, selector: #selector(staticClock), name: Notification.Name.blinkClock, object:nil)
         self.timerDisplay.isBordered = false
         self.timerDisplay.wantsLayer = true
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
