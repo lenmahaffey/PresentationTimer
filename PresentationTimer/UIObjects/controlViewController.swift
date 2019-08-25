@@ -154,12 +154,10 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func timerFunctionSelector(_ sender: AnyObject) {
         if countUpRadioButton.state == .on {
-            print("Count up selected")
             nc.post(name: Notification.Name.showTimer, object: self)
             nc.post(name: Notification.Name.countUp, object: self)
         }
         if countDownRadioButton.state == .on {
-            print("Count down selected")
             nc.post(name: Notification.Name.showTimer, object: self)
             nc.post(name: Notification.Name.countDown, object: self)
         }
