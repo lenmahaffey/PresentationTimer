@@ -41,9 +41,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         nc.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.timerStarted, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.timerReset, object:nil)
-        nc.addObserver(self, selector: #selector(clockStopped), name: Notification.Name.timerStopped, object: nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockReset, object:nil)
+        nc.addObserver(self, selector: #selector(clockStopped), name: Notification.Name.clockStopped, object: nil)
         nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
         nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
@@ -51,8 +51,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
         nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
         nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
-        nc.addObserver(self, selector: #selector(blinkTimer), name: Notification.Name.blinkTimer, object:nil)
-        nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.staticTimer, object:nil)
+        nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkClock, object:nil)
+        nc.addObserver(self, selector: #selector(staticClock), name: Notification.Name.blinkClock, object:nil)
         self.timerDisplay.isBordered = false
         self.timerDisplay.wantsLayer = true
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
@@ -75,63 +75,16 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let displayWindowControllerSceneID = "displayWindowController"
         self.displayWindowControl = (NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: displayWindowControllerSceneID) as! displayWindowController)
     }
-    @objc func timerStartedNotificationAction() {
-        setBorderGreen()
-    }
     
-    @objc func timerResetNotificationAction() {
-        setBorderGreen()
-    }
-    
-    @objc func timerStoppedNotificationAction() {
-        clockStopped()
-    }
-    
-    @objc func warningOnNotificationAction() {
-        setBorderYellow()
-    }
-    
-    @objc func warningOffNotificationAction() {
-        setBorderGreen()
-    }
-    
-    @objc func outOfTimeNotificationAction() {
-        setBorderRed()
-    }
-    
-    @objc func showBorderNotificationAction() {
-        showBorder()
-    }
-    
-    @objc func hideBorderNotificationAction() {
-        hideBorder()
-    }
-    
-    @objc func blinkBorderNotificationAction() {
-        blinkBorder()
-    }
-    
-    @objc func staticBorderNotificationAction() {
-        staticBorder()
-    }
-    
-    @objc func blinkTimerNotificationAction() {
-        blinkTimer()
-    }
-    
-    @objc func staticTimerNotificationAction() {
-        staticTimer()
-    }
-    
-    @objc func setBorderGreen() {
+    @objc func setBorderGreen(notification: Notification) {
         self.timerDisplay.layer?.borderColor = NSColor.green.cgColor
     }
     
-    @objc func setBorderYellow() {
+    @objc func setBorderYellow(notification: Notification) {
         self.timerDisplay.layer?.borderColor = NSColor.yellow.cgColor
     }
     
-    @objc func setBorderRed() {
+    @objc func setBorderRed(notification: Notification) {
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
     }
     
@@ -148,19 +101,19 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func blinkBorder() {
-
+        
     }
     
     @objc func staticBorder() {
-
+        
     }
     
-    @objc func blinkTimer() {
-    
+    @objc func blinkClock() {
+        
     }
     
-    @objc func staticTimer() {
-
+    @objc func staticClock() {
+        
     }
     
     @IBAction func showBorderControl(_ sender: Any) {
@@ -171,7 +124,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             nc.post(name: Notification.Name.hideBorder, object: self)
         }
     }
- 
+    
     @IBAction func blinkBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.blinkBorder, object: self)
@@ -183,10 +136,10 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func blinkClockControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
-            nc.post(name: Notification.Name.blinkTimer, object: self)
+            nc.post(name: Notification.Name.blinkClock, object: self)
         }
         if (sender as AnyObject).state == .off {
-            nc.post(name: Notification.Name.staticTimer, object: self)
+            nc.post(name: Notification.Name.staticClock, object: self)
         }
     }
     
@@ -202,20 +155,21 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func timerFunctionSelector(_ sender: AnyObject) {
         if countUpRadioButton.state == .on {
             nc.post(name: Notification.Name.showTimer, object: self)
-            nc.post(name: Notification.Name.setCountUp, object: self)
+            nc.post(name: Notification.Name.countUp, object: self)
         }
         if countDownRadioButton.state == .on {
             nc.post(name: Notification.Name.showTimer, object: self)
-            nc.post(name: Notification.Name.setCountDown, object: self)
+            nc.post(name: Notification.Name.countDown, object: self)
         }
         if showDateRadioButton.state == .on {
             nc.post(name: Notification.Name.showDate, object: self)
         }
     }
     
+    
     @IBAction func startButtonPress(_ sender: Any) {
         if timerController.timer.isRunning == true {
-            nc.post(name: Notification.Name.stopTimer, object: self)
+            timerController.stopTheClock()
             self.startButton.title = "Start"
         } else if timerController.timer.isRunning == false {
             if self.countUpRadioButton.state == .on {
@@ -230,14 +184,14 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func repeatButtonPress(_ sender: Any) {
         if timerController.timer.isRunning == true {
-            nc.post(name: Notification.Name.stopTimer, object: self)
+            timerController.stopTheClock()
             self.startButton.title = "Start"
         }
         if self.countUpRadioButton.state == .on {
-            nc.post(name: Notification.Name.setCountUp, object: self)
+            timerController.setCountUp()
         } else if self.countDownRadioButton.state == .on {
-             nc.post(name: Notification.Name.resetTimer, object: self)
-             return
+            timerController.resetTheClock()
+            return
         }
     }
     
@@ -397,6 +351,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let warningTime = time(hours: Int(self.wrapUpTimeHoursEntryField?.intValue ?? 0),
                                minutes: Int(self.wrapUpTimeMinutesEntryField?.intValue ?? 0),
                                seconds: Int(self.wrapUpTimeSecondsEntryField?.intValue ?? 0))
+        
         if timerController.timer.isRunning == true {
             timerController.setWarningTime(warningTime: warningTime)
         } else if timerController.timer.isRunning == false {

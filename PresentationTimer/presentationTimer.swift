@@ -11,13 +11,9 @@ import Cocoa
 var countdownTimerController = presentationTimerController(timeLimit: 10, warningTime: 5)
 
 extension Notification.Name {
-    static let startCountingUp = Notification.Name("startCountingDown")
-    static let startCountingDown = Notification.Name("startCountingDown")
-    static let timerStarted = Notification.Name("timerStarted")
-    static let stopTimer = Notification.Name("stopTimer")
-    static let timerStopped = Notification.Name("timerStopped")
-    static let resetTimer = Notification.Name("resetTimer")
-    static let timerReset = Notification.Name("timerReset")
+    static let clockStarted = Notification.Name("clockStarted")
+    static let clockStopped = Notification.Name("clockStopped")
+    static let clockReset = Notification.Name("clockReset")
     static let warningOn = Notification.Name("warningOn")
     static let warningOff = Notification.Name("warningOff")
     static let outOfTime = Notification.Name("outOfTime")
@@ -26,16 +22,16 @@ extension Notification.Name {
     static let setGreenBorder = Notification.Name("setGreenBorder")
     static let setYellowBorder = Notification.Name("setYellowBorder")
     static let setRedBorder = Notification.Name("setRedBorder")
-    static let setCountUp = Notification.Name("setCountUp")
-    static let setCountDown = Notification.Name("setCountDown")
+    static let countUp = Notification.Name("countUp")
+    static let countDown = Notification.Name("countDown")
     static let stopCounting = Notification.Name("stopCounting")
     static let continueCounting = Notification.Name("continueCounting")
     static let showDate = Notification.Name("showDate")
     static let showTimer = Notification.Name("showTimer")
     static let blinkBorder = Notification.Name("blinkBorder")
     static let staticBorder = Notification.Name("staticBorder")
-    static let blinkTimer = Notification.Name("blinkTimer")
-    static let staticTimer = Notification.Name("staticTimer")
+    static let blinkClock = Notification.Name("blinkClock")
+    static let staticClock = Notification.Name("staticClock")
     static let setBackgroundColor = Notification.Name("setBackgroundColor")
 }
 
@@ -46,46 +42,26 @@ class presentationTimerController: NSObject {
     init (timeLimit: Int, warningTime: Int){
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)
         super.init()
-        nc.addObserver(self, selector: #selector(startCountingUpNotificationAction), name: Notification.Name.startCountingUp, object: nil)
-        nc.addObserver(self, selector: #selector(startCountingDownNotificationAction), name: Notification.Name.startCountingDown, object: nil)
-        nc.addObserver(self, selector: #selector(stopTimerNotificationAction), name: Notification.Name.stopTimer, object: nil)
-        nc.addObserver(self, selector: #selector(resetTimerNotificationAction), name: Notification.Name.resetTimer, object: nil)
-        nc.addObserver(self, selector: #selector(continueCountingNotificationAction), name: Notification.Name.continueCounting, object:nil)
-        nc.addObserver(self, selector: #selector(setStopCountingNotificationAction), name: Notification.Name.stopCounting, object:nil)
-        nc.addObserver(self, selector: #selector(setCountUpNotificationAction), name: Notification.Name.setCountUp, object:nil)
-        nc.addObserver(self, selector: #selector(setCountDownNotificationAction), name: Notification.Name.setCountDown, object:nil)
+        nc.addObserver(self, selector: #selector(setContinueCounting), name: Notification.Name.continueCounting, object:nil)
+        nc.addObserver(self, selector: #selector(setStopCounting), name: Notification.Name.stopCounting, object:nil)
+        nc.addObserver(self, selector: #selector(setCountUp), name: Notification.Name.countUp, object:nil)
+        nc.addObserver(self, selector: #selector(setCountDown), name: Notification.Name.countDown, object:nil)
     }
     
-    @objc func startCountingUpNotificationAction() {
-        countUp()
-    }
-    
-    @objc func startCountingDownNotificationAction() {
-        countDown()
-    }
-    
-    @objc func stopTimerNotificationAction() {
-        stopTheClock()
-    }
-    
-    @objc func resetTimerNotificationAction() {
-        resetTheClock()
-    }
-    
-    @objc func continueCountingNotificationAction() {
+    @objc func setContinueCounting() {
         self.timer.continueCounting = true
     }
     
-    @objc func setStopCountingNotificationAction() {
+    @objc func setStopCounting() {
         self.timer.continueCounting = false
     }
     
-    @objc func setCountUpNotificationAction() {
-        self.timer.currentTime.timeInSeconds = 0
+    @objc func setCountDown() {
+        self.timer.currentTime.timeInSeconds = self.timer.totalTime.timeInSeconds
     }
     
-    @objc func setCountDownNotificationAction() {
-        self.timer.currentTime.timeInSeconds = self.timer.totalTime.timeInSeconds
+    @objc func setCountUp() {
+        self.timer.currentTime.timeInSeconds = 0
     }
     
     func setTime(timeLimit: time, warningTime: time) {
@@ -130,23 +106,8 @@ class presentationTimer: NSObject {
     @objc dynamic var totalTime: time
     @objc dynamic var currentTime: time
     @objc dynamic var warningTime: time
-    var isRunning: Bool {
-        didSet (value) {
-            if value {
-                nc.post(name: Notification.Name.timerStarted, object: self)
-            } else if !value {
-                nc.post(name: Notification.Name.timerStopped, object: self)
-            }
-        }
-    }
-    var isOutOfTime: Bool {
-        didSet (value) {
-            if value == true {
-                nc.post(name: Notification.Name.outOfTime, object: self)
-            }
-        }
-    }
-    
+    var isRunning: Bool
+    var isOutOfTime: Bool
     var continueCounting: Bool
     var nc = NotificationCenter.default
     private var timer = Timer()
@@ -155,11 +116,11 @@ class presentationTimer: NSObject {
         self.totalTime = time(timeToCountInSeconds: secondsToCount)
         self.currentTime = time(timeToCountInSeconds: secondsToCount)
         self.warningTime = time(timeToCountInSeconds: warningTime)
-        self.isRunning = true
-        self.isOutOfTime = true
+        self.isRunning = false
+        self.isOutOfTime = false
         self.continueCounting = false
     }
-
+    
     init(hoursToCount: Int, minutesToCount: Int, secondsToCount: Int, warningTime: time) {
         self.totalTime = time(hours: Int(hoursToCount), minutes: Int(minutesToCount), seconds: Int(secondsToCount))
         self.currentTime = totalTime
@@ -173,7 +134,7 @@ class presentationTimer: NSObject {
         guard isRunning == false else {
             return
         }
-        nc.post(name: Notification.Name.timerStarted, object: self)
+        nc.post(name: Notification.Name.clockStarted, object: self)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecond), userInfo: nil, repeats: true)
         timer.fire()
         isRunning = true
@@ -183,38 +144,38 @@ class presentationTimer: NSObject {
         guard isRunning == false else {
             return
         }
-        nc.post(name: Notification.Name.timerStarted, object: self)
+        nc.post(name: Notification.Name.clockStarted, object: self)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecond), userInfo: nil, repeats: true)
         timer.fire()
         isRunning = true
     }
     
     @objc func decreaseTimeByOneSecond() {
-        if self.continueCounting == true {
+        guard self.continueCounting == true else {
+            guard currentTime.timeInSeconds > 0 else {
+                setIsOutOfTime()
+                return
+            }
             currentTime.timeInSeconds -= 1
             checkCountDownWarning()
-        } else if self.continueCounting == false {
-            if currentTime.timeInSeconds <= 0 {
-                setIsOutOfTime()
-            } else if currentTime.timeInSeconds > 0 {
-                currentTime.timeInSeconds -= 1
-                checkCountDownWarning()
-            }
+            return
         }
+        currentTime.timeInSeconds -= 1
+        checkCountDownWarning()
     }
-
+    
     @objc func increaseTimeByOneSecond() {
-        if self.continueCounting == true {
+        guard self.continueCounting == false else {
             currentTime.timeInSeconds += 1
             checkCountUpWarning()
-        } else if self.continueCounting == false {
-            if currentTime.timeInSeconds < self.totalTime.timeInSeconds {
-                currentTime.timeInSeconds += 1
-                checkCountUpWarning()
-            }
-            if currentTime.timeInSeconds >= self.totalTime.timeInSeconds {
-                setIsOutOfTime()
-            }
+            return
+        }
+        if currentTime.timeInSeconds < self.totalTime.timeInSeconds {
+            currentTime.timeInSeconds += 1
+            checkCountUpWarning()
+        }
+        if currentTime.timeInSeconds >= self.totalTime.timeInSeconds {
+            setIsOutOfTime()
         }
     }
     
@@ -226,6 +187,7 @@ class presentationTimer: NSObject {
             nc.post(name:Notification.Name.warningOff, object: self)
         }
         if currentTime.timeInSeconds <= 0 {
+            nc.post(name:Notification.Name.outOfTime, object: self)
             self.isOutOfTime = true
         }
     }
@@ -248,7 +210,7 @@ class presentationTimer: NSObject {
         }
         timer.invalidate()
         isRunning = false
-        nc.post(name:Notification.Name.timerStopped, object: self)
+        nc.post(name:Notification.Name.clockStopped, object: self)
     }
     
     func resetTheClock() {
@@ -259,11 +221,12 @@ class presentationTimer: NSObject {
             return
         }
         currentTime.timeInSeconds = totalTime.timeInSeconds
-        nc.post(name: Notification.Name.timerReset, object: self)
+        nc.post(name: Notification.Name.clockReset, object: self)
     }
     
     func setIsOutOfTime() {
         self.isOutOfTime = true
+        nc.post(name:Notification.Name.outOfTime, object: self)
     }
 }
 
