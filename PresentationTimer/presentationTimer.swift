@@ -24,6 +24,8 @@ extension Notification.Name {
     static let setRedBorder = Notification.Name("setRedBorder")
     static let countUp = Notification.Name("countUp")
     static let countDown = Notification.Name("countDown")
+    static let setCountUp = Notification.Name("setCountUp")
+    static let setCountDown = Notification.Name("setCountDown")
     static let stopCounting = Notification.Name("stopCounting")
     static let continueCounting = Notification.Name("continueCounting")
     static let showDateandTime = Notification.Name("showDateAndTime")
@@ -31,7 +33,7 @@ extension Notification.Name {
     static let blinkBorder = Notification.Name("blinkBorder")
     static let staticBorder = Notification.Name("staticBorder")
     static let blinkClock = Notification.Name("blinkClock")
-    static let staticClock = Notification.Name("staticClock")
+    static let staticTimer = Notification.Name("staticTimer")
     static let setBackgroundColor = Notification.Name("setBackgroundColor")
 }
 
@@ -44,8 +46,8 @@ class presentationTimerController: NSObject {
         super.init()
         nc.addObserver(self, selector: #selector(setContinueCounting), name: Notification.Name.continueCounting, object:nil)
         nc.addObserver(self, selector: #selector(setStopCounting), name: Notification.Name.stopCounting, object:nil)
-        nc.addObserver(self, selector: #selector(setCountUp), name: Notification.Name.countUp, object:nil)
-        nc.addObserver(self, selector: #selector(setCountDown), name: Notification.Name.countDown, object:nil)
+        nc.addObserver(self, selector: #selector(setCountUp), name: Notification.Name.setCountUp, object:nil)
+        nc.addObserver(self, selector: #selector(setCountDown), name: Notification.Name.setCountDown, object:nil)
     }
     
     @objc func setContinueCounting() {
@@ -107,7 +109,13 @@ class presentationTimer: NSObject {
     @objc dynamic var currentTime: time
     @objc dynamic var warningTime: time
     var isRunning: Bool
-    var isOutOfTime: Bool
+    var isOutOfTime: Bool {
+        didSet (value){
+            if value == true {
+                nc.post(name: Notification.Name.outOfTime, object: self)
+            }
+        }
+    }
     var continueCounting: Bool
     var nc = NotificationCenter.default
     private var timer = Timer()
@@ -153,7 +161,7 @@ class presentationTimer: NSObject {
     @objc func decreaseTimeByOneSecond() {
         guard self.continueCounting == true else {
             guard currentTime.timeInSeconds > 0 else {
-                setIsOutOfTime()
+                self.isOutOfTime = true
                 return
             }
             currentTime.timeInSeconds -= 1
@@ -175,7 +183,7 @@ class presentationTimer: NSObject {
             checkCountUpWarning()
         }
         if currentTime.timeInSeconds >= self.totalTime.timeInSeconds {
-            setIsOutOfTime()
+            self.isOutOfTime = true
         }
     }
     
@@ -187,7 +195,6 @@ class presentationTimer: NSObject {
             nc.post(name:Notification.Name.warningOff, object: self)
         }
         if currentTime.timeInSeconds <= 0 {
-            nc.post(name:Notification.Name.outOfTime, object: self)
             self.isOutOfTime = true
         }
     }
@@ -200,7 +207,7 @@ class presentationTimer: NSObject {
             nc.post(name:Notification.Name.warningOff, object: self)
         }
         if currentTime.timeInSeconds >= totalTime.timeInSeconds {
-            setIsOutOfTime()
+            self.isOutOfTime = true
         }
     }
     
@@ -222,11 +229,6 @@ class presentationTimer: NSObject {
         }
         currentTime.timeInSeconds = totalTime.timeInSeconds
         nc.post(name: Notification.Name.clockReset, object: self)
-    }
-    
-    func setIsOutOfTime() {
-        self.isOutOfTime = true
-        nc.post(name:Notification.Name.outOfTime, object: self)
     }
 }
 

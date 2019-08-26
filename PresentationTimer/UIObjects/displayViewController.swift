@@ -11,11 +11,11 @@ import Cocoa
 class displayViewController: NSViewController {
     
     let nc = NotificationCenter.default
+    var displayTimer: Bool = true
+    var displayClock: Bool = false
     var clockDisplayTextFieldTimer = Timer()
-    var blinkBorderTimer1 = Timer()
-    var blinkBorderTimer2 = Timer()
-    var blinkClockTimer1 = Timer()
-    var blinkClockTimer2 = Timer()
+    var blinkBorderTimer = Timer()
+    var blinkClockTimer = Timer()
     var blinkTimerDisplayTextFieldTimer = Timer()
     var currentDate: String {
         get {
@@ -54,8 +54,8 @@ class displayViewController: NSViewController {
         nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
         nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
         nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
-        nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkClock, object:nil)
-        nc.addObserver(self, selector: #selector(staticClock), name: Notification.Name.staticClock, object:nil)
+        nc.addObserver(self, selector: #selector(blinkTimer), name: Notification.Name.blinkClock, object:nil)
+        nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.staticTimer, object:nil)
         nc.addObserver(self, selector: #selector(showDateAndTime), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(showTimer), name: Notification.Name.showTimer, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColor), name: Notification.Name.setBackgroundColor, object:nil)
@@ -105,39 +105,57 @@ class displayViewController: NSViewController {
     }
 
     @objc func hideClock() {
-        self.timerDisplayTextField.isHidden = true
+        if displayClock == false {
+            self.timerDisplayTextField.isHidden = true
+        }
     }
     
     @objc func showClock() {
-        self.timerDisplayTextField.isHidden = false
+        if displayClock == true {
+            self.timerDisplayTextField.isHidden = false
+        }
     }
     
     @objc func blinkBorder() {
-        blinkBorderTimer1 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hideBorder), userInfo: nil, repeats: true)
-        blinkBorderTimer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showBorder), userInfo: nil, repeats: true)
-        blinkBorderTimer1.fire()
-        blinkBorderTimer2.fire()
+        if timerController.timer.isOutOfTime == true {
+            blinkBorderTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
+            blinkBorderTimer.fire()
+        }
+    }
+    
+    @objc func showAndHideBorder() {
+        if self.view.layer?.borderWidth == 50 {
+            self.view.layer?.borderWidth = 0
+        } else if self.view.layer?.borderWidth == 0 {
+            self.view.layer?.borderWidth = 50
+        }
     }
     
     @objc func staticBorder() {
-        blinkBorderTimer1.invalidate()
-        blinkBorderTimer2.invalidate()
+        blinkBorderTimer.invalidate()
         nc.post(name: Notification.Name.showBorder, object: self)
     }
     
-    @objc func blinkClock() {
-        blinkClockTimer1 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hideClock), userInfo: nil, repeats: true)
-        blinkClockTimer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showClock), userInfo: nil, repeats: true)
-        blinkClockTimer1.fire()
-        blinkClockTimer2.fire()
+    @objc func blinkTimer() {
+        if timerController.timer.isOutOfTime == true {
+            blinkClockTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
+            blinkClockTimer.fire()
+        }
     }
     
-    @objc func staticClock() {
-        blinkClockTimer1.invalidate()
-        blinkClockTimer2.invalidate()
+    @objc func showAndHideTimer() {
+        if self.timerDisplayTextField.isHidden == false {
+           self.timerDisplayTextField.isHidden = true
+        } else if self.timerDisplayTextField.isHidden == true {
+            self.timerDisplayTextField.isHidden = false
+        }
+    }
+    
+    @objc func staticTimer() {
+        blinkClockTimer.invalidate()
         self.timerDisplayTextField.isHidden = false
-        self.dateDisplayTextField.isHidden = false
-        self.timeDisplayTextField.isHidden = false
+        self.dateDisplayTextField.isHidden = true
+        self.timeDisplayTextField.isHidden = true
     }
     
     @objc func showDateAndTime() {
@@ -153,5 +171,7 @@ class displayViewController: NSViewController {
         self.dateDisplayTextField.isHidden = true
         self.timeDisplayTextField.isHidden = true
         self.clockDisplayTextFieldTimer.invalidate()
+        blinkClockTimer.invalidate()
+        blinkBorderTimer.invalidate()
     }
 }

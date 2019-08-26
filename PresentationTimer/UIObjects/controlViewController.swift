@@ -52,7 +52,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
         nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
         nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkClock, object:nil)
-        nc.addObserver(self, selector: #selector(staticClock), name: Notification.Name.blinkClock, object:nil)
+        nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.blinkClock, object:nil)
         self.timerDisplay.isBordered = false
         self.timerDisplay.wantsLayer = true
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
@@ -112,7 +112,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         
     }
     
-    @objc func staticClock() {
+    @objc func staticTimer() {
         
     }
     
@@ -135,11 +135,13 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func blinkClockControl(_ sender: Any) {
-        if (sender as AnyObject).state == .on {
-            nc.post(name: Notification.Name.blinkClock, object: self)
-        }
-        if (sender as AnyObject).state == .off {
-            nc.post(name: Notification.Name.staticClock, object: self)
+        if self.showDateRadioButton.state == .off {
+            if (sender as AnyObject).state == .on {
+                nc.post(name: Notification.Name.blinkClock, object: self)
+            }
+            if (sender as AnyObject).state == .off {
+                nc.post(name: Notification.Name.staticTimer, object: self)
+            }
         }
     }
     
@@ -153,15 +155,21 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func timerFunctionSelector(_ sender: AnyObject) {
+        if timerController.timer.isRunning == true {
+            timerController.stopTheClock()
+        }
         if countUpRadioButton.state == .on {
+            nc.post(name: Notification.Name.staticTimer, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
-            nc.post(name: Notification.Name.countUp, object: self)
+            nc.post(name: Notification.Name.setCountUp, object: self)
         }
         if countDownRadioButton.state == .on {
+            nc.post(name: Notification.Name.staticTimer, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
-            nc.post(name: Notification.Name.countDown, object: self)
+            nc.post(name: Notification.Name.setCountDown, object: self)
         }
         if showDateRadioButton.state == .on {
+            nc.post(name: Notification.Name.staticTimer, object: self)
             nc.post(name: Notification.Name.showDateandTime, object: self)
         }
     }
