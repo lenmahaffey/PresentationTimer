@@ -56,7 +56,7 @@ class displayViewController: NSViewController {
         nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
         nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkClock, object:nil)
         nc.addObserver(self, selector: #selector(staticClock), name: Notification.Name.staticClock, object:nil)
-        nc.addObserver(self, selector: #selector(showDate), name: Notification.Name.showDate, object:nil)
+        nc.addObserver(self, selector: #selector(showDateAndTime), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(showTimer), name: Notification.Name.showTimer, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColor), name: Notification.Name.setBackgroundColor, object:nil)
     }
@@ -72,7 +72,8 @@ class displayViewController: NSViewController {
     }
     
     @objc func setDateAndTime() {
-        self.dateDisplayTextField.stringValue = currentTime
+        self.dateDisplayTextField.stringValue = currentDate
+        self.timeDisplayTextField.stringValue = currentTime
         self.view.layer?.setNeedsDisplay()
     }
     
@@ -135,18 +136,22 @@ class displayViewController: NSViewController {
         blinkClockTimer1.invalidate()
         blinkClockTimer2.invalidate()
         self.timerDisplayTextField.isHidden = false
+        self.dateDisplayTextField.isHidden = false
+        self.timeDisplayTextField.isHidden = false
     }
     
-    @objc func showDate() {
+    @objc func showDateAndTime() {
         self.startClock()
         setDateAndTime()
         self.timerDisplayTextField.isHidden = true
         self.dateDisplayTextField.isHidden = false
+        self.timeDisplayTextField.isHidden = false
     }
     
     @objc func showTimer() {
         self.timerDisplayTextField.isHidden = false
         self.dateDisplayTextField.isHidden = true
+        self.timeDisplayTextField.isHidden = true
         self.clockDisplayTextFieldTimer.invalidate()
     }
 }

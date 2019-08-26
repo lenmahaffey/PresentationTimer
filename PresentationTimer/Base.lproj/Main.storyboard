@@ -338,9 +338,18 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFg-Xl-FU6">
-                                <rect key="frame" x="0.0" y="108" width="500" height="83"/>
+                                <rect key="frame" x="0.0" y="187" width="500" height="75"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="Rdd-Zf-Kmi">
+                                    <font key="font" size="145" name="Tahoma"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-4L-3Wk">
+                                <rect key="frame" x="0.0" y="112" width="500" height="75"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="PmA-YH-jyf">
                                     <font key="font" size="145" name="Tahoma"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -350,6 +359,7 @@
                     </view>
                     <connections>
                         <outlet property="dateDisplayTextField" destination="bFg-Xl-FU6" id="4Ma-4F-A7y"/>
+                        <outlet property="timeDisplayTextField" destination="Hti-4L-3Wk" id="3C2-Wy-8zD"/>
                         <outlet property="timerDisplayTextField" destination="qxD-d8-QtL" id="Sy9-oG-dsN"/>
                     </connections>
                 </viewController>

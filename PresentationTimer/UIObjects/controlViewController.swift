@@ -162,7 +162,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             nc.post(name: Notification.Name.countDown, object: self)
         }
         if showDateRadioButton.state == .on {
-            nc.post(name: Notification.Name.showDate, object: self)
+            nc.post(name: Notification.Name.showDateandTime, object: self)
         }
     }
     
