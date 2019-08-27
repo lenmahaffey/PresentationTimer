@@ -198,79 +198,8 @@
                                 <rect key="frame" x="275" y="220" width="225" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5c-mh-i52">
-                                        <rect key="frame" x="62" y="0.0" width="19" height="22"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="G:" id="DOf-Kg-vt4">
-                                            <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-Fb-N6l">
-                                        <rect key="frame" x="25" y="0.0" width="34" height="25"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="123" drawsBackground="YES" id="g5C-44-Ocr">
-                                            <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="backgroundRGBRedTextFieldAction:" target="Kqx-Qm-IXA" id="tEl-Ut-p7v"/>
-                                        </connections>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hog-Md-aQf">
-                                        <rect key="frame" x="116" y="0.0" width="19" height="22"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="B:" id="MyB-e0-afC">
-                                            <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xmm-kH-k3g">
-                                        <rect key="frame" x="79" y="0.0" width="34" height="25"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="123" drawsBackground="YES" id="4qs-Cg-CE0">
-                                            <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="backgroundRGBGreenTextFieldAction:" target="Kqx-Qm-IXA" id="8Om-ax-w2p"/>
-                                        </connections>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KGK-6A-avR">
-                                        <rect key="frame" x="8" y="0.0" width="19" height="22"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="R:" id="RoU-RT-7JD">
-                                            <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z3E-jL-iYg">
-                                        <rect key="frame" x="175" y="0.0" width="50" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="backgroundColorPickerAction:" target="Kqx-Qm-IXA" id="zYA-zf-qyG"/>
-                                        </connections>
-                                    </colorWell>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mlZ-7s-qAd">
-                                        <rect key="frame" x="133" y="0.0" width="34" height="25"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="123" drawsBackground="YES" id="ws0-EH-GDk">
-                                            <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="backgroundRGBBlueTextFieldAction:" target="Kqx-Qm-IXA" id="NzW-OX-SRd"/>
-                                        </connections>
-                                    </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cKf-n8-dDo">
-                                        <rect key="frame" x="45" y="30" width="135" height="19"/>
+                                        <rect key="frame" x="18" y="15" width="135" height="19"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Background Color" id="vy5-km-Qri">
                                             <font key="font" metaFont="system" size="16"/>
@@ -278,16 +207,20 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z3E-jL-iYg">
+                                        <rect key="frame" x="166" y="12" width="50" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="backgroundColorPickerAction:" target="Kqx-Qm-IXA" id="zYA-zf-qyG"/>
+                                        </connections>
+                                    </colorWell>
                                 </subviews>
                             </customView>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="BackgroundRGBRedTextField" destination="3m3-ht-p9e" id="Flx-N5-hLj"/>
                         <outlet property="backgroundColorPicker" destination="Z3E-jL-iYg" id="va0-5G-2gO"/>
-                        <outlet property="backgroundRGBBlueTextField" destination="mlZ-7s-qAd" id="exo-8g-8g7"/>
-                        <outlet property="backgroundRGBGreenTextField" destination="Xmm-kH-k3g" id="Ddr-12-ckf"/>
-                        <outlet property="backgroundRGBRedTextField" destination="vaO-Fb-N6l" id="UQj-8e-RQn"/>
                         <outlet property="fontColorPicker" destination="Yld-jV-bc8" id="hiC-i2-5yI"/>
                         <outlet property="fontSelector" destination="xbC-oX-1kP" id="ECf-4y-ujb"/>
                     </connections>
