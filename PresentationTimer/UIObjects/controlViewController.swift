@@ -196,7 +196,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             self.startButton.title = "Start"
         }
         if self.countUpRadioButton.state == .on {
-            timerController.setCountUp()
+            timerController.countUpNotificationAction()
         } else if self.countDownRadioButton.state == .on {
             timerController.resetTheClock()
             return
