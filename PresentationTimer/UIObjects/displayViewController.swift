@@ -45,16 +45,16 @@ class displayViewController: NSViewController {
     }
     
     func commonInit() {
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.timerStarted, object:nil)
         nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
         nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockReset, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.didResetTimer, object:nil)
         nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.showBorder, object:nil)
         nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
         nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
         nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
-        nc.addObserver(self, selector: #selector(blinkTimer), name: Notification.Name.blinkClock, object:nil)
+        nc.addObserver(self, selector: #selector(blinkTimer), name: Notification.Name.blinkTimer, object:nil)
         nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.staticTimer, object:nil)
         nc.addObserver(self, selector: #selector(showDateAndTime), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(showTimer), name: Notification.Name.showTimer, object:nil)

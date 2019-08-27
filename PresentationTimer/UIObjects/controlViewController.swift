@@ -41,9 +41,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         nc.addObserver(self, selector: #selector(setUpTime), name: NSText.didEndEditingNotification, object: nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockStarted, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.clockReset, object:nil)
-        nc.addObserver(self, selector: #selector(clockStopped), name: Notification.Name.clockStopped, object: nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.timerStarted, object:nil)
+        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.didResetTimer, object:nil)
+        nc.addObserver(self, selector: #selector(clockStopped), name: Notification.Name.timerStopped, object: nil)
         nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
         nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
         nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
@@ -51,8 +51,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
         nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
         nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
-        nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkClock, object:nil)
-        nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.blinkClock, object:nil)
+        nc.addObserver(self, selector: #selector(blinkClock), name: Notification.Name.blinkTimer, object:nil)
+        nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.blinkTimer, object:nil)
         self.timerDisplay.isBordered = false
         self.timerDisplay.wantsLayer = true
         self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
@@ -137,7 +137,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func blinkClockControl(_ sender: Any) {
         if self.showDateRadioButton.state == .off {
             if (sender as AnyObject).state == .on {
-                nc.post(name: Notification.Name.blinkClock, object: self)
+                nc.post(name: Notification.Name.blinkTimer, object: self)
             }
             if (sender as AnyObject).state == .off {
                 nc.post(name: Notification.Name.staticTimer, object: self)
