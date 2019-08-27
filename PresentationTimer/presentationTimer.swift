@@ -47,27 +47,6 @@ class presentationTimerController: NSObject {
     init (timeLimit: Int, warningTime: Int){
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)
         super.init()
-        nc.addObserver(self, selector: #selector(continueCountingNotificationAction), name: Notification.Name.continueCounting, object:nil)
-        nc.addObserver(self, selector: #selector(stopCountingNotificationAction), name: Notification.Name.stopCounting, object:nil)
-        nc.addObserver(self, selector: #selector(countUpNotificationAction), name: Notification.Name.setCountUp, object:nil)
-        nc.addObserver(self, selector: #selector(countDownNotificationAction), name: Notification.Name.setCountDown, object:nil)
-    }
-    
-//Notification Actions
-    @objc func continueCountingNotificationAction() {
-        self.setContinueCounting()
-    }
-    
-    @objc func stopCountingNotificationAction() {
-        self.setStopCounting()
-    }
-    
-    @objc func countDownNotificationAction() {
-        self.setCountDown()
-    }
-    
-    @objc func countUpNotificationAction() {
-        self.setCountUp()
     }
     
     @objc func setContinueCounting() {
@@ -120,6 +99,31 @@ class presentationTimerController: NSObject {
     
     func resetTheClock() {
         timer.resetTheClock()
+    }
+}
+
+extension presentationTimerController {
+    fileprivate func setUpNotifications() {
+        nc.addObserver(self, selector: #selector(continueCountingNotificationAction), name: Notification.Name.continueCounting, object:nil)
+        nc.addObserver(self, selector: #selector(stopCountingNotificationAction), name: Notification.Name.stopCounting, object:nil)
+        nc.addObserver(self, selector: #selector(countUpNotificationAction), name: Notification.Name.setCountUp, object:nil)
+        nc.addObserver(self, selector: #selector(countDownNotificationAction), name: Notification.Name.setCountDown, object:nil)
+    }
+    
+    @objc private func continueCountingNotificationAction(notification: Notification) {
+        self.setContinueCounting()
+    }
+    
+    @objc private func stopCountingNotificationAction(notification: Notification) {
+        self.setStopCounting()
+    }
+    
+    @objc private func countDownNotificationAction(notification: Notification) {
+        self.setCountDown()
+    }
+    
+    @objc private func countUpNotificationAction(notification: Notification) {
+        self.setCountUp()
     }
 }
 
