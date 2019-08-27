@@ -53,20 +53,21 @@ class presentationTimerController: NSObject {
         nc.addObserver(self, selector: #selector(countDownNotificationAction), name: Notification.Name.setCountDown, object:nil)
     }
     
+//Notification Actions
     @objc func continueCountingNotificationAction() {
-        self.timer.continueCounting = true
+        self.setContinueCounting()
     }
     
     @objc func stopCountingNotificationAction() {
-        self.timer.continueCounting = false
+        self.setStopCounting()
     }
     
     @objc func countDownNotificationAction() {
-        self.timer.currentTime.timeInSeconds = self.timer.totalTime.timeInSeconds
+        self.setCountDown()
     }
     
     @objc func countUpNotificationAction() {
-        self.timer.currentTime.timeInSeconds = 0
+        self.setCountUp()
     }
     
     @objc func setContinueCounting() {
@@ -103,7 +104,6 @@ class presentationTimerController: NSObject {
     func changeCurrentTime(newTime: time) {
         let totalSecondsToChange = self.timer.totalTime.timeInSeconds - newTime.timeInSeconds
         self.timer.currentTime.timeInSeconds += totalSecondsToChange
-        
     }
     
     func countDown() {
@@ -227,7 +227,6 @@ class presentationTimer: NSObject {
         }
         if currentTime.timeInSeconds >= totalTime.timeInSeconds {
             self.isOutOfTime = true
-            nc.post(name: Notification.Name.outOfTime, object: self)
         }
     }
     
