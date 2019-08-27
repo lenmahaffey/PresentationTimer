@@ -45,20 +45,20 @@ class displayViewController: NSViewController {
     }
     
     func commonInit() {
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.timerStarted, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderYellow), name: Notification.Name.warningOn, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.warningOff, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderRed), name: Notification.Name.outOfTime, object:nil)
-        nc.addObserver(self, selector: #selector(setBorderGreen), name: Notification.Name.didResetTimer, object:nil)
-        nc.addObserver(self, selector: #selector(showBorder), name: Notification.Name.showBorder, object:nil)
-        nc.addObserver(self, selector: #selector(hideBorder), name: Notification.Name.hideBorder, object:nil)
-        nc.addObserver(self, selector: #selector(blinkBorder), name: Notification.Name.blinkBorder, object:nil)
-        nc.addObserver(self, selector: #selector(staticBorder), name: Notification.Name.staticBorder, object:nil)
-        nc.addObserver(self, selector: #selector(blinkTimer), name: Notification.Name.blinkTimer, object:nil)
-        nc.addObserver(self, selector: #selector(staticTimer), name: Notification.Name.staticTimer, object:nil)
-        nc.addObserver(self, selector: #selector(showDateAndTime), name: Notification.Name.showDateandTime, object:nil)
-        nc.addObserver(self, selector: #selector(showTimer), name: Notification.Name.showTimer, object:nil)
-        nc.addObserver(self, selector: #selector(setBackgroundColor), name: Notification.Name.setBackgroundColor, object:nil)
+        nc.addObserver(self, selector: #selector(timerStartedNotificationAction), name: Notification.Name.timerStarted, object:nil)
+        nc.addObserver(self, selector: #selector(warningOnNotificationAction), name: Notification.Name.warningOn, object:nil)
+        nc.addObserver(self, selector: #selector(warningOffNotificationAction), name: Notification.Name.warningOff, object:nil)
+        nc.addObserver(self, selector: #selector(outOfTimeNotificationAction), name: Notification.Name.outOfTime, object:nil)
+        nc.addObserver(self, selector: #selector(didResetTimerNotificationAction), name: Notification.Name.didResetTimer, object:nil)
+        nc.addObserver(self, selector: #selector(showBorderNotificationAction), name: Notification.Name.showBorder, object:nil)
+        nc.addObserver(self, selector: #selector(hideBorderNotificationAction), name: Notification.Name.hideBorder, object:nil)
+        nc.addObserver(self, selector: #selector(blinkBorderNotificationAction), name: Notification.Name.blinkBorder, object:nil)
+        nc.addObserver(self, selector: #selector(staticBorderNotificationAction), name: Notification.Name.staticBorder, object:nil)
+        nc.addObserver(self, selector: #selector(showTimerNotificationAction), name: Notification.Name.showTimer, object:nil)
+        nc.addObserver(self, selector: #selector(blinkTimerNotificationAction), name: Notification.Name.blinkTimer, object:nil)
+        nc.addObserver(self, selector: #selector(staticTimerNotificationAction), name: Notification.Name.staticTimer, object:nil)
+        nc.addObserver(self, selector: #selector(showDateAndTimeNotificationAction), name: Notification.Name.showDateandTime, object:nil)
+        nc.addObserver(self, selector: #selector(setBackgroundColorNotificationAction), name: Notification.Name.setBackgroundColor, object:nil)
     }
     
     override func viewDidLoad() {
@@ -66,64 +66,112 @@ class displayViewController: NSViewController {
         self.setBorderRed()
     }
     
-    @objc func startClock() {
+//Notification Actions
+    @objc private func timerStartedNotificationAction() {
+        self.setBorderGreen()
+    }
+    
+    @objc private func warningOnNotificationAction() {
+        self.setBorderYellow()
+    }
+    
+    @objc private func warningOffNotificationAction() {
+        self.setBorderGreen()
+    }
+    
+    @objc private func outOfTimeNotificationAction() {
+        self.setBorderRed()
+    }
+    
+    @objc private func didResetTimerNotificationAction() {
+        self.setBorderGreen()
+    }
+    
+    @objc private func showBorderNotificationAction() {
+        self.showBorder()
+    }
+    
+    @objc private func hideBorderNotificationAction() {
+        self.hideBorder()
+    }
+    
+    @objc private func blinkBorderNotificationAction() {
+        self.blinkBorder()
+    }
+    
+    @objc private func staticBorderNotificationAction() {
+        self.staticBorder()
+    }
+    
+    @objc private func showTimerNotificationAction() {
+        self.showTimer()
+    }
+    
+    @objc private func blinkTimerNotificationAction() {
+        self.blinkTimer()
+    }
+    
+    @objc private func staticTimerNotificationAction() {
+        self.staticTimer()
+    }
+    
+    @objc private func showDateAndTimeNotificationAction() {
+        showDateAndTime()
+    }
+    
+    @objc private func setBackgroundColorNotificationAction() {
+        self.view.layer?.backgroundColor = backgroundColor
+    }
+    
+    @objc private func startClock() {
         self.clockDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setDateAndTime), userInfo: nil, repeats: true)
         self.clockDisplayTextFieldTimer.fire()
     }
     
-    @objc func setDateAndTime() {
+    @objc private func setDateAndTime() {
         self.dateDisplayTextField.stringValue = currentDate
         self.timeDisplayTextField.stringValue = currentTime
         self.view.layer?.setNeedsDisplay()
     }
     
-    @objc func setBackgroundColor() {
-        self.view.layer?.backgroundColor = backgroundColor
-    }
-    
-    @objc func setBorderGreen() {
+//class methods
+    func setBorderGreen() {
         self.view.layer?.borderWidth = 50
         self.view.layer?.borderColor = NSColor.green.cgColor
     }
     
-    @objc func setBorderYellow() {
+    func setBorderYellow() {
         self.view.layer?.borderWidth = 50
         self.view.layer?.borderColor = NSColor.yellow.cgColor
     }
     
-    @objc func setBorderRed() {
+    func setBorderRed() {
         self.view.layer?.borderWidth = 50
         self.view.layer?.borderColor = NSColor.red.cgColor
     }
     
-    @objc func hideBorder() {
-        self.view.layer?.borderWidth = 0
-    }
-    
-    @objc func showBorder() {
+    func showBorder() {
         self.view.layer?.borderWidth = 50
     }
+    
+    func hideBorder() {
+        self.view.layer?.borderWidth = 0
+    }
 
-    @objc func hideClock() {
+    func hideClock() {
         if displayClock == false {
             self.timerDisplayTextField.isHidden = true
         }
     }
     
-    @objc func showClock() {
-        if displayClock == true {
-            self.timerDisplayTextField.isHidden = false
-        }
-    }
-    
-    @objc func blinkBorder() {
+    func blinkBorder() {
         if timerController.timer.isOutOfTime == true {
             blinkBorderTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
             blinkBorderTimer.fire()
         }
     }
     
-    @objc func showAndHideBorder() {
+    @objc private func showAndHideBorder() {
         if self.view.layer?.borderWidth == 50 {
             self.view.layer?.borderWidth = 0
         } else if self.view.layer?.borderWidth == 0 {
@@ -131,19 +179,34 @@ class displayViewController: NSViewController {
         }
     }
     
-    @objc func staticBorder() {
+    func staticBorder() {
         blinkBorderTimer.invalidate()
         nc.post(name: Notification.Name.showBorder, object: self)
     }
     
-    @objc func blinkTimer() {
+    func showClock() {
+        if displayClock == true {
+            self.timerDisplayTextField.isHidden = false
+        }
+    }
+    
+    func showTimer() {
+        self.timerDisplayTextField.isHidden = false
+        self.dateDisplayTextField.isHidden = true
+        self.timeDisplayTextField.isHidden = true
+        self.clockDisplayTextFieldTimer.invalidate()
+        blinkClockTimer.invalidate()
+        blinkBorderTimer.invalidate()
+    }
+    
+    func blinkTimer() {
         if timerController.timer.isOutOfTime == true {
             blinkClockTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
             blinkClockTimer.fire()
         }
     }
     
-    @objc func showAndHideTimer() {
+    @objc private func showAndHideTimer() {
         if self.timerDisplayTextField.isHidden == false {
            self.timerDisplayTextField.isHidden = true
         } else if self.timerDisplayTextField.isHidden == true {
@@ -151,14 +214,14 @@ class displayViewController: NSViewController {
         }
     }
     
-    @objc func staticTimer() {
+    func staticTimer() {
         blinkClockTimer.invalidate()
         self.timerDisplayTextField.isHidden = false
         self.dateDisplayTextField.isHidden = true
         self.timeDisplayTextField.isHidden = true
     }
     
-    @objc func showDateAndTime() {
+    func showDateAndTime() {
         self.startClock()
         setDateAndTime()
         self.timerDisplayTextField.isHidden = true
@@ -166,12 +229,7 @@ class displayViewController: NSViewController {
         self.timeDisplayTextField.isHidden = false
     }
     
-    @objc func showTimer() {
-        self.timerDisplayTextField.isHidden = false
-        self.dateDisplayTextField.isHidden = true
-        self.timeDisplayTextField.isHidden = true
-        self.clockDisplayTextFieldTimer.invalidate()
-        blinkClockTimer.invalidate()
-        blinkBorderTimer.invalidate()
+    func setBackgroundColor() {
+        self.view.layer?.backgroundColor = backgroundColor
     }
 }
