@@ -12,7 +12,7 @@ class displayWindowController: NSWindowController, NSWindowDelegate {
     
     required init?(coder: NSCoder){
         super.init(coder: coder)
-        NotificationCenter.default.addObserver( self, selector: #selector(monitorDidChange), name: NSApplication.didChangeScreenParametersNotification, object: nil)
+        NotificationCenter.default.addObserver( self, selector: #selector(monitorDidChangeNotificationAction), name: NSApplication.didChangeScreenParametersNotification, object: nil)
     }
     
     override func windowDidLoad() {
@@ -27,7 +27,7 @@ class displayWindowController: NSWindowController, NSWindowDelegate {
         }
     }
     
-    @objc func monitorDidChange(notification: NSNotification) {
+    @objc func monitorDidChangeNotificationAction(notification: NSNotification) {
         //print("Monitor did Change")
         if NSScreen.screens.count == 1 {
             self.window!.close()
