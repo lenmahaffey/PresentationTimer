@@ -357,10 +357,10 @@
                                                 <buttonCell key="cell" type="check" title="Blink Clock" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ujI-go-2ti">
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
-                                                    <connections>
-                                                        <action selector="blinkClockControl:" target="XfG-lQ-9wD" id="c87-XZ-PMS"/>
-                                                    </connections>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="blinkTimerControl:" target="XfG-lQ-9wD" id="48v-Yt-6OO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

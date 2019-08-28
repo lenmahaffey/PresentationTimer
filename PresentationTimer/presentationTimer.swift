@@ -27,8 +27,12 @@ extension Notification.Name {
     //UI Actions
     static let warningOn = Notification.Name("warningOn")
     static let warningOff = Notification.Name("warningOff")
+    static let setWillShowBorderOn = Notification.Name("setWillShowBorderOn")
+    static let setWillShowBorderOff = Notification.Name("setWillShowBorderOff")
     static let showBorder = Notification.Name("showBorder")
     static let blinkBorder = Notification.Name("blinkBorder")
+    static let setBlinkBorderOn = Notification.Name("setBlinkBorderOn")
+    static let setBlinkBorderOff = Notification.Name("setBlinkBorderOff")
     static let staticBorder = Notification.Name("staticBorder")
     static let hideBorder = Notification.Name("hideBorder")
     static let setGreenBorder = Notification.Name("setGreenBorder")
@@ -36,6 +40,8 @@ extension Notification.Name {
     static let setRedBorder = Notification.Name("setRedBorder")
     static let showTimer = Notification.Name("showTimer")
     static let blinkTimer = Notification.Name("blinkTimer")
+    static let setBlinkTimerOn = Notification.Name("setBlinkTimerOn")
+    static let setBlinkTimerOff = Notification.Name("setBlinkTimerOff")
     static let staticTimer = Notification.Name("staticTimer")
     static let setBackgroundColor = Notification.Name("setBackgroundColor")
 }
