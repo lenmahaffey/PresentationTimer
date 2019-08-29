@@ -17,6 +17,7 @@ extension Notification.Name {
     static let timerStarted = Notification.Name("timerStarted")
     static let timerStopped = Notification.Name("timerStopped")
     static let didResetTimer = Notification.Name("didResetTimer")
+    static let resetTimer = Notification.Name("resetTimer")
     static let outOfTime = Notification.Name("outOfTime")
     static let showDateandTime = Notification.Name("showDateAndTime")
     //Timer Behaviors
@@ -110,10 +111,15 @@ class presentationTimerController: NSObject {
 
 extension presentationTimerController {
     fileprivate func setUpNotifications() {
+        nc.addObserver(self, selector: #selector(resetTimerNotificationAction), name: Notification.Name.resetTimer, object: nil)
         nc.addObserver(self, selector: #selector(continueCountingNotificationAction), name: Notification.Name.continueCounting, object:nil)
         nc.addObserver(self, selector: #selector(stopCountingNotificationAction), name: Notification.Name.stopCounting, object:nil)
         nc.addObserver(self, selector: #selector(countUpNotificationAction), name: Notification.Name.setCountUp, object:nil)
         nc.addObserver(self, selector: #selector(countDownNotificationAction), name: Notification.Name.setCountDown, object:nil)
+    }
+    
+    @objc private func resetTimerNotificationAction(notification: Notification) {
+        self.resetTheClock()
     }
     
     @objc private func continueCountingNotificationAction(notification: Notification) {
@@ -138,13 +144,7 @@ class presentationTimer: NSObject {
     @objc dynamic var currentTime: time
     @objc dynamic var warningTime: time
     var isRunning: Bool
-    var isOutOfTime: Bool {
-        didSet (value){
-            if value == true {
-                nc.post(name: Notification.Name.outOfTime, object: self)
-            }
-        }
-    }
+    var isOutOfTime: Bool
     var continueCounting: Bool
     var nc = NotificationCenter.default
     private var timer = Timer()
@@ -154,7 +154,7 @@ class presentationTimer: NSObject {
         self.currentTime = time(timeToCountInSeconds: secondsToCount)
         self.warningTime = time(timeToCountInSeconds: warningTime)
         self.isRunning = false
-        self.isOutOfTime = true
+        self.isOutOfTime = false
         self.continueCounting = false
     }
     
@@ -225,6 +225,7 @@ class presentationTimer: NSObject {
         }
         if currentTime.timeInSeconds <= 0 {
             self.isOutOfTime = true
+            nc.post(name: Notification.Name.outOfTime, object: self)
         }
     }
     
@@ -237,6 +238,7 @@ class presentationTimer: NSObject {
         }
         if currentTime.timeInSeconds >= totalTime.timeInSeconds {
             self.isOutOfTime = true
+            nc.post(name: Notification.Name.outOfTime, object: self)
         }
     }
     

@@ -37,6 +37,11 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var countUpRadioButton: NSButton!
     @IBOutlet weak var countDownRadioButton: NSButton!
     @IBOutlet weak var showDateRadioButton: NSButton!
+    @IBOutlet weak var showBorderRadioButton: NSButton!
+    @IBOutlet weak var blinkBorderRadioButton: NSButton!
+    @IBOutlet weak var blinkClockRadioButton: NSButton!
+    @IBOutlet weak var keepCountingRadioButton: NSButton!
+    
     var willShowBorder: Bool
     
     required init?(coder: NSCoder) {
@@ -158,20 +163,24 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func timerFunctionSelector(_ sender: AnyObject) {
-        if timerController.timer.isRunning == true {
-            timerController.stopTheClock()
+        if timerController.timer.isRunning {
+            nc.post(name: Notification.Name.stopCounting, object: self)
+            self.repeatButtonPress(self)
         }
         if countUpRadioButton.state == .on {
             nc.post(name: Notification.Name.staticTimer, object: self)
+            nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
             nc.post(name: Notification.Name.setCountUp, object: self)
         }
         if countDownRadioButton.state == .on {
             nc.post(name: Notification.Name.staticTimer, object: self)
+            nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
             nc.post(name: Notification.Name.setCountDown, object: self)
         }
         if showDateRadioButton.state == .on {
+            nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.staticTimer, object: self)
             nc.post(name: Notification.Name.showDateandTime, object: self)
         }
@@ -196,7 +205,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func repeatButtonPress(_ sender: Any) {
         if timerController.timer.isRunning == true {
             timerController.stopTheClock()
-            self.startButton.title = "Start"
+            //self.startButton.title = "Start"
         }
         if self.countUpRadioButton.state == .on {
             timerController.setCountUp()

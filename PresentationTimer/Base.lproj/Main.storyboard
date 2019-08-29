@@ -841,9 +841,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="countDownRadioButton" destination="MCF-1u-0Y4" id="SnB-Kg-d0t"/>
+                        <outlet property="blinkBorderRadioButton" destination="zhK-eI-Asu" id="tfQ-W1-5cw"/>
+                        <outlet property="blinkClockRadioButton" destination="cOw-a9-6Pk" id="MHf-Lm-dcf"/>
+                        <outlet property="countDownRadioButton" destination="MCF-1u-0Y4" id="DZI-lt-PVb"/>
                         <outlet property="countUpRadioButton" destination="n1i-8E-FO4" id="Kp7-6H-3Y2"/>
+                        <outlet property="keepCountingRadioButton" destination="q0a-N6-vee" id="fev-yi-iAY"/>
                         <outlet property="repeatButton" destination="Z4I-h8-bw5" id="y4b-Oq-ZJa"/>
+                        <outlet property="showBorderRadioButton" destination="Bfm-na-PJb" id="Q35-nu-UHa"/>
                         <outlet property="showDateRadioButton" destination="pld-tM-w6a" id="Whw-LW-x85"/>
                         <outlet property="startButton" destination="rmH-Uc-knu" id="cde-hf-YE3"/>
                         <outlet property="timerDisplay" destination="5a7-i0-8fh" id="hFG-lQ-ENg"/>
