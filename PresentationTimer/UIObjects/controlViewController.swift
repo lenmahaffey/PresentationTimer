@@ -155,26 +155,23 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func keepCountingControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
-            nc.post(name: Notification.Name.continueCounting, object: self)
-        }
-        if (sender as AnyObject).state == .off {
-            nc.post(name: Notification.Name.stopCounting, object: self)
+            nc.post(name: Notification.Name.setContinueCountingOn, object: self)
+        } else if (sender as AnyObject).state == .off {
+            nc.post(name: Notification.Name.setContinueCountingOff, object: self)
         }
     }
     
     @IBAction func timerFunctionSelector(_ sender: AnyObject) {
         if timerController.timer.isRunning {
-            nc.post(name: Notification.Name.stopCounting, object: self)
+            nc.post(name: Notification.Name.setContinueCountingOn, object: self)
             self.repeatButtonPress(self)
         }
         if countUpRadioButton.state == .on {
-            nc.post(name: Notification.Name.staticTimer, object: self)
             nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
             nc.post(name: Notification.Name.setCountUp, object: self)
         }
         if countDownRadioButton.state == .on {
-            nc.post(name: Notification.Name.staticTimer, object: self)
             nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
             nc.post(name: Notification.Name.setCountDown, object: self)
@@ -186,32 +183,30 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    
     @IBAction func startButtonPress(_ sender: Any) {
-        if timerController.timer.isRunning == true {
-            timerController.stopTheClock()
+        guard timerController.timer.isRunning == false else {
+            nc.post(name: Notification.Name.stopTimer, object: self)
             self.startButton.title = "Start"
-        } else if timerController.timer.isRunning == false {
-            if self.countUpRadioButton.state == .on {
-                timerController.countUp()
-                self.startButton.title = "Stop"
-            } else if self.countDownRadioButton.state == .on {
-                timerController.countDown()
-                self.startButton.title = "Stop"
-            }
+            return
+        }
+        if self.countUpRadioButton.state == .on {
+            nc.post(name: Notification.Name.startTimerCountingUp, object: self)
+            self.startButton.title = "Stop"
+        } else if self.countDownRadioButton.state == .on {
+           nc.post(name: Notification.Name.startTimerCountingDown, object: self)
+            self.startButton.title = "Stop"
         }
     }
     
     @IBAction func repeatButtonPress(_ sender: Any) {
         if timerController.timer.isRunning == true {
             timerController.stopTheClock()
-            //self.startButton.title = "Start"
+            self.startButton.title = "Start"
         }
         if self.countUpRadioButton.state == .on {
-            timerController.setCountUp()
+            nc.post(name: Notification.Name.setCountUp, object: self)
         } else if self.countDownRadioButton.state == .on {
-            timerController.resetTheClock()
-            return
+            nc.post(name: Notification.Name.resetTimer, object: self)
         }
     }
     
