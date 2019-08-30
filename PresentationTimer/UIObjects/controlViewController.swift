@@ -63,6 +63,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.timerDisplay.layer?.borderWidth = 10
         self.timerDisplay.layer?.cornerRadius = 10.0
         self.countDownRadioButton.state = .on
+        self.showBorderRadioButton.state = .on
     }
     
     override func viewWillAppear() {
@@ -105,13 +106,11 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func blinkBorder() {
-        if self.willShowBorder == true {
-            
-        }
+
     }
     
     @objc func staticBorder() {
-        self.showBorder()
+   
     }
     
     @objc func blinkTimer() {
@@ -125,22 +124,22 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func showBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.setWillShowBorderOn, object: self)
-            nc.post(name: Notification.Name.showBorder, object: self)
             nc.post(name: Notification.Name.staticBorder, object: self)
         }
         if (sender as AnyObject).state == .off {
             nc.post(name: Notification.Name.setWillShowBorderOff, object: self)
-            nc.post(name: Notification.Name.hideBorder, object: self)
-            nc.post(name: Notification.Name.staticBorder, object: self)
+            //nc.post(name: Notification.Name.staticBorder, object: self)
         }
     }
     
     @IBAction func blinkBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
+            print("Blink border clicked")
             nc.post(name: Notification.Name.setBlinkBorderOn, object: self)
-        } else if (sender as AnyObject).state == .off {
+        }
+        if (sender as AnyObject).state == .off {
+            print("Static border clicked")
             nc.post(name: Notification.Name.setBlinkBorderOff, object: self)
-            nc.post(name: Notification.Name.staticBorder, object: self)
         }
     }
     
@@ -149,7 +148,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             nc.post(name: Notification.Name.setBlinkTimerOn, object: self)
         } else if (sender as AnyObject).state == .off {
             nc.post(name: Notification.Name.setBlinkTimerOff, object: self)
-            nc.post(name: Notification.Name.staticTimer, object: self)
         }
     }
     

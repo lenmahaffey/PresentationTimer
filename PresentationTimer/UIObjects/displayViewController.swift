@@ -11,11 +11,57 @@ import Cocoa
 class displayViewController: NSViewController {
     
     let nc = NotificationCenter.default
-    var willShowBorder: Bool
-    var willShowTimer: Bool
-    var willShowClock: Bool
-    var willBlinkTimer: Bool
-    var willBlinkBorder: Bool
+    var willShowBorder: Bool {
+        didSet {
+            if willShowBorder == true {
+                nc.post(name: Notification.Name.showBorder, object: self)
+            } else {
+                nc.post(name: Notification.Name.hideBorder, object: self)
+            }
+        }
+    }
+    var willShowTimer: Bool {
+        didSet {
+            if willShowTimer == true {
+                nc.post(name: Notification.Name.showTimer, object: self)
+            } else {
+                nc.post(name: Notification.Name.hideTimer, object: self)
+            }
+        }
+    }
+    
+    var willShowClock: Bool {
+        didSet {
+            if willShowClock == true {
+                nc.post(name: Notification.Name.showClock, object: self)
+            } else {
+                nc.post(name: Notification.Name.hideClock, object: self)
+            }
+        }
+    }
+    
+    var willBlinkTimer: Bool {
+        didSet  {
+            if willBlinkTimer == true {
+                nc.post(name: Notification.Name.blinkTimer, object: self)
+            } else {
+                nc.post(name: Notification.Name.staticTimer, object: self)
+            }
+        }
+    }
+    
+    var willBlinkBorder: Bool {
+        didSet {
+            if willBlinkBorder == true {
+                print("will blink border")
+                nc.post(name: Notification.Name.blinkBorder, object: self)
+            } else {
+                print("will not blink border")
+                nc.post(name: Notification.Name.staticBorder, object: self)
+            }
+        }
+    }
+    
     var clockDisplayTextFieldTimer = Timer()
     var blinkBorderTimer = Timer()
     var blinkTimerDisplayTextFieldTimer = Timer()
@@ -70,28 +116,28 @@ class displayViewController: NSViewController {
     }
 
     func setBorderGreen() {
-        if willShowBorder {
+        if willShowBorder == true {
             self.view.layer?.borderWidth = 50
             self.view.layer?.borderColor = NSColor.green.cgColor
         }
     }
     
     func setBorderYellow() {
-        if willShowBorder {
+        if willShowBorder == true {
             self.view.layer?.borderWidth = 50
             self.view.layer?.borderColor = NSColor.yellow.cgColor
         }
     }
     
     func setBorderRed() {
-        if willShowBorder {
+        if willShowBorder == true {
             self.view.layer?.borderWidth = 50
             self.view.layer?.borderColor = NSColor.red.cgColor
         }
     }
     
     func showBorder() {
-        if willShowBorder {
+        if willShowBorder == true {
             self.view.layer?.borderWidth = 50
         }
     }
@@ -101,15 +147,19 @@ class displayViewController: NSViewController {
     }
     
     func blinkBorder() {
-        if willBlinkBorder && willShowBorder && timerController.timer.isOutOfTime {
+        if willBlinkBorder == true && willShowBorder == true && timerController.timer.isOutOfTime == true {
             if !blinkBorderTimer.isValid {
-                blinkBorderTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
+                blinkBorderTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
                 blinkBorderTimer.fire()
             }
         }
     }
     
     @objc private func showAndHideBorder() {
+        guard willShowBorder == true else {
+            
+            return
+        }
         if self.view.layer?.borderWidth == 50 {
             self.view.layer?.borderWidth = 0
         } else if self.view.layer?.borderWidth == 0 {
@@ -119,11 +169,6 @@ class displayViewController: NSViewController {
     
     func staticBorder() {
         blinkBorderTimer.invalidate()
-        if self.willShowBorder == true {
-            self.showBorder()
-        } else if self.willShowBorder == false {
-            self.hideBorder()
-        }
     }
     
     func showTimer() {
@@ -136,8 +181,8 @@ class displayViewController: NSViewController {
     }
     
     func blinkTimer() {
-        if willShowTimer && willBlinkTimer && timerController.timer.isOutOfTime {
-            blinkTimerDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
+        if willShowTimer == true && willBlinkTimer == true && timerController.timer.isOutOfTime == true {
+            blinkTimerDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
             blinkTimerDisplayTextFieldTimer.fire()
         }
     }
@@ -152,15 +197,6 @@ class displayViewController: NSViewController {
     
     func staticTimer() {
         blinkTimerDisplayTextFieldTimer.invalidate()
-        if willShowTimer {
-            self.timerDisplayTextField.isHidden = false
-            self.dateDisplayTextField.isHidden = true
-            self.timeDisplayTextField.isHidden = true
-        }else if !willShowTimer {
-            self.timerDisplayTextField.isHidden = true
-            self.dateDisplayTextField.isHidden = false
-            self.timeDisplayTextField.isHidden = false
-        }
     }
     
     func showDateAndTime() {
@@ -226,13 +262,13 @@ extension displayViewController {
         if blinkBorderTimer.isValid{
             return
         }
-        if willShowBorder {
+        if willShowBorder  == true {
             self.setBorderRed()
         }
-        if willBlinkTimer {
+        if willBlinkTimer == true {
             self.blinkTimer()
         }
-        if willShowBorder {
+        if willBlinkBorder == true {
             self.blinkBorder()
         }
     }
@@ -264,8 +300,7 @@ extension displayViewController {
     }
     
     @objc private func setBlinkBorderOnNotificationAction(notification: Notification) {
-        self.willBlinkBorder = true
-        self.blinkBorder()
+        willBlinkBorder = true
     }
     
     @objc private func setBlinkBorderOffNotificationAction(notification: Notification) {
@@ -286,7 +321,6 @@ extension displayViewController {
     
     @objc private func setBlinkTimerOnNotificationAction(notification: Notification) {
         self.willBlinkTimer = true
-        self.blinkTimer()
     }
     
     @objc private func setBlinkTimerOffNotificationAction(notification: Notification) {

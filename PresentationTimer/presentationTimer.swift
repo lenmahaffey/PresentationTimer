@@ -29,9 +29,9 @@ extension Notification.Name {
     //UI Actions
     static let warningOn = Notification.Name("warningOn")
     static let warningOff = Notification.Name("warningOff")
+    static let showBorder = Notification.Name("showBorder")
     static let setWillShowBorderOn = Notification.Name("setWillShowBorderOn")
     static let setWillShowBorderOff = Notification.Name("setWillShowBorderOff")
-    static let showBorder = Notification.Name("showBorder")
     static let blinkBorder = Notification.Name("blinkBorder")
     static let setBlinkBorderOn = Notification.Name("setBlinkBorderOn")
     static let setBlinkBorderOff = Notification.Name("setBlinkBorderOff")
@@ -41,11 +41,14 @@ extension Notification.Name {
     static let setYellowBorder = Notification.Name("setYellowBorder")
     static let setRedBorder = Notification.Name("setRedBorder")
     static let showTimer = Notification.Name("showTimer")
+    static let hideTimer = Notification.Name("hideTimer")
     static let blinkTimer = Notification.Name("blinkTimer")
     static let setBlinkTimerOn = Notification.Name("setBlinkTimerOn")
     static let setBlinkTimerOff = Notification.Name("setBlinkTimerOff")
     static let staticTimer = Notification.Name("staticTimer")
     static let setBackgroundColor = Notification.Name("setBackgroundColor")
+    static let showClock = Notification.Name("showClock")
+    static let hideClock = Notification.Name("hideClock")
 }
 
 class presentationTimerController: NSObject {
@@ -203,7 +206,6 @@ class presentationTimer: NSObject {
         guard isRunning == false else {
             return
         }
-        //nc.post(name: Notification.Name.timerStarted, object: self)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(decreaseTimeByOneSecond), userInfo: nil, repeats: true)
         timer.fire()
         isRunning = true
@@ -213,7 +215,6 @@ class presentationTimer: NSObject {
         guard isRunning == false else {
             return
         }
-        //nc.post(name: Notification.Name.timerStarted, object: self)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(increaseTimeByOneSecond), userInfo: nil, repeats: true)
         timer.fire()
         isRunning = true
@@ -244,7 +245,8 @@ class presentationTimer: NSObject {
             checkCountUpWarning()
         }
         if currentTime.timeInSeconds >= self.totalTime.timeInSeconds {
-            self.isOutOfTime = true
+            nc.post(name: Notification.Name.outOfTime, object: self)
+            //self.isOutOfTime = true
         }
     }
     
@@ -256,8 +258,8 @@ class presentationTimer: NSObject {
             nc.post(name:Notification.Name.warningOff, object: self)
         }
         if currentTime.timeInSeconds <= 0 {
-            self.isOutOfTime = true
             nc.post(name: Notification.Name.outOfTime, object: self)
+            self.isOutOfTime = true
         }
     }
     
