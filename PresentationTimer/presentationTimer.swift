@@ -70,11 +70,15 @@ class presentationTimerController: NSObject {
     }
     
     @objc func setCountDown() {
+        //print("willSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
         self.timer.currentTime.timeInSeconds = self.timer.totalTime.timeInSeconds
+        //print("didSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
     }
     
     @objc func setCountUp() {
+        //print("willSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
         self.timer.currentTime.timeInSeconds = 0
+        //print("didSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
     }
     
     func setTime(timeLimit: time, warningTime: time) {
@@ -229,10 +233,12 @@ class presentationTimer: NSObject {
     @objc func decreaseTimeByOneSecond() {
         //print("decrease one second")
         guard self.willContinueCounting == false else {
+            //print("will continue counting")
             currentTime.timeInSeconds -= 1
             checkCountDownWarning()
             return
         }
+        //print("will not continue counting")
         if currentTime.timeInSeconds > 0 {
             currentTime.timeInSeconds -= 1
             checkCountDownWarning()
@@ -242,10 +248,12 @@ class presentationTimer: NSObject {
     @objc func increaseTimeByOneSecond() {
         //print("increase one second")
         guard self.willContinueCounting == false else {
+            //print("will continue counting")
             currentTime.timeInSeconds += 1
             checkCountUpWarning()
             return
         }
+        //print("will not continue counting")
         if currentTime.timeInSeconds < self.totalTime.timeInSeconds {
             currentTime.timeInSeconds += 1
             checkCountUpWarning()
@@ -259,24 +267,29 @@ class presentationTimer: NSObject {
                 return
             }
         }
-        if currentTime.timeInSeconds <= warningTime.timeInSeconds {
-            nc.post(name: Notification.Name.warningOn, object: self)
-        }
-        if currentTime.timeInSeconds > warningTime.timeInSeconds {
-            nc.post(name:Notification.Name.warningOff, object: self)
+        if isOutOfTime == false {
+            if currentTime.timeInSeconds <= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.warningOn, object: self)
+            }
+            if currentTime.timeInSeconds > warningTime.timeInSeconds {
+                nc.post(name:Notification.Name.warningOff, object: self)
+            }
         }
     }
     
     func checkCountUpWarning() {
-        if currentTime.timeInSeconds >= warningTime.timeInSeconds {
-            nc.post(name: Notification.Name.warningOn, object: self)
-        }
-        if currentTime.timeInSeconds < warningTime.timeInSeconds {
-            nc.post(name:Notification.Name.warningOff, object: self)
-        }
-        if currentTime.timeInSeconds >= totalTime.timeInSeconds {
+        if currentTime.timeInSeconds == totalTime.timeInSeconds  {
             if self.isOutOfTime == false {
                 self.isOutOfTime = true
+                return
+            }
+        }
+        if isOutOfTime == false {
+            if currentTime.timeInSeconds >= warningTime.timeInSeconds {
+                nc.post(name: Notification.Name.warningOn, object: self)
+            }
+            if currentTime.timeInSeconds < warningTime.timeInSeconds {
+                nc.post(name:Notification.Name.warningOff, object: self)
             }
         }
     }

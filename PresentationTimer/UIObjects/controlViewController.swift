@@ -159,18 +159,16 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func timerFunctionSelector(_ sender: AnyObject) {
-        if timerController.timer.isRunning {
-            nc.post(name: Notification.Name.setContinueCountingOn, object: self)
-            self.repeatButtonPress(self)
-        }
         if countUpRadioButton.state == .on {
             nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
+            nc.post(name: Notification.Name.resetTimer, object: self)
             nc.post(name: Notification.Name.setCountUp, object: self)
         }
         if countDownRadioButton.state == .on {
             nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.showTimer, object: self)
+            nc.post(name: Notification.Name.resetTimer, object: self)
             nc.post(name: Notification.Name.setCountDown, object: self)
         }
         if showDateRadioButton.state == .on {
@@ -183,6 +181,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func startButtonPress(_ sender: Any) {
         guard timerController.timer.isRunning == false else {
             nc.post(name: Notification.Name.stopTimer, object: self)
+            self.startButton.title = "Start"
             return
         }
         if self.countUpRadioButton.state == .on {

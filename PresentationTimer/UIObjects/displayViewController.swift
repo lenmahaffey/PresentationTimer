@@ -144,32 +144,32 @@ class displayViewController: NSViewController {
     
     func blinkBorder() {
         guard timerController.timer.isOutOfTime == true else {
-            print("blinkBorder(): Time on the clock.  Can't Blink")
+            //print("blinkBorder(): Time on the clock.  Can't Blink")
             return
         }
         guard blinkBorderTimer.isValid == false else {
-            print("blinkBorder(): blinker timer already running")
+            //print("blinkBorder(): blinker timer already running")
             return
         }
         guard willShowBorder == true else {
-            print("blinkBorder(): willShowBorder: ",willShowBorder," Can't Blink")
+            //print("blinkBorder(): willShowBorder: ",willShowBorder," Can't Blink")
             return
         }
-        print("blinkBorder(): setting up blinking borderTimer")
+        //print("blinkBorder(): setting up blinking borderTimer")
         blinkBorderTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
         blinkBorderTimer.fire()
     }
     
     @objc private func showAndHideBorder() {
         guard willBlinkBorder == true else {
-            print("showAndHideBorder() willBlinkBorder: off. Can't Blink")
+            //print("showAndHideBorder() willBlinkBorder: off. Can't Blink")
             return
         }
         guard willShowBorder == true else {
-            print("showAndHideBorder() willShowBorder: false.  Can't Blink")
+            //print("showAndHideBorder() willShowBorder: false.  Can't Blink")
             return
         }
-        print("showAndHideBorder() blink border")
+        //print("showAndHideBorder() blink border")
         if self.view.layer?.borderWidth == 50 {
             self.view.layer?.borderWidth = 0
         } else if self.view.layer?.borderWidth == 0 {
@@ -178,7 +178,7 @@ class displayViewController: NSViewController {
     }
     
     func staticBorder() {
-        print("staticBorder(): stop blinking border")
+        //print("staticBorder(): stop blinking border")
         blinkBorderTimer.invalidate()
         if self.willShowBorder == true {
             self.showBorder()
@@ -195,14 +195,14 @@ class displayViewController: NSViewController {
     
     func blinkTimer() {
         guard timerController.timer.isOutOfTime == true else {
-            print("Time on the clock.  Can't Blink")
+            //print("Time on the clock.  Can't Blink")
             return
         }
         guard blinkTimerDisplayTextFieldTimer.isValid == false else {
-            print("blinker timer already running")
+            //print("blinker timer already running")
             return
         }
-        print("setting up blinkingTimer for timerDisplayTextField")
+        //print("setting up blinkingTimer for timerDisplayTextField")
         blinkTimerDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
         blinkBorderTimer.fire()
         
@@ -222,14 +222,14 @@ class displayViewController: NSViewController {
     @objc private func showAndHideTimer() {
         
         guard willBlinkTimer == true else {
-            print("willBlinkTimer: off. Can't Blink")
+            //print("willBlinkTimer: off. Can't Blink")
             return
         }
         guard willShowTimer == true else {
-            print("willShowTimer: false.  Can't Blink")
+            //print("willShowTimer: false.  Can't Blink")
             return
         }
-        print("blink timer")
+        //print("blink timer")
         if self.timerDisplayTextField.isHidden == false {
            self.timerDisplayTextField.isHidden = true
         } else if self.timerDisplayTextField.isHidden == true {
@@ -238,7 +238,7 @@ class displayViewController: NSViewController {
     }
     
     func staticTimer() {
-        print("stop blinking timer")
+        //print("stop blinking timer")
         blinkTimerDisplayTextFieldTimer.invalidate()
         self.showTimer()
     }
@@ -292,7 +292,9 @@ extension displayViewController {
     }
     
     @objc private func timerStartedNotificationAction(notification: Notification) {
-        self.setBorderGreen()
+        if timerController.timer.isOutOfTime == false {
+            self.setBorderGreen()
+        }
     }
     
     @objc private func warningOnNotificationAction(notification: Notification) {
@@ -300,21 +302,26 @@ extension displayViewController {
     }
     
     @objc private func warningOffNotificationAction(notification: Notification) {
-        self.setBorderGreen()
+        if timerController.timer.isOutOfTime == false {
+            self.setBorderGreen()
+        }
     }
     
     @objc private func outOfTimeNotificationAction(notification: Notification) {
-        print("outOfTime")
+        //This function needs work.  If a borderTimer is running the function will return leaving no way to
+        //start a timer for the timerDisplayTextField
+        //The border will be set to red every time the outOfTime Notification is received
         self.setBorderRed()
+        //The timers for the blinking UI elements will only be started when one is not already running
         guard blinkBorderTimer.isValid == false else {
-            print("timer Already running")
+            //print("timer Already running")
             return
-        }
-        if willShowTimer == true && willBlinkTimer == true && timerController.timer.isOutOfTime == true {
-            self.blinkTimer()
         }
         if willShowBorder == true && willBlinkBorder == true && timerController.timer.isOutOfTime == true {
             self.blinkBorder()
+        }
+        if willShowTimer == true && willBlinkTimer == true && timerController.timer.isOutOfTime == true {
+            self.blinkTimer()
         }
     }
     
