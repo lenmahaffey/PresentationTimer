@@ -59,7 +59,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.setUpNotifications()
         self.timerDisplay.isBordered = false
         self.timerDisplay.wantsLayer = true
-        self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
+        self.timerDisplay.layer?.borderColor = NSColor.green.cgColor
         self.timerDisplay.layer?.borderWidth = 10
         self.timerDisplay.layer?.cornerRadius = 10.0
         self.countDownRadioButton.state = .on
@@ -102,7 +102,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func timerStopped() {
-        self.startButton.title = "Start"
+        if timerController.timer.isOutOfTime == false {
+            self.startButton.title = "Start"
+        }
     }
     
     @objc func blinkBorder() {
@@ -124,21 +126,18 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func showBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.setWillShowBorderOn, object: self)
-            nc.post(name: Notification.Name.staticBorder, object: self)
         }
         if (sender as AnyObject).state == .off {
+            nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.setWillShowBorderOff, object: self)
-            //nc.post(name: Notification.Name.staticBorder, object: self)
         }
     }
     
     @IBAction func blinkBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
-            print("Blink border clicked")
             nc.post(name: Notification.Name.setBlinkBorderOn, object: self)
         }
         if (sender as AnyObject).state == .off {
-            print("Static border clicked")
             nc.post(name: Notification.Name.setBlinkBorderOff, object: self)
         }
     }
@@ -184,7 +183,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func startButtonPress(_ sender: Any) {
         guard timerController.timer.isRunning == false else {
             nc.post(name: Notification.Name.stopTimer, object: self)
-            self.startButton.title = "Start"
             return
         }
         if self.countUpRadioButton.state == .on {
@@ -198,13 +196,15 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func repeatButtonPress(_ sender: Any) {
         if timerController.timer.isRunning == true {
-            timerController.stopTheClock()
+            nc.post(name: Notification.Name.stopTimer, object: self)
             self.startButton.title = "Start"
         }
+        nc.post(name: Notification.Name.resetTimer, object: self)
         if self.countUpRadioButton.state == .on {
             nc.post(name: Notification.Name.setCountUp, object: self)
-        } else if self.countDownRadioButton.state == .on {
-            nc.post(name: Notification.Name.resetTimer, object: self)
+        }
+        if self.countDownRadioButton.state == .on {
+            nc.post(name: Notification.Name.setCountDown, object: self)
         }
     }
     
