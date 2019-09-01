@@ -9,8 +9,7 @@
 import Cocoa
 
 class controlViewController: NSViewController, NSTextViewDelegate {
-    
-    let nc = NotificationCenter.default
+    //let nc = NotificationCenter.default
     @objc dynamic var displayWindowControl: displayWindowController? = nil
     @objc dynamic var timerController = countdownTimerController
     @IBOutlet weak var timerDisplay: NSTextField!

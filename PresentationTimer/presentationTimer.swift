@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+let nc = NotificationCenter.default
 var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
 
 extension Notification.Name {
@@ -53,7 +53,7 @@ extension Notification.Name {
 
 class presentationTimerController: NSObject {
     @objc dynamic var timer: presentationTimer
-    let nc = NotificationCenter.default
+    //let nc = NotificationCenter.default
     
     init (timeLimit: Int, warningTime: Int){
         self.timer = presentationTimer(secondsToCount: timeLimit, warningTime: warningTime)

@@ -10,7 +10,7 @@ import Cocoa
 
 class displayViewController: NSViewController {
     
-    let nc = NotificationCenter.default
+    //let nc = NotificationCenter.default
     @IBOutlet weak var timerDisplayTextField: NSTextField!
     @IBOutlet weak var dateDisplayTextField: NSTextField!
     @IBOutlet weak var timeDisplayTextField: NSTextField!

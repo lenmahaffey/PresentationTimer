@@ -11,7 +11,7 @@ import Cocoa
 var backgroundColor = NSColor.black.cgColor
 class preferencesViewController: NSViewController {
     
-    let nc = NotificationCenter.default
+    //let nc = NotificationCenter.default
     @IBOutlet weak var backgroundColorPicker: NSColorWell!
     @IBOutlet weak var fontColorPicker: NSColorWell!
     @IBOutlet weak var fontSelector: NSPopUpButton!
