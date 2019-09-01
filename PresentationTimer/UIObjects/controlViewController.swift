@@ -150,7 +150,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.wrapUpTimeHoursEntryField?.intValue = 0
         self.wrapUpTimeMinutesEntryField?.intValue = 0
         self.wrapUpTimeSecondsEntryField?.intValue = 3
-        self.setUpTime(notification: Notification.init(name: Notification.Name.setUpTime))
+        self.setUpTime()
     }
     
     func loadDisplayWindow() {
@@ -482,7 +482,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
     }
     
-    @objc func setUpTime(notification: Notification) {
+    @objc func setUpTime() {
         let totalHours = self.totalTimeHoursEntryField?.intValue ?? 0
         let totalMinutes = self.totalTimeMinutesEntryField?.intValue ?? 0
         let totalSeconds = self.totalTimeSecondsEntryField?.intValue ?? 0
@@ -495,14 +495,16 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             let newMinutes = Int(totalMinutes) + 1
             self.totalTimeSecondsEntryField?.stringValue = String(describing: newSeconds)
             self.totalTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            setUpTime(notification: notification)
+            setUpTime()
+            return
         }
         if Int(totalMinutes) > 59 {
             let newMinutes = Int(totalMinutes) - 60
             let newHours = Int(totalHours) + 1
             self.totalTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
             self.totalTimeHoursEntryField?.stringValue = String(describing: newHours)
-            setUpTime(notification: notification)
+            setUpTime()
+            return
         }
         
         if Int(wrapUpMinutes) > 59 {
@@ -510,7 +512,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             let newHours = Int(wrapUpHours) + 1
             self.wrapUpTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
             self.wrapUpTimeHoursEntryField?.stringValue = String(describing: newHours)
-            setUpTime(notification: notification)
+            setUpTime()
+            return
         }
         
         if Int(wrapUpSeconds) > 59 {
@@ -518,7 +521,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             let newMinutes = Int(wrapUpMinutes) + 1
             self.wrapUpTimeSecondsEntryField?.stringValue = String(describing: newSeconds)
             self.wrapUpTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            setUpTime(notification: notification)
+            setUpTime()
+            return
         }
         
         let totalTime = time(hours: Int(self.totalTimeHoursEntryField?.intValue ?? 0),
