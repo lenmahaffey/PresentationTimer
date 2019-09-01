@@ -282,6 +282,52 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.showTimer()
     }
     
+    func disableUIControls() {
+        self.totalTimeHoursEntryField?.isEditable = false
+        self.totalTimeHoursEntryField?.isSelectable = false
+        self.totalTimeMinutesEntryField?.isEditable = false
+        self.totalTimeMinutesEntryField?.isSelectable = false
+        self.totalTimeSecondsEntryField?.isEditable = false
+        self.totalTimeSecondsEntryField?.isSelectable = false
+        
+        self.totalTimeIncreseHoursButton.isEnabled = false
+        self.totalTimeIncreseMinutesButton.isEnabled = false
+        self.totalTimeIncreaseSecondsButton.isEnabled = false
+        self.totalTimeDecreaseHoursButton.isEnabled = false
+        self.totalTimeDecreaseMinutesButton.isEnabled = false
+        self.totalTimeDecreaseSecondsButton.isEnabled = false
+        
+        self.wrapUpTimeIncreaseHoursButton.isEnabled = false
+        self.wrapUpTimeIncreaseMinutesButton.isEnabled = false
+        self.wrapUpTimeIncreaseSecondsButton.isEnabled = false
+        self.warpUpTimeDecreaseHoursButton.isEnabled = false
+        self.wrapUpTimeDecreaseMinutesButton.isEnabled = false
+        self.wrapUpTimeDecreaseSecondsButton.isEnabled = false
+    }
+    
+    func enableUIControls() {
+        self.totalTimeHoursEntryField?.isEditable = true
+        self.totalTimeHoursEntryField?.isSelectable = true
+        self.totalTimeMinutesEntryField?.isEditable = true
+        self.totalTimeMinutesEntryField?.isSelectable = true
+        self.totalTimeSecondsEntryField?.isEditable = true
+        self.totalTimeSecondsEntryField?.isSelectable = true
+        
+        self.totalTimeIncreseHoursButton.isEnabled = true
+        self.totalTimeIncreseMinutesButton.isEnabled = true
+        self.totalTimeIncreaseSecondsButton.isEnabled = true
+        self.totalTimeDecreaseHoursButton.isEnabled = true
+        self.totalTimeDecreaseMinutesButton.isEnabled = true
+        self.totalTimeDecreaseSecondsButton.isEnabled = true
+        
+        self.wrapUpTimeIncreaseHoursButton.isEnabled = true
+        self.wrapUpTimeIncreaseMinutesButton.isEnabled = true
+        self.wrapUpTimeIncreaseSecondsButton.isEnabled = true
+        self.warpUpTimeDecreaseHoursButton.isEnabled = true
+        self.wrapUpTimeDecreaseMinutesButton.isEnabled = true
+        self.wrapUpTimeDecreaseSecondsButton.isEnabled = true
+    }
+    
     @IBAction func showBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             self.willShowBorder = true
