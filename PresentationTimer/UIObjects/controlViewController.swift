@@ -373,112 +373,71 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func totalTimeIncreaseHoursButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 1, minutes: 0, seconds: 0)
-        timerController.timer.totalTime.timeInSeconds += newTime.timeInSeconds
-        timerController.timer.currentTime.timeInSeconds += newTime.timeInSeconds
-        self.totalTimeHoursEntryField?.stringValue = String(timerController.timer.totalTime.hours)
+        self.totalTimeHoursEntryField?.intValue += 1
+        self.setUpTime()
     }
     
     @IBAction func totalTimeIncreaseMinutesButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 1, seconds: 0)
-        timerController.timer.totalTime.timeInSeconds += newTime.timeInSeconds
-        timerController.timer.currentTime.timeInSeconds += newTime.timeInSeconds
-        self.totalTimeHoursEntryField?.stringValue = String(timerController.timer.totalTime.hours)
-        self.totalTimeMinutesEntryField?.stringValue = String(timerController.timer.totalTime.minutes)
+        self.totalTimeMinutesEntryField?.intValue += 1
+        self.setUpTime()
     }
     
     @IBAction func totalTimeIncreaseSecondsButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 0, seconds: 1)
-        timerController.timer.totalTime.timeInSeconds += newTime.timeInSeconds
-        timerController.timer.currentTime.timeInSeconds += newTime.timeInSeconds
-        self.totalTimeMinutesEntryField?.stringValue = String(timerController.timer.totalTime.minutes)
-        self.totalTimeSecondsEntryField?.stringValue = String(timerController.timer.totalTime.seconds)
+        self.totalTimeSecondsEntryField?.intValue += 1
+        self.setUpTime()
     }
     
     @IBAction func totalTimeDecreaseHoursButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 1, minutes: 0, seconds: 0)
-        if timerController.timer.totalTime.hours >= newTime.hours {
-            timerController.timer.totalTime.timeInSeconds -= newTime.timeInSeconds
-            if timerController.timer.currentTime.timeInSeconds >= newTime.timeInSeconds {
-                timerController.timer.currentTime.timeInSeconds -= newTime.timeInSeconds
-            }
-            if totalTimeHoursEntryField?.intValue != 0 {
-                totalTimeHoursEntryField?.intValue -= 1
-            }
+        if totalTimeHoursEntryField!.intValue >= Int32(1) {
+            totalTimeHoursEntryField?.intValue -= 1
+            self.setUpTime()
         }
     }
     
     @IBAction func totalTimeDecreaseMinutesButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 1, seconds: 0)
-        if timerController.timer.totalTime.minutes >= newTime.minutes {
-            timerController.timer.totalTime.timeInSeconds -= newTime.timeInSeconds
-            if timerController.timer.currentTime.timeInSeconds >= newTime.timeInSeconds {
-                timerController.timer.currentTime.timeInSeconds -= newTime.timeInSeconds
-            }
-            if totalTimeMinutesEntryField?.intValue != 0 {
-                totalTimeMinutesEntryField?.intValue -= 1
-            }
+        if totalTimeMinutesEntryField!.intValue >= Int32(1) {
+            totalTimeMinutesEntryField?.intValue -= 1
+            self.setUpTime()
         }
     }
     
     @IBAction func totalTimeDecreaseSecondsButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 0, seconds: 1)
-        if timerController.timer.totalTime.seconds >= newTime.seconds {
-            timerController.timer.totalTime.timeInSeconds -= newTime.timeInSeconds
-            if timerController.timer.currentTime.timeInSeconds >= newTime.timeInSeconds {
-                timerController.timer.currentTime.timeInSeconds -= newTime.timeInSeconds
-            }
-            if totalTimeSecondsEntryField?.intValue != 0 {
-                totalTimeSecondsEntryField?.intValue -= 1
-            }
+        if timerController.timer.totalTime.seconds >= Int32(1) {
+            totalTimeSecondsEntryField?.intValue -= 1
+            self.setUpTime()
         }
     }
     
     @IBAction func wrapUpTimeIncreaseHoursButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 1, minutes: 0, seconds: 0)
-        timerController.timer.warningTime.timeInSeconds += newTime.timeInSeconds
-        self.wrapUpTimeHoursEntryField?.intValue = Int32(timerController.timer.warningTime.hours)
+        self.wrapUpTimeHoursEntryField?.intValue += 1
+        self.setUpTime()
     }
     
     @IBAction func wrapUpTimeIncreaseMinutesButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 1, seconds: 0)
-        timerController.timer.warningTime.timeInSeconds += newTime.timeInSeconds
-        self.wrapUpTimeMinutesEntryField?.intValue = Int32(timerController.timer.warningTime.minutes)
+        self.wrapUpTimeMinutesEntryField?.intValue += 1
+        self.setUpTime()
     }
     
     @IBAction func wrapUpTimeIncreaseSecondsButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 0, seconds: 1)
-        timerController.timer.warningTime.timeInSeconds += newTime.timeInSeconds
-        self.wrapUpTimeSecondsEntryField?.intValue = Int32(timerController.timer.warningTime.seconds)
+        self.wrapUpTimeSecondsEntryField?.intValue += 1
+        self.setUpTime()
     }
     
     @IBAction func wrapUpTimeDecreaseHoursButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 1, minutes: 0, seconds: 0)
-        if timerController.timer.warningTime.timeInSeconds != 0 {
-            timerController.timer.warningTime.timeInSeconds -= newTime.timeInSeconds
-            if wrapUpTimeHoursEntryField?.intValue != 0 {
-                wrapUpTimeHoursEntryField?.intValue -= 1
-            }
+        if wrapUpTimeHoursEntryField!.intValue >= Int32(1) {
+            wrapUpTimeHoursEntryField?.intValue -= 1
         }
     }
     
     @IBAction func wrapUpTimeDecreaseMinutesButtonPress(_ sender: Any) {
-        let newTime =  time.init(hours: 0, minutes: 1, seconds: 0)
-        if timerController.timer.warningTime.timeInSeconds > newTime.timeInSeconds {
-            timerController.timer.warningTime.timeInSeconds -= newTime.timeInSeconds
-            if wrapUpTimeMinutesEntryField?.intValue != 0 {
-                wrapUpTimeMinutesEntryField?.intValue -= 1
-            }
+        if wrapUpTimeMinutesEntryField!.intValue >= Int32(1) {
+            wrapUpTimeMinutesEntryField?.intValue -= 1
         }
     }
     
     @IBAction func wrapUpTimeDecreaseSecondsButtonPress(_ sender: Any) {
-        let newTime = time.init(hours: 0, minutes: 0, seconds: 1)
-        if timerController.timer.warningTime.timeInSeconds > newTime.timeInSeconds {
-            timerController.timer.warningTime.timeInSeconds -= newTime.timeInSeconds
-            if wrapUpTimeSecondsEntryField?.intValue != 0 {
-                wrapUpTimeSecondsEntryField?.intValue -= 1
-            }
+        if wrapUpTimeSecondsEntryField!.intValue >= Int32(1) {
+            wrapUpTimeSecondsEntryField?.intValue -= 1
         }
     }
     
