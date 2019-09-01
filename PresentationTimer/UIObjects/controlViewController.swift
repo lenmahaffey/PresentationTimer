@@ -238,6 +238,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     func showTimer() {
         self.timerDisplay.isHidden = false
+        timerDisplay.textColor = NSColor.textBackgroundColor
         //self.dateDisplayTextField.isHidden = true
         //self.timeDisplayTextField.isHidden = true
         self.clockDisplayTextFieldTimer.invalidate()
@@ -269,11 +270,10 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             return
         }
         print("blink timer")
-        if self.timerDisplay.isHidden == false {
-            self.timerDisplay.isHidden = true
-        } else if self.timerDisplay.isHidden == true {
-            self.timerDisplay.isHidden = false
-        }
+        let currentTextColor = NSColor.textBackgroundColor
+        if self.timerDisplay.textColor == currentTextColor{
+            timerDisplay.textColor = NSColor.clear
+        } else { timerDisplay.textColor = currentTextColor }
     }
     
     @objc func staticTimer() {
