@@ -8,7 +8,7 @@
 
 import Cocoa
 
-var countdownTimerController = presentationTimerController(timeLimit: 10, warningTime: 5)
+var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
 
 extension Notification.Name {
     //Timer Actions
@@ -26,6 +26,7 @@ extension Notification.Name {
     static let setCountDown = Notification.Name("setCountDown")
     static let setContinueCountingOn = Notification.Name("setContinueCountingOn")
     static let setContinueCountingOff = Notification.Name("setContinueCountingOff")
+    static let setUpTime = Notification.Name("setUpTime")
     //UI Actions
     static let warningOn = Notification.Name("warningOn")
     static let warningOff = Notification.Name("warningOff")

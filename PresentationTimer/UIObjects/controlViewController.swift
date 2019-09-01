@@ -144,6 +144,13 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     override func viewDidAppear() {
         loadDisplayWindow()
         //view.window?.zoom(self)
+        self.totalTimeHoursEntryField?.intValue = 0
+        self.totalTimeMinutesEntryField?.intValue = 0
+        self.totalTimeSecondsEntryField?.intValue = 5
+        self.wrapUpTimeHoursEntryField?.intValue = 0
+        self.wrapUpTimeMinutesEntryField?.intValue = 0
+        self.wrapUpTimeSecondsEntryField?.intValue = 3
+        self.setUpTime(notification: Notification.init(name: Notification.Name.setUpTime))
     }
     
     func loadDisplayWindow() {
@@ -529,7 +536,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             timerController.setWarningTime(warningTime: warningTime)
         }
     }
-    
 }
 
 extension controlViewController {
