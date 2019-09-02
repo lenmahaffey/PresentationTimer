@@ -66,6 +66,11 @@ class displayViewController: NSViewController {
         self.showBorder()
     }
 
+    func setTimerDisplayTextFieldSize() {
+        let currentSize = timerDisplayTextField.attributedStringValue.size()
+        
+    }
+    
     func setBorderGreen() {
         self.view.layer?.borderColor = NSColor.green.cgColor
     }

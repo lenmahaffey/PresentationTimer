@@ -518,7 +518,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
         if self.countDownRadioButton.state == .on {
             timerController.timer.currentTime = newTotalTime
-            
+            timerController.timer.currentTime = newTotalTime
         }
     }
 }
