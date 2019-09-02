@@ -9,7 +9,6 @@
 import Cocoa
 
 class controlViewController: NSViewController, NSTextViewDelegate {
-    //let nc = NotificationCenter.default
     @objc dynamic var displayWindowControl: displayWindowController? = nil
     @objc dynamic var timerController = countdownTimerController
     @IBOutlet weak var timerDisplay: NSTextField!
@@ -150,6 +149,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.wrapUpTimeMinutesEntryField?.intValue = 0
         self.wrapUpTimeSecondsEntryField?.intValue = 3
         self.setUpTime()
+        //self.timerDisplay.adjustsFontSizeToFitWidth = true
     }
     
     func loadDisplayWindow() {
@@ -493,55 +493,29 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let wrapUpHours = self.wrapUpTimeHoursEntryField?.intValue ?? 0
         let wrapUpMinutes = self.wrapUpTimeMinutesEntryField?.intValue ?? 0
         let wrapUpSeconds = self.wrapUpTimeSecondsEntryField?.intValue ?? 0
+        let newTotalTime = time(hours: Int(totalHours), minutes: Int(totalMinutes), seconds: Int(totalSeconds))
+        let newWrapUpTime = time(hours: Int(wrapUpHours), minutes: Int(wrapUpMinutes), seconds: Int(wrapUpSeconds))
+        self.totalTimeHoursEntryField?.intValue = Int32(newTotalTime.hours)
+        self.totalTimeMinutesEntryField?.intValue = Int32(newTotalTime.minutes)
+        self.totalTimeSecondsEntryField?.intValue = Int32(newTotalTime.seconds)
+        self.wrapUpTimeHoursEntryField?.intValue = Int32(newWrapUpTime.hours)
+        self.wrapUpTimeMinutesEntryField?.intValue = Int32(newWrapUpTime.minutes)
+        self.wrapUpTimeSecondsEntryField?.intValue = Int32(newWrapUpTime.seconds)
         
-        if Int(totalSeconds) > 59 {
-            let newSeconds = Int(totalSeconds) - 60
-            let newMinutes = Int(totalMinutes) + 1
-            self.totalTimeSecondsEntryField?.stringValue = String(describing: newSeconds)
-            self.totalTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            setUpTime()
+        timerController.setTotalTime(timeLimit: newTotalTime)
+        timerController.setWarningTime(warningTime: newWrapUpTime)
+        
+        guard timerController.timer.isRunning == true else {
+            if self.countUpRadioButton.state == .on {
+                nc.post(name: Notification.Name.setCountUp, object: self)
+            } else if self.countDownRadioButton.state == .on {
+                nc.post(name: Notification.Name.setCountDown, object: self)
+            }
             return
         }
-        if Int(totalMinutes) > 59 {
-            let newMinutes = Int(totalMinutes) - 60
-            let newHours = Int(totalHours) + 1
-            self.totalTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            self.totalTimeHoursEntryField?.stringValue = String(describing: newHours)
-            setUpTime()
-            return
-        }
-        
-        if Int(wrapUpMinutes) > 59 {
-            let newMinutes = Int(wrapUpMinutes) - 60
-            let newHours = Int(wrapUpHours) + 1
-            self.wrapUpTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            self.wrapUpTimeHoursEntryField?.stringValue = String(describing: newHours)
-            setUpTime()
-            return
-        }
-        
-        if Int(wrapUpSeconds) > 59 {
-            let newSeconds = Int(wrapUpSeconds) - 60
-            let newMinutes = Int(wrapUpMinutes) + 1
-            self.wrapUpTimeSecondsEntryField?.stringValue = String(describing: newSeconds)
-            self.wrapUpTimeMinutesEntryField?.stringValue = String(describing: newMinutes)
-            setUpTime()
-            return
-        }
-        
-        let totalTime = time(hours: Int(self.totalTimeHoursEntryField?.intValue ?? 0),
-                             minutes: Int(self.totalTimeMinutesEntryField?.intValue ?? 0),
-                             seconds: Int(self.totalTimeSecondsEntryField?.intValue ?? 0))
-        
-        let warningTime = time(hours: Int(self.wrapUpTimeHoursEntryField?.intValue ?? 0),
-                               minutes: Int(self.wrapUpTimeMinutesEntryField?.intValue ?? 0),
-                               seconds: Int(self.wrapUpTimeSecondsEntryField?.intValue ?? 0))
-        
-        if timerController.timer.isRunning == true {
-            timerController.setWarningTime(warningTime: warningTime)
-        } else if timerController.timer.isRunning == false {
-            timerController.setTotalTime(timeLimit: totalTime)
-            timerController.setWarningTime(warningTime: warningTime)
+        if self.countDownRadioButton.state == .on {
+            timerController.timer.currentTime = newTotalTime
+            
         }
     }
 }
