@@ -77,9 +77,8 @@ class presentationTimerController: NSObject {
         self.timer.currentTime.timeInSeconds = 0
     }
     
-    func setTime(timeLimit: time, warningTime: time) {
+    func setTotalAndWarningTimes(timeLimit: time, warningTime: time) {
         self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
-        self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
         self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
     }
     
@@ -248,8 +247,8 @@ class presentationTimer: NSObject {
         }
         if currentTime.timeInSeconds < self.totalTime.timeInSeconds {
             currentTime.timeInSeconds += 1
-            checkCountUpWarning()
         }
+        checkCountUpWarning()
     }
     
     func checkCountDownWarning() {
@@ -270,10 +269,14 @@ class presentationTimer: NSObject {
     }
     
     func checkCountUpWarning() {
-        if currentTime.timeInSeconds == totalTime.timeInSeconds  {
+        if currentTime.timeInSeconds >= totalTime.timeInSeconds  {
             if self.isOutOfTime == false {
                 self.isOutOfTime = true
-                return
+            }
+        }
+        if currentTime.timeInSeconds < totalTime.timeInSeconds {
+            if self.isOutOfTime == true {
+                self.isOutOfTime = false
             }
         }
         if isOutOfTime == false {

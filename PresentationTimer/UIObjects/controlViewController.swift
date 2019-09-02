@@ -471,18 +471,21 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func wrapUpTimeDecreaseHoursButtonPress(_ sender: Any) {
         if wrapUpTimeHoursEntryField!.intValue >= Int32(1) {
             wrapUpTimeHoursEntryField?.intValue -= 1
+            self.setUpTime()
         }
     }
     
     @IBAction func wrapUpTimeDecreaseMinutesButtonPress(_ sender: Any) {
         if wrapUpTimeMinutesEntryField!.intValue >= Int32(1) {
             wrapUpTimeMinutesEntryField?.intValue -= 1
+            self.setUpTime()
         }
     }
     
     @IBAction func wrapUpTimeDecreaseSecondsButtonPress(_ sender: Any) {
         if wrapUpTimeSecondsEntryField!.intValue >= Int32(1) {
             wrapUpTimeSecondsEntryField?.intValue -= 1
+            self.setUpTime()
         }
     }
     
