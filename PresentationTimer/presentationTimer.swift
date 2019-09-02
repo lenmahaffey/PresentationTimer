@@ -70,15 +70,11 @@ class presentationTimerController: NSObject {
     }
     
     @objc func setCountDown() {
-        //print("willSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
         self.timer.currentTime.timeInSeconds = self.timer.totalTime.timeInSeconds
-        //print("didSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
     }
     
     @objc func setCountUp() {
-        //print("willSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
         self.timer.currentTime.timeInSeconds = 0
-        //print("didSetCountDown: currentTime: ", timer.currentTime.timeInSeconds, "totalTime: ", timer.totalTime.timeInSeconds)
     }
     
     func setTime(timeLimit: time, warningTime: time) {
@@ -89,16 +85,18 @@ class presentationTimerController: NSObject {
     
     func setTotalTime(timeLimit: time) {
         self.timer.totalTime.timeInSeconds = timeLimit.timeInSeconds
-        self.timer.currentTime.timeInSeconds = timeLimit.timeInSeconds
     }
     
     func setWarningTime(warningTime: time) {
         self.timer.warningTime.timeInSeconds = warningTime.timeInSeconds
     }
     
-    func changeCurrentTime(newTime: time) {
-        let totalSecondsToChange = self.timer.totalTime.timeInSeconds - newTime.timeInSeconds
-        self.timer.currentTime.timeInSeconds += totalSecondsToChange
+    func increaseCurrentTime(timeToIncrease: Int) {
+        self.timer.currentTime.timeInSeconds += timeToIncrease
+    }
+    
+    func decreaseCurrentTime(timeToDecrease: time) {
+        self.timer.currentTime.timeInSeconds -= timeToDecrease.timeInSeconds
     }
     
     func countDown() {
@@ -231,14 +229,11 @@ class presentationTimer: NSObject {
     }
     
     @objc func decreaseTimeByOneSecond() {
-        //print("decrease one second")
         guard self.willContinueCounting == false else {
-            //print("will continue counting")
             currentTime.timeInSeconds -= 1
             checkCountDownWarning()
             return
         }
-        //print("will not continue counting")
         if currentTime.timeInSeconds > 0 {
             currentTime.timeInSeconds -= 1
             checkCountDownWarning()
@@ -246,14 +241,11 @@ class presentationTimer: NSObject {
     }
     
     @objc func increaseTimeByOneSecond() {
-        //print("increase one second")
         guard self.willContinueCounting == false else {
-            //print("will continue counting")
             currentTime.timeInSeconds += 1
             checkCountUpWarning()
             return
         }
-        //print("will not continue counting")
         if currentTime.timeInSeconds < self.totalTime.timeInSeconds {
             currentTime.timeInSeconds += 1
             checkCountUpWarning()
@@ -334,6 +326,7 @@ class time: NSObject, NSCopying {
             self.didChangeValue(forKey: "totalTimeAsString")
         }
     }
+    
     @objc dynamic var hours: Int {
         get {
             return abs(timeInSeconds / 3600)
