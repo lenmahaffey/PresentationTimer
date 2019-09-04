@@ -16,6 +16,8 @@
 		7F8C611220746D6A0074A6BE /* controlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C610A20746D6A0074A6BE /* controlView.swift */; };
 		7F8C611320746D6A0074A6BE /* displayWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C610B20746D6A0074A6BE /* displayWindow.swift */; };
 		7F8C611420746D6A0074A6BE /* displayWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C610C20746D6A0074A6BE /* displayWindowController.swift */; };
+		7F8CA3DF231CD92300C89A51 /* timerDisplayTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8CA3DE231CD92300C89A51 /* timerDisplayTextFieldCell.swift */; };
+		7F974B3C231CB95700EB3FEE /* timerDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F974B3B231CB95700EB3FEE /* timerDisplayTextField.swift */; };
 		7F9BB3A9207C14FA00351035 /* presentationTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9BB3A8207C14FA00351035 /* presentationTimer.swift */; };
 		7FB2511C230FACCC00157224 /* preferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2511B230FACCC00157224 /* preferencesViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		7F8C610A20746D6A0074A6BE /* controlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = controlView.swift; sourceTree = "<group>"; };
 		7F8C610B20746D6A0074A6BE /* displayWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = displayWindow.swift; sourceTree = "<group>"; };
 		7F8C610C20746D6A0074A6BE /* displayWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = displayWindowController.swift; sourceTree = "<group>"; };
+		7F8CA3DE231CD92300C89A51 /* timerDisplayTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timerDisplayTextFieldCell.swift; sourceTree = "<group>"; };
+		7F974B3B231CB95700EB3FEE /* timerDisplayTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timerDisplayTextField.swift; sourceTree = "<group>"; };
 		7F9BB3A8207C14FA00351035 /* presentationTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = presentationTimer.swift; path = PresentationTimer/presentationTimer.swift; sourceTree = SOURCE_ROOT; };
 		7FB2511B230FACCC00157224 /* preferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = preferencesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,8 +100,10 @@
 				7F8C610720746D6A0074A6BE /* displayViewController.swift */,
 				7F8C610C20746D6A0074A6BE /* displayWindowController.swift */,
 				7F8C610B20746D6A0074A6BE /* displayWindow.swift */,
-				7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */,
 				7FB2511B230FACCC00157224 /* preferencesViewController.swift */,
+				7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */,
+				7F8CA3DE231CD92300C89A51 /* timerDisplayTextFieldCell.swift */,
+				7F974B3B231CB95700EB3FEE /* timerDisplayTextField.swift */,
 			);
 			path = UIObjects;
 			sourceTree = "<group>";
@@ -175,8 +181,10 @@
 			files = (
 				7F8C611220746D6A0074A6BE /* controlView.swift in Sources */,
 				7F7DC46D20FBEB9100A5EB6D /* controlViewTextField.swift in Sources */,
+				7F974B3C231CB95700EB3FEE /* timerDisplayTextField.swift in Sources */,
 				7F8C610E20746D6A0074A6BE /* controlViewController.swift in Sources */,
 				7F8C611320746D6A0074A6BE /* displayWindow.swift in Sources */,
+				7F8CA3DF231CD92300C89A51 /* timerDisplayTextFieldCell.swift in Sources */,
 				7F8C611420746D6A0074A6BE /* displayWindowController.swift in Sources */,
 				7F8C60F520746D280074A6BE /* AppDelegate.swift in Sources */,
 				7F9BB3A9207C14FA00351035 /* presentationTimer.swift in Sources */,
