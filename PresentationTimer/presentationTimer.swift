@@ -7,6 +7,11 @@
 //
 
 import Cocoa
+
+var selectedFont = NSFont.systemFont(ofSize: selectedFontSize)
+var selectedFontSize = CGFloat(200)
+var fontColor = NSColor.white
+var backgroundColor = NSColor.black.cgColor
 let nc = NotificationCenter.default
 var countdownTimerController = presentationTimerController(timeLimit: 0, warningTime: 0)
 
@@ -47,6 +52,8 @@ extension Notification.Name {
     static let setBlinkTimerOff = Notification.Name("setBlinkTimerOff")
     static let staticTimer = Notification.Name("staticTimer")
     static let setBackgroundColor = Notification.Name("setBackgroundColor")
+    static let setTimerDisplayTextColor = Notification.Name("setTimerDisplayTextColor")
+    static let setTimerDisplayFont = Notification.Name("setTimerDisplayFont")
     static let showClock = Notification.Name("showClock")
     static let hideClock = Notification.Name("hideClock")
 }

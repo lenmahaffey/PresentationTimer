@@ -10,8 +10,7 @@ import Cocoa
 
 class displayViewController: NSViewController {
     
-    //let nc = NotificationCenter.default
-    @IBOutlet weak var timerDisplayTextField: NSTextField!
+    @IBOutlet weak var timerDisplayTextField: timerDisplayTextField!
     @IBOutlet weak var dateDisplayTextField: NSTextField!
     @IBOutlet weak var timeDisplayTextField: NSTextField!
     @objc dynamic var timerController = countdownTimerController
@@ -65,10 +64,10 @@ class displayViewController: NSViewController {
         self.setBorderGreen()
         self.showBorder()
     }
-
-    func setTimerDisplayTextFieldSize() {
-        let currentSize = timerDisplayTextField.attributedStringValue.size()
-        
+    
+    override func viewDidAppear() {
+        timerDisplayTextField.setTimerDisplayTextFieldSize()
+        timerDisplayTextField.backgroundColor = NSColor.red
     }
     
     func setBorderGreen() {
@@ -199,6 +198,10 @@ class displayViewController: NSViewController {
         self.view.layer?.backgroundColor = backgroundColor
     }
     
+    func setFontColor() {
+        self.timerDisplayTextField.textColor = fontColor
+    }
+    
     @objc private func startClock() {
         self.clockDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(setDateAndTime), userInfo: nil, repeats: true)
         self.clockDisplayTextFieldTimer.fire()
@@ -233,6 +236,8 @@ extension displayViewController {
         nc.addObserver(self, selector: #selector(staticTimerNotificationAction), name: Notification.Name.staticTimer, object:nil)
         nc.addObserver(self, selector: #selector(showDateAndTimeNotificationAction), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColorNotificationAction), name: Notification.Name.setBackgroundColor, object:nil)
+        nc.addObserver(self, selector: #selector(setTimerDisplayTextColorNotificationAction), name: Notification.Name.setTimerDisplayTextColor, object:nil)
+        nc.addObserver(self, selector: #selector(setTimerDisplayFontNotificationAction), name: Notification.Name.setTimerDisplayFont, object:nil)
     }
     
     @objc private func timerStartedNotificationAction(notification: Notification) {
@@ -340,6 +345,14 @@ extension displayViewController {
     
     @objc private func setBackgroundColorNotificationAction(notification: Notification) {
         self.view.layer?.backgroundColor = backgroundColor
+    }
+    
+    @objc private func setTimerDisplayTextColorNotificationAction(notification: Notification) {
+        timerDisplayTextField.textColor = fontColor
+    }
+    
+    @objc private func setTimerDisplayFontNotificationAction(notification: Notification) {
+        timerDisplayTextField.font = selectedFont
     }
 }
 
