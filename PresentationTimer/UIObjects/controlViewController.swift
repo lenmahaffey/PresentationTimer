@@ -149,7 +149,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.wrapUpTimeMinutesEntryField?.intValue = 0
         self.wrapUpTimeSecondsEntryField?.intValue = 3
         self.setUpTime()
-        //self.timerDisplay.adjustsFontSizeToFitWidth = true
     }
     
     func loadDisplayWindow() {
