@@ -10,7 +10,7 @@ import Cocoa
 
 class displayViewController: NSViewController {
     
-    @IBOutlet weak var timerDisplayTextField: timerDisplayTextField!
+    @IBOutlet weak var timerDisplayTextField: NSTextField!
     @IBOutlet weak var dateDisplayTextField: NSTextField!
     @IBOutlet weak var timeDisplayTextField: NSTextField!
     @objc dynamic var timerController = countdownTimerController
