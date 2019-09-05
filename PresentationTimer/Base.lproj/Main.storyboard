@@ -474,33 +474,19 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="V4T-ba-AFt">
-                                <rect key="frame" x="109" y="87" width="422" height="86"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qxD-d8-QtL" customClass="timerDisplayTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                        <rect key="frame" x="207" y="-75" width="8" height="236"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="Wbg-Id-b2q">
-                                            <font key="font" metaFont="system" size="200"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="backgroundColor" name="findHighlightColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <binding destination="EfJ-oa-6SN" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="6JI-bj-myp"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="qxD-d8-QtL" firstAttribute="centerX" secondItem="V4T-ba-AFt" secondAttribute="centerX" id="Fnn-mG-HKf"/>
-                                    <constraint firstItem="qxD-d8-QtL" firstAttribute="centerY" secondItem="V4T-ba-AFt" secondAttribute="centerY" id="KWy-5f-wen"/>
-                                </constraints>
-                            </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qxD-d8-QtL" customClass="timerDisplayTextField" customModule="PresentationTimer" customModuleProvider="target">
+                                <rect key="frame" x="316" y="12" width="8" height="236"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="Wbg-Id-b2q">
+                                    <font key="font" metaFont="system" size="200"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="findHighlightColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="EfJ-oa-6SN" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="6JI-bj-myp"/>
+                                </connections>
+                            </textField>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="V4T-ba-AFt" firstAttribute="height" secondItem="Yif-FG-Agk" secondAttribute="height" multiplier="0.33" id="Ezr-T3-JV9"/>
-                            <constraint firstItem="V4T-ba-AFt" firstAttribute="centerY" secondItem="Yif-FG-Agk" secondAttribute="centerY" id="Hhq-Q0-BMO"/>
-                            <constraint firstItem="V4T-ba-AFt" firstAttribute="width" secondItem="Yif-FG-Agk" secondAttribute="width" multiplier="0.66" id="Lkp-oV-JcF"/>
-                            <constraint firstItem="V4T-ba-AFt" firstAttribute="centerX" secondItem="Yif-FG-Agk" secondAttribute="centerX" id="i7g-6K-LNc"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="dateDisplayTextField" destination="bFg-Xl-FU6" id="4Ma-4F-A7y"/>

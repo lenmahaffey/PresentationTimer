@@ -63,11 +63,32 @@ class displayViewController: NSViewController {
         super.viewDidLoad()
         self.setBorderGreen()
         self.showBorder()
+        self.timerDisplayTextField.backgroundColor = NSColor.red
     }
     
     override func viewDidAppear() {
-        timerDisplayTextField.setTimerDisplayTextFieldSize()
-        timerDisplayTextField.backgroundColor = NSColor.red
+        setTimerDisplayTextFieldSize()
+        //timerDisplayTextField.backgroundColor = NSColor.red
+    }
+    
+    func setTimerDisplayTextFieldSize() {
+        print(timerDisplayTextField.frame.size.height)
+        print(timeDisplayTextField.frame.size.width)
+        let currentFont = timerDisplayTextField.attributedStringValue.attribute(NSAttributedString.Key.font, at: 0, effectiveRange: nil)
+        let attributes = [NSAttributedString.Key.font: currentFont]
+        let placeHolderAttributedString = NSAttributedString(string: "55H 55M 55S", attributes: attributes as [NSAttributedString.Key : Any])
+        print(type(of: placeHolderAttributedString))
+        print("placeHolder font: ", placeHolderAttributedString.attribute(NSAttributedString.Key.font, at: 0, effectiveRange: nil)!)
+        print("placeHolder string: ", placeHolderAttributedString.string)
+        print("placeHolder height: ", placeHolderAttributedString.size().height)
+        print("placeHolder width: ", placeHolderAttributedString.size().width)
+        print(timerDisplayTextField.frame)
+        timerDisplayTextField.frame = NSRect(x: (self.view.frame.maxX / 2) - (placeHolderAttributedString.size().width / 2),
+                            y: (self.view.frame.maxY / 2) - (placeHolderAttributedString.size().height / 2),
+                            width: placeHolderAttributedString.size().width,
+                            height: placeHolderAttributedString.size().height)
+        print("??", timerDisplayTextField.frame)
+        timerDisplayTextField.backgroundColor = NSColor.blue
     }
     
     func setBorderGreen() {
@@ -353,6 +374,7 @@ extension displayViewController {
     
     @objc private func setTimerDisplayFontNotificationAction(notification: Notification) {
         timerDisplayTextField.font = selectedFont
+        setTimerDisplayTextFieldSize()
     }
 }
 
