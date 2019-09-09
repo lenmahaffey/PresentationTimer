@@ -12,7 +12,7 @@ class timerDisplayTextField: NSTextField, NSTextFieldDelegate{
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.backgroundColor = NSColor.red
+        //self.backgroundColor = NSColor.red
     }
     
 }
