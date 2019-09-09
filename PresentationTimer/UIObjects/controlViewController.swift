@@ -236,8 +236,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     func showTimer() {
-        self.timerDisplay.isHidden = false
-        timerDisplay.textColor = NSColor.textBackgroundColor
+        self.timerDisplayTextField.isHidden = false
+        timerDisplayTextField.textColor = NSColor.textBackgroundColor
         //self.dateDisplayTextField.isHidden = true
         //self.timeDisplayTextField.isHidden = true
         self.clockDisplayTextFieldTimer.invalidate()
@@ -270,9 +270,9 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         }
         //print("blink timer")
         let currentTextColor = NSColor.textBackgroundColor
-        if self.timerDisplay.textColor == currentTextColor{
-            timerDisplay.textColor = NSColor.clear
-        } else { timerDisplay.textColor = currentTextColor }
+        if self.timerDisplayTextField.textColor == currentTextColor{
+            timerDisplayTextField.textColor = NSColor.clear
+        } else { timerDisplayTextField.textColor = currentTextColor }
     }
     
     @objc func staticTimer() {
@@ -334,8 +334,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             nc.post(name: Notification.Name.showBorder, object: self)
         }
         if (sender as AnyObject).state == .off {
-            nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.setWillShowBorderOff, object: self)
+            nc.post(name: Notification.Name.staticBorder, object: self)
             nc.post(name: Notification.Name.hideBorder, object: self)
         }
     }
@@ -546,6 +546,7 @@ extension controlViewController {
         nc.addObserver(self, selector: #selector(staticTimerNotificationAction), name: Notification.Name.staticTimer, object:nil)
         nc.addObserver(self, selector: #selector(showDateAndTimeNotificationAction), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColorNotificationAction), name: Notification.Name.setBackgroundColor, object:nil)
+        nc.addObserver(self, selector: #selector(setTimerDisplayFontNotificationAction), name: Notification.Name.setTimerDisplayFont, object:nil)
     }
     
     @objc private func timerStartedNotificationAction(notification:Notification) {
@@ -649,4 +650,13 @@ extension controlViewController {
     @objc private func setBackgroundColorNotificationAction(notification:Notification) {
         
     }
+    
+    @objc private func setTimerDisplayFontNotificationAction(notification: Notification) {
+        //let currentFontSize = (timerDisplayTextField.font?.pointSize)!
+        //let newFont = NSFont(name: selectedFont, size: currentFontSize)
+        //timerDisplayTextField.attributedStringValue.attribute(NSAttributedString.Key.font, at: 0, effectiveRange: nil)
+        //timerDisplayTextField.font = selectedFont
+        //setTimerDisplayTextFieldSize()
+    }
+    
 }

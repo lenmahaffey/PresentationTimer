@@ -8,8 +8,8 @@
 
 import Cocoa
 
-var selectedFont = NSFont.systemFont(ofSize: selectedFontSize)
-var selectedFontSize = CGFloat(200)
+var currentSelectedFont = NSFont.systemFont(ofSize: currentFontSize)
+var currentFontSize = CGFloat(200)
 var fontColor = NSColor.white
 var backgroundColor = NSColor.black.cgColor
 let nc = NotificationCenter.default
