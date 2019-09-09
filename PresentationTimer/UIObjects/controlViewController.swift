@@ -11,7 +11,8 @@ import Cocoa
 class controlViewController: NSViewController, NSTextViewDelegate {
     @objc dynamic var displayWindowControl: displayWindowController? = nil
     @objc dynamic var timerController = countdownTimerController
-    @IBOutlet weak var timerDisplay: NSTextField!
+    @IBOutlet weak var timerDisplayTextFieldView: NSView!
+    @IBOutlet weak var timerDisplayTextField: NSTextField!
     @IBOutlet weak var startButton: NSButton!
     @IBOutlet weak var repeatButton: NSButton!
     @IBOutlet weak var totalTimeIncreseHoursButton: NSButton!
@@ -125,11 +126,11 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.timerDisplay.isBordered = false
-        self.timerDisplay.wantsLayer = true
-        self.timerDisplay.layer?.borderColor = NSColor.green.cgColor
-        self.timerDisplay.layer?.borderWidth = 10
-        self.timerDisplay.layer?.cornerRadius = 10.0
+        self.timerDisplayTextField.isBordered = false
+        self.timerDisplayTextFieldView.wantsLayer = true
+        self.setBorderGreen()
+        self.timerDisplayTextFieldView.layer?.borderWidth = 10
+        self.timerDisplayTextFieldView.layer?.cornerRadius = 10.0
         self.countDownRadioButton.state = .on
         self.showBorderRadioButton.state = .on
     }
@@ -157,20 +158,20 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func setBorderGreen() {
-        self.timerDisplay.layer?.borderColor = NSColor.green.cgColor
+        self.timerDisplayTextFieldView.layer?.borderColor = NSColor.green.cgColor
     }
     
     @objc func setBorderYellow() {
-        self.timerDisplay.layer?.borderColor = NSColor.yellow.cgColor
+        self.timerDisplayTextFieldView.layer?.borderColor = NSColor.yellow.cgColor
     }
     
     @objc func setBorderRed() {
-        self.timerDisplay.layer?.borderColor = NSColor.red.cgColor
+        self.timerDisplayTextFieldView.layer?.borderColor = NSColor.red.cgColor
     }
     
     @objc func showBorder() {
         if willShowBorder == true {
-            self.timerDisplay.layer?.borderWidth = 10
+            self.timerDisplayTextFieldView.layer?.borderWidth = 10
         }
         if willBlinkBorder == true {
             self.blinkBorder()
@@ -179,7 +180,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @objc func hideBorder() {
         if willShowBorder == false {
-            self.timerDisplay.layer?.borderWidth = 0
+            self.timerDisplayTextFieldView.layer?.borderWidth = 0
             nc.post(name: Notification.Name.staticBorder, object: self)
         }
     }
@@ -218,11 +219,11 @@ class controlViewController: NSViewController, NSTextViewDelegate {
             print("showAndHideBorder() willShowBorder: false.  Can't Blink")
             return
         }
-        print("showAndHideBorder() blink border")
-        if self.timerDisplay.layer?.borderWidth == 10 {
-            self.timerDisplay.layer?.borderWidth = 0
-        } else if self.timerDisplay.layer?.borderWidth == 0 {
-            self.timerDisplay.layer?.borderWidth = 10
+        //print("showAndHideBorder() blink border")
+        if self.timerDisplayTextFieldView.layer?.borderWidth == 10 {
+            self.timerDisplayTextFieldView.layer?.borderWidth = 0
+        } else if self.timerDisplayTextFieldView.layer?.borderWidth == 0 {
+            self.timerDisplayTextFieldView.layer?.borderWidth = 10
         }
     }
     
