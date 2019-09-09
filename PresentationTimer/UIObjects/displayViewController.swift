@@ -64,7 +64,6 @@ class displayViewController: NSViewController {
         super.viewDidLoad()
         self.setBorderGreen()
         self.showBorder()
-        self.timerDisplayTextField.backgroundColor = NSColor.red
     }
     
     override func viewDidAppear() {
@@ -116,7 +115,7 @@ class displayViewController: NSViewController {
     func hideBorder() {
         if willShowBorder == false {
             self.view.layer?.borderWidth = 0
-            nc.post(name: Notification.Name.staticBorder, object: self)
+            //nc.post(name: Notification.Name.staticBorder, object: self)
         }
     }
     
