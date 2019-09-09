@@ -192,31 +192,31 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func blinkBorder() {
-        print("blinkBorder() start")
+        //print("blinkBorder() start")
         guard timerController.timer.isOutOfTime == true else {
-            print("blinkBorder(): Time on the clock.  Can't Blink")
+            //print("blinkBorder(): Time on the clock.  Can't Blink")
             return
         }
         guard blinkBorderTimer.isValid == false else {
-            print("blinkBorder(): blinker timer already running")
+            //print("blinkBorder(): blinker timer already running")
             return
         }
         guard willShowBorder == true else {
-            print("blinkBorder(): willShowBorder: ",willShowBorder," Can't Blink")
+            //print("blinkBorder(): willShowBorder: ",willShowBorder," Can't Blink")
             return
         }
-        print("blinkBorder(): setting up blinking borderTimer")
+        //print("blinkBorder(): setting up blinking borderTimer")
         blinkBorderTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
         blinkBorderTimer.fire()
     }
     
     @objc func showAndHideBorder() {
         guard willBlinkBorder == true else {
-            print("showAndHideBorder() willBlinkBorder: off. Can't Blink")
+            //print("showAndHideBorder() willBlinkBorder: off. Can't Blink")
             return
         }
         guard willShowBorder == true else {
-            print("showAndHideBorder() willShowBorder: false.  Can't Blink")
+            //print("showAndHideBorder() willShowBorder: false.  Can't Blink")
             return
         }
         //print("showAndHideBorder() blink border")
@@ -228,7 +228,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     func staticBorder() {
-        print("staticBorder(): stop blinking border")
+        //print("staticBorder(): stop blinking border")
         blinkBorderTimer.invalidate()
         if self.willShowBorder == true {
             self.showBorder()
@@ -245,30 +245,30 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func blinkTimer() {
-        print("blinkTimer() start")
+        //print("blinkTimer() start")
         guard timerController.timer.isOutOfTime == true else {
-            print("blinkTimer(): Time on the clock.  Can't Blink")
+            //print("blinkTimer(): Time on the clock.  Can't Blink")
             return
         }
         guard blinkTimerDisplayTextFieldTimer.isValid == false else {
-            print("blinkTimer(): blinker timer already running")
+            //print("blinkTimer(): blinker timer already running")
             return
         }
-        print("blinkTimer(): setting up blinkingTimer for timerDisplayTextField")
+        //print("blinkTimer(): setting up blinkingTimer for timerDisplayTextField")
         blinkTimerDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
         blinkTimerDisplayTextFieldTimer.fire()
     }
     
     @objc private func showAndHideTimer() {
         guard willBlinkTimer == true else {
-            print("showAndHideTimer(): willBlinkTimer: off. Can't Blink")
+            //print("showAndHideTimer(): willBlinkTimer: off. Can't Blink")
             return
         }
         guard willShowTimer == true else {
-            print("showAndHideTimer(): willShowTimer: false.  Can't Blink")
+            //print("showAndHideTimer(): willShowTimer: false.  Can't Blink")
             return
         }
-        print("blink timer")
+        //print("blink timer")
         let currentTextColor = NSColor.textBackgroundColor
         if self.timerDisplay.textColor == currentTextColor{
             timerDisplay.textColor = NSColor.clear
@@ -276,7 +276,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func staticTimer() {
-        print("staticTimer(): stop blinking timer")
+        //print("staticTimer(): stop blinking timer")
         blinkTimerDisplayTextFieldTimer.invalidate()
         self.showTimer()
     }
@@ -569,7 +569,7 @@ extension controlViewController {
         self.setBorderRed()
         //The timers for the blinking UI elements will only be started when one is not already running
         guard blinkBorderTimer.isValid == false else {
-            print("timer Already running")
+            //print("timer Already running")
             return
         }
         if willShowBorder == true && willBlinkBorder == true && timerController.timer.isOutOfTime == true {
