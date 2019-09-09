@@ -22,6 +22,7 @@ class displayViewController: NSViewController {
     var willShowClock: Bool
     var willBlinkTimer: Bool
     var willBlinkBorder: Bool
+    
     var currentDate: String {
         get {
             let date = DateFormatter.localizedString(from: Date(), dateStyle: .full, timeStyle: .none)

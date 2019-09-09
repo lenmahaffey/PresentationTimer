@@ -46,4 +46,5 @@ class controlViewTextFieldFormatter: Formatter {
         obj?.pointee = Int(string) as AnyObject
         return true
     }
+    
 }
