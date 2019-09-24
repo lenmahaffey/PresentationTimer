@@ -52,8 +52,8 @@ extension Notification.Name {
     static let setBlinkTimerOff = Notification.Name("setBlinkTimerOff")
     static let staticTimer = Notification.Name("staticTimer")
     static let setBackgroundColor = Notification.Name("setBackgroundColor")
-    static let setTimerDisplayTextColor = Notification.Name("setTimerDisplayTextColor")
-    static let setTimerDisplayFont = Notification.Name("setTimerDisplayFont")
+    static let setFontColor = Notification.Name("setFontColor")
+    static let setFont = Notification.Name("setFont")
     static let showClock = Notification.Name("showClock")
     static let hideClock = Notification.Name("hideClock")
 }
@@ -327,6 +327,8 @@ class time: NSObject, NSCopying {
             self.willChangeValue(forKey: "minutes")
             self.willChangeValue(forKey: "seconds")
             self.willChangeValue(forKey: "totalTimeAsString")
+            self.willChangeValue(forKey: "currentTime")
+            self.willChangeValue(forKey: "currentDate")
         }
         didSet {
             self.didChangeValue(forKey: "timeInSeconds")
@@ -334,6 +336,8 @@ class time: NSObject, NSCopying {
             self.didChangeValue(forKey: "minutes")
             self.didChangeValue(forKey: "seconds")
             self.didChangeValue(forKey: "totalTimeAsString")
+            self.didChangeValue(forKey: "currentTime")
+            self.didChangeValue(forKey: "currentDate")
         }
     }
     
@@ -365,6 +369,20 @@ class time: NSObject, NSCopying {
     @objc dynamic var totalTimeAsString: String {
         get {
             return String(hours) + "h " + String(minutes) + "m " + String(seconds) + "s"
+        }
+    }
+    
+    @objc dynamic var currentDate: String {
+        get {
+            let date = DateFormatter.localizedString(from: Date(), dateStyle: .full, timeStyle: .none)
+            return date
+        }
+    }
+    
+    @objc dynamic var currentTime: String {
+        get {
+            let time = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .medium)
+            return time
         }
     }
     

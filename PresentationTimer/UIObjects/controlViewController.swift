@@ -13,6 +13,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @objc dynamic var timerController = countdownTimerController
     @IBOutlet weak var timerDisplayTextFieldView: NSView!
     @IBOutlet weak var timerDisplayTextField: NSTextField!
+    @IBOutlet weak var dateDisplayTextField: NSTextField!
+    @IBOutlet weak var timeDisplayTextField: NSTextField!
     @IBOutlet weak var startButton: NSButton!
     @IBOutlet weak var repeatButton: NSButton!
     @IBOutlet weak var totalTimeIncreseHoursButton: NSButton!
@@ -45,46 +47,43 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     var blinkTimerDisplayTextFieldTimer = Timer()
     var willShowBorder: Bool {
         didSet {
+            print("controlView.willShowBorder: ", willShowBorder)
             if willShowBorder == true {
-                nc.post(name: Notification.Name.showBorder, object: self)
+                self.showBorder()
             } else {
-                nc.post(name: Notification.Name.hideBorder, object: self)
+                self.hideBorder()
             }
         }
     }
     var willShowTimer: Bool {
         didSet {
             if willShowTimer == true {
-                nc.post(name: Notification.Name.showTimer, object: self)
-            } else {
-                nc.post(name: Notification.Name.hideTimer, object: self)
-            }
+                self.showTimer()
+            } 
         }
     }
     var willShowClock: Bool {
         didSet {
             if willShowClock == true {
-                nc.post(name: Notification.Name.showClock, object: self)
-            } else {
-                nc.post(name: Notification.Name.hideClock, object: self)
+                self.showClock()
             }
         }
     }
     var willBlinkTimer: Bool {
         didSet  {
             if willBlinkTimer == true {
-                nc.post(name: Notification.Name.blinkTimer, object: self)
+                self.blinkTimer()
             } else {
-                nc.post(name: Notification.Name.staticTimer, object: self)
+                self.staticTimer()
             }
         }
     }
     var willBlinkBorder: Bool {
         didSet {
             if willBlinkBorder == true {
-                nc.post(name: Notification.Name.blinkBorder, object: self)
+                self.blinkBorder()
             } else {
-                nc.post(name: Notification.Name.staticBorder, object: self)
+                self.staticBorder()
             }
         }
     }
@@ -112,6 +111,7 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         super.init(coder: coder)
         self.setUpNotifications()
     }
+    
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         willShowBorder = true
         willBlinkTimer = false
@@ -133,6 +133,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.timerDisplayTextFieldView.layer?.cornerRadius = 10.0
         self.countDownRadioButton.state = .on
         self.showBorderRadioButton.state = .on
+        self.timeDisplayTextField.isHidden = true
+        self.dateDisplayTextField.isHidden = true
     }
     
     override func viewWillAppear() {
@@ -150,6 +152,12 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         self.wrapUpTimeMinutesEntryField?.intValue = 0
         self.wrapUpTimeSecondsEntryField?.intValue = 3
         self.setUpTime()
+        timerDisplayTextField.textColor = fontColor
+        timeDisplayTextField.textColor = fontColor
+        dateDisplayTextField.textColor = fontColor
+        self.timerDisplayTextFieldView.layer?.backgroundColor = backgroundColor
+        self.timeDisplayTextField.layer?.backgroundColor = backgroundColor
+        self.dateDisplayTextField.layer?.backgroundColor = backgroundColor
     }
     
     func loadDisplayWindow() {
@@ -181,7 +189,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @objc func hideBorder() {
         if willShowBorder == false {
             self.timerDisplayTextFieldView.layer?.borderWidth = 0
-            nc.post(name: Notification.Name.staticBorder, object: self)
         }
     }
     
@@ -192,34 +199,26 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @objc func blinkBorder() {
-        //print("blinkBorder() start")
         guard timerController.timer.isOutOfTime == true else {
-            //print("blinkBorder(): Time on the clock.  Can't Blink")
             return
         }
         guard blinkBorderTimer.isValid == false else {
-            //print("blinkBorder(): blinker timer already running")
             return
         }
         guard willShowBorder == true else {
-            //print("blinkBorder(): willShowBorder: ",willShowBorder," Can't Blink")
             return
         }
-        //print("blinkBorder(): setting up blinking borderTimer")
         blinkBorderTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideBorder), userInfo: nil, repeats: true)
         blinkBorderTimer.fire()
     }
     
     @objc func showAndHideBorder() {
         guard willBlinkBorder == true else {
-            //print("showAndHideBorder() willBlinkBorder: off. Can't Blink")
             return
         }
         guard willShowBorder == true else {
-            //print("showAndHideBorder() willShowBorder: false.  Can't Blink")
             return
         }
-        //print("showAndHideBorder() blink border")
         if self.timerDisplayTextFieldView.layer?.borderWidth == 10 {
             self.timerDisplayTextFieldView.layer?.borderWidth = 0
         } else if self.timerDisplayTextFieldView.layer?.borderWidth == 0 {
@@ -228,7 +227,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     func staticBorder() {
-        //print("staticBorder(): stop blinking border")
         blinkBorderTimer.invalidate()
         if self.willShowBorder == true {
             self.showBorder()
@@ -237,48 +235,53 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     func showTimer() {
         self.timerDisplayTextField.isHidden = false
-        timerDisplayTextField.textColor = NSColor.textBackgroundColor
-        //self.dateDisplayTextField.isHidden = true
-        //self.timeDisplayTextField.isHidden = true
+        timerDisplayTextField.textColor = fontColor
+        self.dateDisplayTextField.isHidden = true
+        self.timeDisplayTextField.isHidden = true
         self.clockDisplayTextFieldTimer.invalidate()
         blinkTimerDisplayTextFieldTimer.invalidate()
     }
     
     @objc func blinkTimer() {
-        //print("blinkTimer() start")
         guard timerController.timer.isOutOfTime == true else {
-            //print("blinkTimer(): Time on the clock.  Can't Blink")
             return
         }
         guard blinkTimerDisplayTextFieldTimer.isValid == false else {
-            //print("blinkTimer(): blinker timer already running")
             return
         }
-        //print("blinkTimer(): setting up blinkingTimer for timerDisplayTextField")
         blinkTimerDisplayTextFieldTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(showAndHideTimer), userInfo: nil, repeats: true)
         blinkTimerDisplayTextFieldTimer.fire()
     }
     
     @objc private func showAndHideTimer() {
         guard willBlinkTimer == true else {
-            //print("showAndHideTimer(): willBlinkTimer: off. Can't Blink")
             return
         }
         guard willShowTimer == true else {
-            //print("showAndHideTimer(): willShowTimer: false.  Can't Blink")
             return
         }
-        //print("blink timer")
-        let currentTextColor = NSColor.textBackgroundColor
-        if self.timerDisplayTextField.textColor == currentTextColor{
+        if self.timerDisplayTextField.textColor == fontColor {
             timerDisplayTextField.textColor = NSColor.clear
-        } else { timerDisplayTextField.textColor = currentTextColor }
+        } else { timerDisplayTextField.textColor = fontColor }
     }
     
     @objc func staticTimer() {
-        //print("staticTimer(): stop blinking timer")
         blinkTimerDisplayTextFieldTimer.invalidate()
         self.showTimer()
+    }
+    
+    @objc private func setDateAndTime() {
+        self.dateDisplayTextField.stringValue = time(timeToCountInSeconds: 0).currentDate
+        self.timeDisplayTextField.stringValue =  time(timeToCountInSeconds: 0).currentTime
+    }
+    
+    @objc func showClock() {
+        self.timerDisplayTextField.isHidden = true
+        timerDisplayTextField.textColor = fontColor
+        self.dateDisplayTextField.isHidden = false
+        self.timeDisplayTextField.isHidden = false
+        self.clockDisplayTextFieldTimer.invalidate()
+        blinkTimerDisplayTextFieldTimer.invalidate()
     }
     
     func disableUIControls() {
@@ -329,14 +332,10 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func showBorderControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
-            self.willShowBorder = true
             nc.post(name: Notification.Name.setWillShowBorderOn, object: self)
-            nc.post(name: Notification.Name.showBorder, object: self)
         }
         if (sender as AnyObject).state == .off {
             nc.post(name: Notification.Name.setWillShowBorderOff, object: self)
-            nc.post(name: Notification.Name.staticBorder, object: self)
-            nc.post(name: Notification.Name.hideBorder, object: self)
         }
     }
     
@@ -352,7 +351,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func blinkTimerControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.setBlinkTimerOn, object: self)
-        } else if (sender as AnyObject).state == .off {
+        }
+        if (sender as AnyObject).state == .off {
             nc.post(name: Notification.Name.setBlinkTimerOff, object: self)
         }
     }
@@ -360,7 +360,8 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     @IBAction func keepCountingControl(_ sender: Any) {
         if (sender as AnyObject).state == .on {
             nc.post(name: Notification.Name.setContinueCountingOn, object: self)
-        } else if (sender as AnyObject).state == .off {
+        }
+        if (sender as AnyObject).state == .off {
             nc.post(name: Notification.Name.setContinueCountingOff, object: self)
         }
     }
@@ -546,7 +547,8 @@ extension controlViewController {
         nc.addObserver(self, selector: #selector(staticTimerNotificationAction), name: Notification.Name.staticTimer, object:nil)
         nc.addObserver(self, selector: #selector(showDateAndTimeNotificationAction), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColorNotificationAction), name: Notification.Name.setBackgroundColor, object:nil)
-        nc.addObserver(self, selector: #selector(setTimerDisplayFontNotificationAction), name: Notification.Name.setTimerDisplayFont, object:nil)
+        nc.addObserver(self, selector: #selector(setFontColorNotificationAction), name: Notification.Name.setFontColor, object:nil)
+        nc.addObserver(self, selector: #selector(setFontNotificationAction), name: Notification.Name.setFont, object:nil)
     }
     
     @objc private func timerStartedNotificationAction(notification:Notification) {
@@ -566,11 +568,8 @@ extension controlViewController {
     }
     
     @objc private func outOfTimeNotificationAction(notification:Notification) {
-        //The border will be set to red every time the outOfTime Notification is received
         self.setBorderRed()
-        //The timers for the blinking UI elements will only be started when one is not already running
         guard blinkBorderTimer.isValid == false else {
-            //print("timer Already running")
             return
         }
         if willShowBorder == true && willBlinkBorder == true && timerController.timer.isOutOfTime == true {
@@ -644,19 +643,22 @@ extension controlViewController {
     }
     
     @objc private func showDateAndTimeNotificationAction(notification:Notification) {
-        
+        self.setUpTime()
+        self.showClock()
     }
     
     @objc private func setBackgroundColorNotificationAction(notification:Notification) {
-        
+        self.timerDisplayTextFieldView.layer?.backgroundColor = backgroundColor
     }
     
-    @objc private func setTimerDisplayFontNotificationAction(notification: Notification) {
-        //let currentFontSize = (timerDisplayTextField.font?.pointSize)!
-        //let newFont = NSFont(name: selectedFont, size: currentFontSize)
-        //timerDisplayTextField.attributedStringValue.attribute(NSAttributedString.Key.font, at: 0, effectiveRange: nil)
-        //timerDisplayTextField.font = selectedFont
-        //setTimerDisplayTextFieldSize()
+    @objc private func setFontColorNotificationAction(notification: Notification) {
+        timerDisplayTextField.textColor = fontColor
+    }
+    
+    @objc private func setFontNotificationAction(notification: Notification) {
+        let currentFontSize = (timerDisplayTextField.font?.pointSize)!
+        let newFont = NSFont(name: currentSelectedFont.displayName!, size: currentFontSize)
+        timerDisplayTextField.font = newFont
     }
     
 }

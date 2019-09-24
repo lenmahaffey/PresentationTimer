@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -117,8 +117,9 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Control Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Control Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
                         <rect key="contentRect" x="625" y="727" width="500" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
@@ -168,7 +169,7 @@
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Fonts" identifier="" id="nBS-cY-1PK">
-                                        <view key="view" id="7f1-bV-TK9">
+                                        <view key="view" ambiguous="YES" id="7f1-bV-TK9">
                                             <rect key="frame" x="10" y="33" width="494" height="240"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -248,7 +249,7 @@
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Colors" identifier="" id="H3d-kf-Xva">
-                                        <view key="view" ambiguous="YES" id="xER-II-aqa">
+                                        <view key="view" id="xER-II-aqa">
                                             <rect key="frame" x="10" y="33" width="494" height="240"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -343,44 +344,45 @@
             <objects>
                 <viewController storyboardIdentifier="displayViewController" id="EfJ-oa-6SN" customClass="displayViewController" customModule="PresentationTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="Yif-FG-Agk">
-                        <rect key="frame" x="0.0" y="0.0" width="644" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="644" height="236"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFg-Xl-FU6">
-                                <rect key="frame" x="0.0" y="162" width="644" height="65"/>
+                                <rect key="frame" x="0.0" y="147" width="644" height="59"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="Rdd-Zf-Kmi">
-                                    <font key="font" size="145" name="Tahoma"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" allowsEditingTextAttributes="YES" id="Rdd-Zf-Kmi">
+                                    <font key="font" size="125" name="Tahoma"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hti-4L-3Wk">
-                                <rect key="frame" x="0.0" y="97" width="644" height="65"/>
+                                <rect key="frame" x="0.0" y="88" width="644" height="59"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="PmA-YH-jyf">
-                                    <font key="font" size="145" name="Tahoma"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" allowsEditingTextAttributes="YES" id="PmA-YH-jyf">
+                                    <font key="font" size="125" name="Tahoma"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qxD-d8-QtL">
-                                <rect key="frame" x="318" y="12" width="8" height="236"/>
-                                <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="Wbg-Id-b2q">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qxD-d8-QtL">
+                                <rect key="frame" x="50" y="50" width="544" height="136"/>
+                                <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" allowsEditingTextAttributes="YES" id="Wbg-Id-b2q" customClass="timerDisplayTextFieldCell" customModule="PresentationTimer" customModuleProvider="target">
                                     <font key="font" metaFont="system" size="200"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="EfJ-oa-6SN" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="6JI-bj-myp"/>
+                                    <binding destination="EfJ-oa-6SN" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="Nc0-XV-75q"/>
                                 </connections>
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="qxD-d8-QtL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yif-FG-Agk" secondAttribute="leading" id="JtA-4Y-WNp"/>
+                            <constraint firstItem="qxD-d8-QtL" firstAttribute="width" secondItem="Yif-FG-Agk" secondAttribute="width" constant="-100" id="1vq-IZ-XHl"/>
+                            <constraint firstAttribute="trailing" secondItem="qxD-d8-QtL" secondAttribute="trailing" constant="50" id="QCP-EE-0zH"/>
                             <constraint firstItem="qxD-d8-QtL" firstAttribute="centerY" secondItem="Yif-FG-Agk" secondAttribute="centerY" id="U68-FN-Kyk"/>
+                            <constraint firstItem="qxD-d8-QtL" firstAttribute="leading" secondItem="Yif-FG-Agk" secondAttribute="leading" constant="50" id="ZGX-2H-7gH"/>
                             <constraint firstItem="qxD-d8-QtL" firstAttribute="centerX" secondItem="Yif-FG-Agk" secondAttribute="centerX" id="hfD-oC-A0g"/>
-                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="qxD-d8-QtL" secondAttribute="trailing" constant="500" id="qHB-4N-fwZ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -545,7 +547,7 @@
                                         <rect key="frame" x="15" y="10" width="150" height="106"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zuf-qQ-B0k">
-                                                <rect key="frame" x="87" y="53" width="49" height="32"/>
+                                                <rect key="frame" x="87" y="54" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="L2t-2p-ZFK"/>
                                                     <constraint firstAttribute="height" constant="21" id="Ytt-kA-gkg"/>
@@ -559,7 +561,7 @@
                                                 </connections>
                                             </button>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uaV-2u-pEc" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="28" width="37" height="30"/>
+                                                <rect key="frame" x="19" y="29" width="37" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="IK5-5b-cGT"/>
                                                     <constraint firstAttribute="height" constant="30" id="UzE-fA-IFk"/>
@@ -571,7 +573,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CEb-Cl-mDZ">
-                                                <rect key="frame" x="50" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="50" y="1" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="Aek-uR-R1w"/>
                                                     <constraint firstAttribute="height" constant="21" id="WMw-FR-isX"/>
@@ -585,7 +587,7 @@
                                                 </connections>
                                             </button>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8xn-rK-WVy" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                                <rect key="frame" x="93" y="28" width="37" height="30"/>
+                                                <rect key="frame" x="93" y="29" width="37" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="Efg-ca-RnU"/>
                                                     <constraint firstAttribute="height" constant="30" id="VBq-6Y-yN8"/>
@@ -597,7 +599,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XEN-h3-Lvl" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                                <rect key="frame" x="56" y="28" width="37" height="30"/>
+                                                <rect key="frame" x="56" y="29" width="37" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="2fB-B2-Ohq"/>
                                                     <constraint firstAttribute="height" constant="30" id="Vm8-1y-fLW"/>
@@ -609,7 +611,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tVB-v7-VCB">
-                                                <rect key="frame" x="13" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="13" y="1" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="29d-ya-K5K"/>
                                                     <constraint firstAttribute="width" constant="37" id="7EH-aK-Ggu"/>
@@ -623,7 +625,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xWv-DJ-L6x">
-                                                <rect key="frame" x="13" y="53" width="49" height="32"/>
+                                                <rect key="frame" x="13" y="54" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="7PQ-ns-lqH"/>
                                                     <constraint firstAttribute="height" constant="21" id="i2G-q7-aju"/>
@@ -637,7 +639,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VbH-xl-cow">
-                                                <rect key="frame" x="50" y="53" width="49" height="32"/>
+                                                <rect key="frame" x="50" y="54" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="3Lq-Tc-JQX"/>
                                                     <constraint firstAttribute="height" constant="21" id="8kO-44-0GU"/>
@@ -651,7 +653,7 @@
                                                 </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GH4-bt-wBY">
-                                                <rect key="frame" x="42" y="89" width="67" height="17"/>
+                                                <rect key="frame" x="42" y="90" width="67" height="16"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Total Time" id="x54-lt-cBD">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -659,7 +661,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="APf-ix-tEo">
-                                                <rect key="frame" x="87" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="87" y="1" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="7q9-vc-cu4"/>
                                                     <constraint firstAttribute="width" constant="37" id="m6K-Xw-TZ1"/>
@@ -702,7 +704,7 @@
                                         <rect key="frame" x="165" y="10" width="150" height="106"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zc8-C6-lCV" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                                <rect key="frame" x="93" y="28" width="37" height="30"/>
+                                                <rect key="frame" x="93" y="29" width="37" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="FPt-m1-0Ui"/>
                                                     <constraint firstAttribute="height" constant="30" id="cKY-7r-GUN"/>
@@ -714,7 +716,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qj5-wj-nqR">
-                                                <rect key="frame" x="50" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="50" y="1" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="QFQ-dE-cH2"/>
                                                     <constraint firstAttribute="height" constant="21" id="bGO-wF-LeT"/>
@@ -728,7 +730,7 @@
                                                 </connections>
                                             </button>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XW9-c0-AWm" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                                <rect key="frame" x="56" y="28" width="37" height="30"/>
+                                                <rect key="frame" x="56" y="29" width="37" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="3PH-Dj-c4J"/>
                                                     <constraint firstAttribute="height" constant="30" id="fI0-7h-LdB"/>
@@ -740,7 +742,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tsr-JJ-sN0">
-                                                <rect key="frame" x="13" y="53" width="49" height="32"/>
+                                                <rect key="frame" x="13" y="54" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="J6d-C4-lec"/>
                                                     <constraint firstAttribute="height" constant="21" id="SZg-wn-1xw"/>
@@ -754,7 +756,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6LM-7O-yOc">
-                                                <rect key="frame" x="13" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="13" y="1" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="EsK-A0-JyF"/>
                                                     <constraint firstAttribute="width" constant="37" id="dLU-qG-Gy7"/>
@@ -768,7 +770,7 @@
                                                 </connections>
                                             </button>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1nb-UD-Y3g" customClass="controlViewTextField" customModule="PresentationTimer" customModuleProvider="target">
-                                                <rect key="frame" x="19" y="28" width="37" height="30"/>
+                                                <rect key="frame" x="19" y="29" width="37" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="9g4-VH-d1o"/>
                                                     <constraint firstAttribute="height" constant="30" id="SQa-tR-eg7"/>
@@ -780,7 +782,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t8x-Kw-Gt3">
-                                                <rect key="frame" x="50" y="53" width="49" height="32"/>
+                                                <rect key="frame" x="50" y="54" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="0SM-9S-xdE"/>
                                                     <constraint firstAttribute="width" constant="37" id="5mF-zJ-oH2"/>
@@ -794,7 +796,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kSx-CG-Bim">
-                                                <rect key="frame" x="87" y="53" width="49" height="32"/>
+                                                <rect key="frame" x="87" y="54" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="jsh-4G-qug"/>
                                                     <constraint firstAttribute="height" constant="21" id="wYe-PH-NRv"/>
@@ -808,7 +810,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PI9-jg-jJw">
-                                                <rect key="frame" x="87" y="0.0" width="49" height="32"/>
+                                                <rect key="frame" x="87" y="1" width="49" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="gEk-NL-cdN"/>
                                                     <constraint firstAttribute="height" constant="21" id="xvq-I5-ZCT"/>
@@ -822,7 +824,7 @@
                                                 </connections>
                                             </button>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6D-Ga-iz7">
-                                                <rect key="frame" x="31" y="89" width="89" height="17"/>
+                                                <rect key="frame" x="31" y="90" width="89" height="16"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Wrap up Time" id="vOs-AN-xAc">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -871,20 +873,48 @@
                                 <rect key="frame" x="25" y="269" width="950" height="256"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5a7-i0-8fh">
-                                        <rect key="frame" x="471" y="54" width="8" height="148"/>
-                                        <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="4C6-XF-O8r">
+                                        <rect key="frame" x="471" y="55" width="8" height="147"/>
+                                        <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" allowsEditingTextAttributes="YES" id="4C6-XF-O8r" customClass="timerDisplayTextFieldCell" customModule="PresentationTimer" customModuleProvider="target">
                                             <font key="font" metaFont="system" size="125"/>
-                                            <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="nsu-07-zH0"/>
+                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="timerController.timer.currentTime.totalTimeAsString" id="kXK-RZ-5X7"/>
+                                        </connections>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BsP-Bj-psk">
+                                        <rect key="frame" x="10" y="57" width="930" height="71"/>
+                                        <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" allowsEditingTextAttributes="YES" id="CPQ-IB-nU3">
+                                            <font key="font" metaFont="system" size="60"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="timerController.timer.currentTime.currentTime" id="LFy-CY-lfT"/>
+                                        </connections>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-U9-cAa">
+                                        <rect key="frame" x="10" y="128" width="930" height="71"/>
+                                        <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" allowsEditingTextAttributes="YES" id="Uc8-cR-lze">
+                                            <font key="font" metaFont="system" size="60"/>
+                                            <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="XfG-lQ-9wD" name="value" keyPath="timerController.timer.currentTime.currentDate" id="WJI-h1-Ckg"/>
                                         </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="BsP-Bj-psk" firstAttribute="centerX" secondItem="dzv-a0-jhT" secondAttribute="centerX" id="7ml-oV-0Ni"/>
+                                    <constraint firstAttribute="centerY" secondItem="gvV-U9-cAa" secondAttribute="bottom" id="V0a-VZ-Vdm"/>
+                                    <constraint firstItem="BsP-Bj-psk" firstAttribute="top" secondItem="dzv-a0-jhT" secondAttribute="centerY" id="ZE5-yl-xjr"/>
+                                    <constraint firstItem="gvV-U9-cAa" firstAttribute="width" secondItem="dzv-a0-jhT" secondAttribute="width" constant="-20" id="bwT-jc-exo"/>
+                                    <constraint firstItem="BsP-Bj-psk" firstAttribute="width" secondItem="dzv-a0-jhT" secondAttribute="width" constant="-20" id="clX-OS-pUj"/>
                                     <constraint firstItem="5a7-i0-8fh" firstAttribute="centerX" secondItem="dzv-a0-jhT" secondAttribute="centerX" id="fqz-Rx-83q"/>
                                     <constraint firstAttribute="width" constant="950" id="hAu-oW-UJi"/>
+                                    <constraint firstItem="gvV-U9-cAa" firstAttribute="centerX" secondItem="dzv-a0-jhT" secondAttribute="centerX" id="kng-90-qXo"/>
                                     <constraint firstAttribute="height" constant="256" id="s8s-zO-gvr"/>
                                     <constraint firstItem="5a7-i0-8fh" firstAttribute="centerY" secondItem="dzv-a0-jhT" secondAttribute="centerY" id="yS2-9v-vaA"/>
                                 </constraints>
@@ -939,11 +969,13 @@
                         <outlet property="blinkClockRadioButton" destination="cOw-a9-6Pk" id="MHf-Lm-dcf"/>
                         <outlet property="countDownRadioButton" destination="MCF-1u-0Y4" id="DZI-lt-PVb"/>
                         <outlet property="countUpRadioButton" destination="n1i-8E-FO4" id="Kp7-6H-3Y2"/>
+                        <outlet property="dateDisplayTextField" destination="gvV-U9-cAa" id="3kw-FN-gOT"/>
                         <outlet property="keepCountingRadioButton" destination="q0a-N6-vee" id="fev-yi-iAY"/>
                         <outlet property="repeatButton" destination="Z4I-h8-bw5" id="y4b-Oq-ZJa"/>
                         <outlet property="showBorderRadioButton" destination="Bfm-na-PJb" id="Q35-nu-UHa"/>
                         <outlet property="showDateRadioButton" destination="pld-tM-w6a" id="Whw-LW-x85"/>
                         <outlet property="startButton" destination="rmH-Uc-knu" id="cde-hf-YE3"/>
+                        <outlet property="timeDisplayTextField" destination="BsP-Bj-psk" id="Ydx-E1-AMZ"/>
                         <outlet property="timerDisplayTextField" destination="5a7-i0-8fh" id="hFG-lQ-ENg"/>
                         <outlet property="timerDisplayTextFieldView" destination="dzv-a0-jhT" id="K67-V6-beM"/>
                         <outlet property="totalTimeDecreaseHoursButton" destination="tVB-v7-VCB" id="wGh-JW-SEr"/>
@@ -966,6 +998,7 @@
                         <outlet property="wrapUpTimeSecondsEntryField" destination="Zc8-C6-lCV" id="JAA-Xf-8Ob"/>
                     </connections>
                 </viewController>
+                <userDefaultsController id="nlx-Gb-38Z"/>
             </objects>
             <point key="canvasLocation" x="-257" y="916"/>
         </scene>
