@@ -260,7 +260,6 @@ extension displayViewController {
         nc.addObserver(self, selector: #selector(showDateAndTimeNotificationAction), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColorNotificationAction), name: Notification.Name.setBackgroundColor, object:nil)
         nc.addObserver(self, selector: #selector(setFontColorNotificationAction), name: Notification.Name.setFontColor, object:nil)
-        nc.addObserver(self, selector: #selector(setFontNotificationAction), name: Notification.Name.setFont, object:nil)
     }
     
     @objc private func timerStartedNotificationAction(notification: Notification) {
@@ -369,10 +368,6 @@ extension displayViewController {
     
     @objc private func setFontColorNotificationAction(notification: Notification) {
         timerDisplayTextField.textColor = fontColor
-    }
-    
-    @objc private func setFontNotificationAction(notification: Notification) {
-        timerDisplayTextField.font = NSFont.bestFittingFont(for: timerDisplayTextField.stringValue, in: timerDisplayTextField.frame, fontDescriptor: currentSelectedFont.fontDescriptor)
     }
 }
 
