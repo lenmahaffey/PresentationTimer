@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F38870423633CEB00B2D121 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 7F38870323633CEA00B2D121 /* Podfile */; };
 		7F7DC46D20FBEB9100A5EB6D /* controlViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */; };
-		7F862A972332D1E4000B4444 /* timerDisplayTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F862A962332D1E4000B4444 /* timerDisplayTextFieldCell.swift */; };
 		7F8C60F520746D280074A6BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8C60F420746D280074A6BE /* AppDelegate.swift */; };
 		7F8C60F920746D290074A6BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F8C60F820746D290074A6BE /* Assets.xcassets */; };
 		7F8C60FC20746D290074A6BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F8C60FA20746D290074A6BE /* Main.storyboard */; };
@@ -23,9 +23,9 @@
 
 /* Begin PBXFileReference section */
 		7F2513EA20B71F6700CB8837 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		7F38870323633CEA00B2D121 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		7F641D3B224983E1006A0341 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controlViewTextField.swift; sourceTree = "<group>"; };
-		7F862A962332D1E4000B4444 /* timerDisplayTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = timerDisplayTextFieldCell.swift; sourceTree = "<group>"; };
 		7F8C60F120746D280074A6BE /* PresentationTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PresentationTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F8C60F420746D280074A6BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F8C60F820746D290074A6BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +54,7 @@
 		7F2513E920B71F6700CB8837 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F38870323633CEA00B2D121 /* Podfile */,
 				7F2513EA20B71F6700CB8837 /* AppKit.framework */,
 			);
 			name = Frameworks;
@@ -100,7 +101,6 @@
 				7F8C610B20746D6A0074A6BE /* displayWindow.swift */,
 				7FB2511B230FACCC00157224 /* preferencesViewController.swift */,
 				7F7DC46C20FBEB9100A5EB6D /* controlViewTextField.swift */,
-				7F862A962332D1E4000B4444 /* timerDisplayTextFieldCell.swift */,
 			);
 			path = UIObjects;
 			sourceTree = "<group>";
@@ -164,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F38870423633CEB00B2D121 /* Podfile in Resources */,
 				7F8C60F920746D290074A6BE /* Assets.xcassets in Resources */,
 				7F8C60FC20746D290074A6BE /* Main.storyboard in Resources */,
 			);
@@ -176,7 +177,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F862A972332D1E4000B4444 /* timerDisplayTextFieldCell.swift in Sources */,
 				7F8C611220746D6A0074A6BE /* controlView.swift in Sources */,
 				7F7DC46D20FBEB9100A5EB6D /* controlViewTextField.swift in Sources */,
 				7F8C610E20746D6A0074A6BE /* controlViewController.swift in Sources */,

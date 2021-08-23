@@ -47,7 +47,6 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     var blinkTimerDisplayTextFieldTimer = Timer()
     var willShowBorder: Bool {
         didSet {
-            print("controlView.willShowBorder: ", willShowBorder)
             if willShowBorder == true {
                 self.showBorder()
             } else {
@@ -419,54 +418,102 @@ class controlViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func totalTimeIncreaseHoursButtonPress(_ sender: Any) {
-        self.totalTimeHoursEntryField?.intValue += 1
-        self.setUpTime()
+        let totalTime = timerController.timer.totalTime
+        let currentTime = timerController.timer.currentTime
+        let ammountOfTimeToChange = time(hours: 1, minutes: 0, seconds: 0)
+        totalTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        currentTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        self.totalTimeHoursEntryField?.intValue = Int32(totalTime.hours)
+        self.totalTimeMinutesEntryField?.intValue = Int32(totalTime.minutes)
+        self.totalTimeSecondsEntryField?.intValue = Int32(totalTime.seconds)
     }
     
     @IBAction func totalTimeIncreaseMinutesButtonPress(_ sender: Any) {
-        self.totalTimeMinutesEntryField?.intValue += 1
-        self.setUpTime()
+        let totalTime = timerController.timer.totalTime
+        let currentTime = timerController.timer.currentTime
+        let ammountOfTimeToChange = time(hours: 0, minutes: 1, seconds: 0)
+        totalTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        currentTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        self.totalTimeHoursEntryField?.intValue = Int32(totalTime.hours)
+        self.totalTimeMinutesEntryField?.intValue = Int32(totalTime.minutes)
+        self.totalTimeSecondsEntryField?.intValue = Int32(totalTime.seconds)
     }
     
     @IBAction func totalTimeIncreaseSecondsButtonPress(_ sender: Any) {
-        self.totalTimeSecondsEntryField?.intValue += 1
-        self.setUpTime()
+        let totalTime = timerController.timer.totalTime
+        let currentTime = timerController.timer.currentTime
+        let ammountOfTimeToChange = time(hours: 0, minutes: 0, seconds: 1)
+        totalTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        currentTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        self.totalTimeHoursEntryField?.intValue = Int32(totalTime.hours)
+        self.totalTimeMinutesEntryField?.intValue = Int32(totalTime.minutes)
+        self.totalTimeSecondsEntryField?.intValue = Int32(totalTime.seconds)
     }
     
     @IBAction func totalTimeDecreaseHoursButtonPress(_ sender: Any) {
-        if totalTimeHoursEntryField!.intValue >= Int32(1) {
-            totalTimeHoursEntryField?.intValue -= 1
-            self.setUpTime()
+        let totalTime = timerController.timer.totalTime
+        let currentTime = timerController.timer.currentTime
+        let ammountOfTimeToChange = time(hours: 1, minutes: 0, seconds: 0)
+        if currentTime.timeInSeconds >= ammountOfTimeToChange.timeInSeconds {
+            totalTime.timeInSeconds -= ammountOfTimeToChange.timeInSeconds
+            currentTime.timeInSeconds -= ammountOfTimeToChange.timeInSeconds
+            self.totalTimeHoursEntryField?.intValue = Int32(totalTime.hours)
+            self.totalTimeMinutesEntryField?.intValue = Int32(totalTime.minutes)
+            self.totalTimeSecondsEntryField?.intValue = Int32(totalTime.seconds)
         }
     }
     
     @IBAction func totalTimeDecreaseMinutesButtonPress(_ sender: Any) {
-        if totalTimeMinutesEntryField!.intValue >= Int32(1) {
-            totalTimeMinutesEntryField?.intValue -= 1
-            self.setUpTime()
+        let totalTime = timerController.timer.totalTime
+        let currentTime = timerController.timer.currentTime
+        let ammountOfTimeToChange = time(hours: 0, minutes: 1, seconds: 0)
+        if currentTime.timeInSeconds >= ammountOfTimeToChange.timeInSeconds {
+            totalTime.timeInSeconds -= ammountOfTimeToChange.timeInSeconds
+            currentTime.timeInSeconds -= ammountOfTimeToChange.timeInSeconds
+            self.totalTimeHoursEntryField?.intValue = Int32(totalTime.hours)
+            self.totalTimeMinutesEntryField?.intValue = Int32(totalTime.minutes)
+            self.totalTimeSecondsEntryField?.intValue = Int32(totalTime.seconds)
         }
     }
     
     @IBAction func totalTimeDecreaseSecondsButtonPress(_ sender: Any) {
-        if timerController.timer.totalTime.seconds >= Int32(1) {
-            totalTimeSecondsEntryField?.intValue -= 1
-            self.setUpTime()
+        let totalTime = timerController.timer.totalTime
+        let currentTime = timerController.timer.currentTime
+        let ammountOfTimeToChange = time(hours: 0, minutes: 0, seconds: 1)
+        if currentTime.timeInSeconds >= ammountOfTimeToChange.timeInSeconds {
+            totalTime.timeInSeconds -= ammountOfTimeToChange.timeInSeconds
+            currentTime.timeInSeconds -= ammountOfTimeToChange.timeInSeconds
+            self.totalTimeHoursEntryField?.intValue = Int32(totalTime.hours)
+            self.totalTimeMinutesEntryField?.intValue = Int32(totalTime.minutes)
+            self.totalTimeSecondsEntryField?.intValue = Int32(totalTime.seconds)
         }
     }
     
     @IBAction func wrapUpTimeIncreaseHoursButtonPress(_ sender: Any) {
-        self.wrapUpTimeHoursEntryField?.intValue += 1
-        self.setUpTime()
+        let wrapUpTime = timerController.timer.warningTime
+        let ammountOfTimeToChange = time(hours: 1, minutes: 0, seconds: 0)
+        wrapUpTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        self.wrapUpTimeHoursEntryField?.intValue = Int32(wrapUpTime.hours)
+        self.wrapUpTimeMinutesEntryField?.intValue = Int32(wrapUpTime.minutes)
+        self.wrapUpTimeSecondsEntryField?.intValue = Int32(wrapUpTime.seconds)
     }
     
     @IBAction func wrapUpTimeIncreaseMinutesButtonPress(_ sender: Any) {
-        self.wrapUpTimeMinutesEntryField?.intValue += 1
-        self.setUpTime()
+        let wrapUpTime = timerController.timer.warningTime
+        let ammountOfTimeToChange = time(hours: 0, minutes: 1, seconds: 0)
+        wrapUpTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        self.wrapUpTimeHoursEntryField?.intValue = Int32(wrapUpTime.hours)
+        self.wrapUpTimeMinutesEntryField?.intValue = Int32(wrapUpTime.minutes)
+        self.wrapUpTimeSecondsEntryField?.intValue = Int32(wrapUpTime.seconds)
     }
     
     @IBAction func wrapUpTimeIncreaseSecondsButtonPress(_ sender: Any) {
-        self.wrapUpTimeSecondsEntryField?.intValue += 1
-        self.setUpTime()
+        let wrapUpTime = timerController.timer.warningTime
+        let ammountOfTimeToChange = time(hours: 0, minutes: 0, seconds: 1)
+        wrapUpTime.timeInSeconds += ammountOfTimeToChange.timeInSeconds
+        self.wrapUpTimeHoursEntryField?.intValue = Int32(wrapUpTime.hours)
+        self.wrapUpTimeMinutesEntryField?.intValue = Int32(wrapUpTime.minutes)
+        self.wrapUpTimeSecondsEntryField?.intValue = Int32(wrapUpTime.seconds)
     }
     
     @IBAction func wrapUpTimeDecreaseHoursButtonPress(_ sender: Any) {
@@ -497,29 +544,48 @@ class controlViewController: NSViewController, NSTextViewDelegate {
         let wrapUpHours = self.wrapUpTimeHoursEntryField?.intValue ?? 0
         let wrapUpMinutes = self.wrapUpTimeMinutesEntryField?.intValue ?? 0
         let wrapUpSeconds = self.wrapUpTimeSecondsEntryField?.intValue ?? 0
+        
         let newTotalTime = time(hours: Int(totalHours), minutes: Int(totalMinutes), seconds: Int(totalSeconds))
         let newWrapUpTime = time(hours: Int(wrapUpHours), minutes: Int(wrapUpMinutes), seconds: Int(wrapUpSeconds))
-        self.totalTimeHoursEntryField?.intValue = Int32(newTotalTime.hours)
-        self.totalTimeMinutesEntryField?.intValue = Int32(newTotalTime.minutes)
-        self.totalTimeSecondsEntryField?.intValue = Int32(newTotalTime.seconds)
-        self.wrapUpTimeHoursEntryField?.intValue = Int32(newWrapUpTime.hours)
-        self.wrapUpTimeMinutesEntryField?.intValue = Int32(newWrapUpTime.minutes)
-        self.wrapUpTimeSecondsEntryField?.intValue = Int32(newWrapUpTime.seconds)
+        
+        let currentTotalTime = timerController.timer.totalTime
+        let currentWarningTime = timerController.timer.warningTime
+        
+        let totalTimeToSet = time(timeToCountInSeconds: 0)
+        let totalWarningTimeToSet = time(timeToCountInSeconds: 0)
+        
+        totalTimeToSet.timeInSeconds += currentTotalTime.timeInSeconds
+        totalTimeToSet.timeInSeconds += newTotalTime.timeInSeconds
+        
+        totalWarningTimeToSet.timeInSeconds += currentWarningTime.timeInSeconds
+        totalWarningTimeToSet.timeInSeconds += totalWarningTimeToSet.timeInSeconds
+        
+        print(timerController.timer.totalTime.timeInSeconds)
+        print(totalTimeToSet.timeInSeconds)
+        //print(totalWarningTimeToSet.timeInSeconds)
         
         timerController.setTotalTime(timeLimit: newTotalTime)
         timerController.setWarningTime(warningTime: newWrapUpTime)
         
+                
+        //        self.totalTimeHoursEntryField?.intValue = Int32(newTotalTime.hours)
+        //        self.totalTimeMinutesEntryField?.intValue = Int32(newTotalTime.minutes)
+        //        self.totalTimeSecondsEntryField?.intValue = Int32(newTotalTime.seconds)
+        //        self.wrapUpTimeHoursEntryField?.intValue = Int32(newWrapUpTime.hours)
+        //        self.wrapUpTimeMinutesEntryField?.intValue = Int32(newWrapUpTime.minutes)
+        //        self.wrapUpTimeSecondsEntryField?.intValue = Int32(newWrapUpTime.seconds)
         guard timerController.timer.isRunning == true else {
             if self.countUpRadioButton.state == .on {
                 nc.post(name: Notification.Name.setCountUp, object: self)
-            } else if self.countDownRadioButton.state == .on {
+            } else
+                if self.countDownRadioButton.state == .on {
                 nc.post(name: Notification.Name.setCountDown, object: self)
             }
             return
         }
         if self.countDownRadioButton.state == .on {
-            timerController.timer.currentTime = newTotalTime
-            timerController.timer.currentTime = newTotalTime
+            timerController.timer.currentTime = totalTimeToSet
+            timerController.timer.currentTime = totalWarningTimeToSet
         }
     }
 }
@@ -548,7 +614,6 @@ extension controlViewController {
         nc.addObserver(self, selector: #selector(showDateAndTimeNotificationAction), name: Notification.Name.showDateandTime, object:nil)
         nc.addObserver(self, selector: #selector(setBackgroundColorNotificationAction), name: Notification.Name.setBackgroundColor, object:nil)
         nc.addObserver(self, selector: #selector(setFontColorNotificationAction), name: Notification.Name.setFontColor, object:nil)
-        nc.addObserver(self, selector: #selector(setFontNotificationAction), name: Notification.Name.setFont, object:nil)
     }
     
     @objc private func timerStartedNotificationAction(notification:Notification) {
@@ -654,11 +719,4 @@ extension controlViewController {
     @objc private func setFontColorNotificationAction(notification: Notification) {
         timerDisplayTextField.textColor = fontColor
     }
-    
-    @objc private func setFontNotificationAction(notification: Notification) {
-        let currentFontSize = (timerDisplayTextField.font?.pointSize)!
-        let newFont = NSFont(name: currentSelectedFont.displayName!, size: currentFontSize)
-        timerDisplayTextField.font = newFont
-    }
-    
 }
